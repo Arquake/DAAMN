@@ -1,0 +1,15 @@
+{
+	"nodes":[
+		{"id":"5f32218fa810c753","type":"file","file":"images/Joueurs.jpg","x":-640,"y":-960,"width":160,"height":160,"color":"4"},
+		{"id":"0f54296d1188a772","x":-300,"y":-1100,"width":250,"height":60,"color":"4","type":"text","text":"Retirer Allumette"},
+		{"id":"f2fdb9977d259053","x":-640,"y":-1020,"width":160,"height":60,"color":"4","type":"text","text":"PLAYER"},
+		{"id":"ddc0dda3c9edfe18","x":-640,"y":-580,"width":160,"height":160,"color":"1","type":"file","file":"images/Joueurs.jpg"},
+		{"id":"01963a1e1bb44cbd","x":-640,"y":-640,"width":160,"height":60,"color":"1","type":"text","text":"HOST"},
+		{"id":"5440e89912ff0a4b","x":-240,"y":-640,"width":250,"height":60,"color":"1","type":"text","text":"Créer un tas"},
+		{"id":"48b2f479c31eb755","x":-240,"y":-560,"width":250,"height":60,"color":"1","type":"text","text":"Remplir un tas"}
+	],
+	"edges":[
+		{"id":"751b27a8fa06d09f","fromNode":"5f32218fa810c753","fromSide":"right","toNode":"0f54296d1188a772","toSide":"left","toEnd":"none","color":"4"},
+		{"id":"4975d6d9c89ef318","fromNode":"ddc0dda3c9edfe18","fromSide":"right","toNode":"5440e89912ff0a4b","toSide":"left","toEnd":"none"}
+	]
+}
