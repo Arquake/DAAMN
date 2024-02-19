@@ -1,15 +1,20 @@
 {
 	"nodes":[
 		{"id":"5f32218fa810c753","type":"file","file":"images/Joueurs.jpg","x":-640,"y":-960,"width":160,"height":160,"color":"4"},
-		{"id":"0f54296d1188a772","x":-300,"y":-1100,"width":250,"height":60,"color":"4","type":"text","text":"Retirer Allumette"},
-		{"id":"f2fdb9977d259053","x":-640,"y":-1020,"width":160,"height":60,"color":"4","type":"text","text":"PLAYER"},
-		{"id":"ddc0dda3c9edfe18","x":-640,"y":-580,"width":160,"height":160,"color":"1","type":"file","file":"images/Joueurs.jpg"},
-		{"id":"01963a1e1bb44cbd","x":-640,"y":-640,"width":160,"height":60,"color":"1","type":"text","text":"HOST"},
-		{"id":"5440e89912ff0a4b","x":-240,"y":-640,"width":250,"height":60,"color":"1","type":"text","text":"Créer un tas"},
-		{"id":"48b2f479c31eb755","x":-240,"y":-560,"width":250,"height":60,"color":"1","type":"text","text":"Remplir un tas"}
+		{"id":"0f54296d1188a772","type":"text","text":"Retirer des Allumettes","x":-300,"y":-1100,"width":250,"height":60,"color":"4"},
+		{"id":"f2fdb9977d259053","type":"text","text":"PLAYER","x":-640,"y":-1020,"width":160,"height":60,"color":"4"},
+		{"id":"ddc0dda3c9edfe18","type":"file","file":"images/Joueurs.jpg","x":-640,"y":-580,"width":160,"height":160,"color":"1"},
+		{"id":"01963a1e1bb44cbd","type":"text","text":"HOST","x":-640,"y":-640,"width":160,"height":60,"color":"1"},
+		{"id":"5440e89912ff0a4b","type":"text","text":"Créer un tas","x":-240,"y":-640,"width":250,"height":60,"color":"1"},
+		{"id":"48b2f479c31eb755","type":"text","text":"Remplir un tas","x":-240,"y":-560,"width":250,"height":60,"color":"1"},
+		{"id":"276e4c6af49465f5","type":"text","text":"Selectionner un tas","x":-300,"y":-990,"width":250,"height":60,"color":"4"},
+		{"id":"097da601788a871d","x":-300,"y":-880,"width":250,"height":60,"color":"4","type":"text","text":"Saisir son nom"}
 	],
 	"edges":[
 		{"id":"751b27a8fa06d09f","fromNode":"5f32218fa810c753","fromSide":"right","toNode":"0f54296d1188a772","toSide":"left","toEnd":"none","color":"4"},
-		{"id":"4975d6d9c89ef318","fromNode":"ddc0dda3c9edfe18","fromSide":"right","toNode":"5440e89912ff0a4b","toSide":"left","toEnd":"none"}
+		{"id":"4975d6d9c89ef318","fromNode":"ddc0dda3c9edfe18","fromSide":"right","toNode":"5440e89912ff0a4b","toSide":"left","toEnd":"none"},
+		{"id":"7c54ca458f8c8ed3","fromNode":"5f32218fa810c753","fromSide":"right","toNode":"276e4c6af49465f5","toSide":"left","toEnd":"none","color":"4"},
+		{"id":"2015025ab30694c1","fromNode":"ddc0dda3c9edfe18","fromSide":"right","toNode":"48b2f479c31eb755","toSide":"left","toEnd":"none"},
+		{"id":"a4d238c43af002f3","fromNode":"5f32218fa810c753","fromSide":"right","toNode":"097da601788a871d","toSide":"left","toEnd":"none","color":"4"}
 	]
 }
