@@ -11,8 +11,15 @@
             "id": "bf1e7a5147ecf581",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "canvas",
+              "state": {
+                "file": "NIM/Diagramme Relations/Sans titre.canvas",
+                "viewState": {
+                  "x": -319.3044904425588,
+                  "y": -695.8266941630665,
+                  "zoom": -0.6666666666666667
+                }
+              }
             }
           }
         ]
@@ -65,7 +72,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "448f6ba2e7e674e7",
@@ -81,6 +88,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "NIM/Diagramme Relations/Sans titre.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +105,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "NIM/Diagramme Relations/Sans titre.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +127,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "NIM/Diagramme Relations/Sans titre.canvas"
+              }
             }
           }
         ]
@@ -140,12 +151,17 @@
   },
   "active": "bf1e7a5147ecf581",
   "lastOpenFiles": [
+    "images/Joueurs.jpg",
+    "NIM/Diagramme Relations/Sans titre.canvas",
+    "images",
+    "NIM",
+    "Puissance 4",
     "Sans titre.md",
-    "Diagramme Relations",
-    "Diagramme Objet",
+    "NIM/Diagramme Relations",
+    "NIM/Diagramme Objet",
     "Welcome.md",
     "Scénario",
     "Use Case",
-    "Diagramme Séquence"
+    "NIM/Diagramme Séquence"
   ]
 }

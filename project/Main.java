@@ -1,5 +1,8 @@
+import project.Nim.NimController;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("DAMN DANIEL");
+        NimController nim = new NimController();
+        nim.jouer();
     }
 }

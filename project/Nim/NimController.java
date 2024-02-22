@@ -14,5 +14,12 @@ public class NimController {
      */
     public void jouer(){
 
+        NimModele modele = new NimModele();
+
+        System.out.println(modele.verifierCoup("5 5",new int[10][10]));
+
+        while (true) {
+            break;
+        }
     }
 }
