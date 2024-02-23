@@ -29,7 +29,7 @@ public class NimView {
 
     public String creerJoueur(int i){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Nom du joueur "+Integer.toString(i)+" : ");
+        System.out.print("Nom du joueur "+i+" : ");
         return scanner.nextLine();
     }
 
@@ -38,22 +38,17 @@ public class NimView {
     }
 
     public void victory(String nomJoueur) {
-        System.out.println(nomJoueur + " a gagné");
+        System.out.println("\u001B[42m" + "\u001B[30m " + nomJoueur + " a gagné " + "\u001B[0m");
     }
 
     public void egalite(){
-        System.out.println("égalité");
+        System.out.println("\u001B[43m" + "\u001B[30m " + "égalité " + "\u001B[0m");
     }
 
     public String replay() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("rejouer ? (Y/N)");
         return scanner.nextLine();
-    }
-
-    public String afficher(String matchSets, String playerName) {
-        System.out.println(matchSets + playerName + " : à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n");
-        return "";
     }
 
 }
