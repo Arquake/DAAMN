@@ -25,6 +25,14 @@ public class NimController {
 
             running = startNewGame();
         }
+        for (Joueur j: joueurs) {
+            view.partieGagnerJoueur(j.getScore(),j.getNom());
+        }
+
+        if (joueurs[0].getScore() == joueurs[1].getScore()) { view.endExeaquo(); }
+        else {
+            view.endVictory(model.isBetter(joueurs[0], joueurs[1]));
+        }
     }
 
     private void playGame() {
@@ -56,12 +64,11 @@ public class NimController {
 
         }
         switch (model.winner(joueurs[0].compareTo(joueurs[1]))){
-            case 1 : view.victory(joueurs[0].getNom());break;
-            case -1: view.victory(joueurs[1].getNom());break;
+            case 1 : view.victory(joueurs[0].getNom());joueurs[0].increaseScore();break;
+            case -1: view.victory(joueurs[1].getNom());joueurs[1].increaseScore();break;
             case 0:view.egalite();break;
 
         }
-
     }
 
 
@@ -92,6 +99,9 @@ public class NimController {
         response = view.replay();
         while (!model.replayValidResponse(response)){
             response = view.replay();
+        }
+        for (Joueur j: joueurs) {
+            j.resetLastMatches();
         }
         return model.isReplaying(response);
     }

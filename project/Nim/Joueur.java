@@ -18,17 +18,22 @@ public class Joueur implements Comparable<Joueur>  {
         this.score++;
     }
 
-    public int getlastMatches() {
-        return lastMatches;
-    }
-
     public void increaseLastMatches() {
         this.lastMatches++;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void resetLastMatches(){
+        lastMatches = 0;
+    }
 
     @Override
     public int compareTo(Joueur o) {
         return this.lastMatches - o.lastMatches;
     }
+
+
 }

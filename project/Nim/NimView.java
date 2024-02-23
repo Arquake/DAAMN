@@ -42,13 +42,25 @@ public class NimView {
     }
 
     public void egalite(){
-        System.out.println("\u001B[43m" + "\u001B[30m " + "égalité " + "\u001B[0m");
+        System.out.println("\u001B[43m" + "\u001B[30m" + " ex aequo " + "\u001B[0m");
     }
 
     public String replay() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("rejouer ? (Y/N)");
         return scanner.nextLine();
+    }
+
+    public void partieGagnerJoueur(int nombreParties, String nomJoueur){
+        System.out.println("\n\u001B[42m" + "\u001B[30m " + nomJoueur + " a gagné " + nombreParties + " parties" + "\u001B[0m");
+    }
+
+    public void endVictory(String joueur){
+        System.out.println("\n\u001B[42m" + "\u001B[30m" + " le vainqueur est : " + joueur + " \u001B[0m");
+    }
+
+    public void endExeaquo(){
+        System.out.println("\n\u001B[43m" + "\u001B[30m " + " ex aequo " + "\u001B[0m");
     }
 
 }

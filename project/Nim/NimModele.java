@@ -91,4 +91,8 @@ public class NimModele {
         String res = scanner.next();
         return res.equals("Y") || res.equals("y");
     }
+
+    public String isBetter(Joueur j1, Joueur j2){
+        return j1.getScore()> j2.getScore() ? j1.getNom() : j2.getNom();
+    }
 }
