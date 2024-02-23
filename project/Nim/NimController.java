@@ -8,10 +8,11 @@ public class NimController {
     private NimView view = new NimView();
 
     private int numberOfHeap;
+    private Joueur dernier_joueur;
 
     public NimController() {
-        createPlayers();
         createBoard();
+        createPlayers();
     }
 
     /**
@@ -39,6 +40,7 @@ public class NimController {
 
         Heap jeu = new Heap(this.numberOfHeap);
 
+        dernier_joueur = joueurs[0];
         int playerTurn = 0;
 
         // game loop
@@ -52,7 +54,7 @@ public class NimController {
 
                 if ( model.jouerCoup(coup,jeu) ) {
 
-                    joueurs[playerTurn].increaseLastMatches();
+                    dernier_joueur= joueurs[playerTurn];
 
                 }
 
@@ -63,12 +65,7 @@ public class NimController {
             }
 
         }
-        switch (model.winner(joueurs[0].compareTo(joueurs[1]))){
-            case 1 : view.victory(joueurs[0].getNom());joueurs[0].increaseScore();break;
-            case -1: view.victory(joueurs[1].getNom());joueurs[1].increaseScore();break;
-            case 0:view.egalite();break;
-
-        }
+        view.victory(dernier_joueur.getNom());joueurs[1].increaseScore();
     }
 
 

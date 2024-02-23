@@ -3,7 +3,7 @@ package project.Nim;
 import java.util.Arrays;
 
 public class Heap {
-    int[][] jeu;
+    private final int[][] jeu;
 
     /**
      * @author Nicolas
