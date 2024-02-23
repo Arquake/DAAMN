@@ -1,3 +1,5 @@
+package project;
+
 import project.Nim.NimController;
 
 public class Main {

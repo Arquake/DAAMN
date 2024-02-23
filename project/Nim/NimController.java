@@ -16,6 +16,12 @@ public class NimController {
 
         NimModele modele = new NimModele();
 
+        NimView view = new NimView();
+
+        Heap test = new Heap(10);
+
+        view.afficher( test.toString(), "jhon");
+
         System.out.println(modele.verifierCoup("5 5",new int[10][10]));
 
         while (true) {
