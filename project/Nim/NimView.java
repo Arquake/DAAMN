@@ -10,10 +10,6 @@ public class NimView {
      * @param matchSets int[][] Array of Heap and the matches in those
      * @return the user input for his move
      */
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     public String demanderCoup(String matchSets, String playerName) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(matchSets + playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
@@ -49,12 +45,6 @@ public class NimView {
         System.out.println("égalité");
     }
 
-<<<<<<< Updated upstream
-    public String replay(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("rejouer ? (Y/N)");
-        return scanner.nextLine();
-=======
     public String replay() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("rejouer ? (Y/N)");
@@ -64,7 +54,6 @@ public class NimView {
     public String afficher(String matchSets, String playerName) {
         System.out.println(matchSets + playerName + " : à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n");
         return "";
->>>>>>> Stashed changes
     }
 
 }

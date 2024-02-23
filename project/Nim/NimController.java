@@ -27,10 +27,6 @@ public class NimController {
         }
     }
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     private void playGame() {
 
         Heap jeu = new Heap(this.numberOfHeap);
