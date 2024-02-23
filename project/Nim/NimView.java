@@ -34,7 +34,7 @@ public class NimView {
     }
 
     public void invalidData() {
-        System.out.println("les données fournit sont invalides");
+        System.out.println("\u001B[41m" + "\u001B[30m" + " les données fournit sont invalides " + "\u001B[0m");
     }
 
     public void victory(String nomJoueur) {
