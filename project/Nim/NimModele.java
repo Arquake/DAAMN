@@ -5,13 +5,28 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class NimModele {
+
+    public int verifierCreationJeu(String nombre){
+        Scanner scanner = new Scanner(nombre);
+        // scanner check if there's an int in the string
+        if ( !scanner.hasNextInt()) {
+            return -1;
+        }
+        // if there's an int we parse it to an int and store it
+        int res = Integer.parseInt(scanner.next());
+        // if scanner hase other information or res is invalid -1 returned
+        if (scanner.hasNext() ) { return -1; }
+        // if everything is valid we return the res
+        return res;
+    }
+
     /**
      * @author Nicolas
      * @param coup player's move in format of string = "int int"
      * @param jeu int[][] Array of Heap and the matches in those
      * @return true if the move is valid, false otherwise
      */
-    public boolean verifierCoup(String coup, int[][] jeu){
+    public boolean verifierCoup(String coup, Heap jeu){
 
         // a scanner is instantiated
         Scanner scanner = new Scanner(coup);
@@ -36,19 +51,44 @@ public class NimModele {
         // if more matches want to be subtracted than the current number in the heap or inferior to 1
         // false is returned
         if ( scanner.hasNext() ||
-            coupIntCheck[0] > jeu.length || coupIntCheck[0] < 1 ||
-            coupIntCheck[1] > numberOfMatches(jeu[coupIntCheck[0]]) || coupIntCheck[1] < 1
+            coupIntCheck[0] > jeu.getNumberOfheap() || coupIntCheck[0] < 1 ||
+            coupIntCheck[1] > jeu.getNumberOfMatchesInHeap(coupIntCheck[0]) || coupIntCheck[1] < 1
         ) { return false; }
-
 
         return true;
     }
 
-    private int numberOfMatches(int[] arr) {
-        int res = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 1){res++;}
+    public boolean gameFinished(Heap tas) {
+        return tas.isEmpty();
+    }
+
+    public boolean jouerCoup(String coup, Heap tas) {
+        Scanner scanner = new Scanner(coup);
+        int[] coupAJouer = new int[2];
+        for (int i = 0; i < 2; i++) {
+            coupAJouer[i] = scanner.nextInt();
         }
-        return res;
+        tas.removeMatches(coupAJouer[1], coupAJouer[0]);
+        return tas.heapIsEmpty(coupAJouer[0]);
+    }
+
+    public int winner(int lastMatches){
+        if (lastMatches>0){return 1;}
+        if (lastMatches<0){return -1;}
+        return 0;
+    }
+
+    public boolean replayValidResponse(String response){
+        Scanner scanner = new Scanner(response);
+        if (!scanner.hasNext()) {return false;}
+        String res = scanner.next();
+        if (scanner.hasNext() || (!res.equals("Y") && !res.equals("y") && !res.equals("N") && !res.equals("n"))) {return false;}
+        return true;
+    }
+
+    public boolean isReplaying(String response){
+        Scanner scanner = new Scanner(response);
+        String res = scanner.next();
+        return res.equals("Y") || res.equals("y");
     }
 }
