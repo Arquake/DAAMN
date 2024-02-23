@@ -16,13 +16,22 @@ public class Heap {
         }
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     /**
      *
      * @param n number of matches to subtract
      * @param m which heap to subtract the matches
      */
+<<<<<<< Updated upstream
     public void removeMatches(int n, int m){
         this.jeu[m-1] = new int[this.jeu[m-1].length - n];
+=======
+    public void removeMatches(int n, int m) {
+        this.jeu[m - 1] = new int[this.jeu[m - 1].length - n];
+>>>>>>> Stashed changes
     }
 
 
@@ -42,6 +51,10 @@ public class Heap {
         return res;
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     public int getNumberOfheap(){
         return jeu.length;
     }
