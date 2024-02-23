@@ -17,8 +17,17 @@ public class Heap {
     }
 
 
-    public void removeMatches(){
-
+    public void removeMatches(int heap, int matches){
+        //it makes a new row with the length of the old row minus the number of matches
+        //i had to add heap-1 because the array start at 0
+        //it throws an exception if the number of matches is greater than the number of matches in the heap
+        int heapLength = this.jeu[heap-1].length;
+        if (heapLength < matches){
+            throw new IllegalArgumentException("You can't remove more matches than there are in the heap");
+        }
+        else {
+            this.jeu[heap - 1] = new int[this.jeu[heap - 1].length - matches];
+        }
     }
 
 
@@ -34,4 +43,6 @@ public class Heap {
         }
         return res;
     }
+
+
 }

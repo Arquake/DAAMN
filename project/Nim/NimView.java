@@ -10,7 +10,7 @@ public class NimView {
      */
     public String afficher(String matchSets, String playerName) {
         System.out.println(matchSets + playerName + " : à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n");
-
         return "";
     }
+
 }
