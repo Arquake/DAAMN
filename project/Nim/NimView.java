@@ -52,7 +52,7 @@ public class NimView {
     }
 
     public void partieGagnerJoueur(int nombreParties, String nomJoueur){
-        System.out.println("\n\u001B[42m" + "\u001B[30m " + nomJoueur + " a gagné " + nombreParties + " parties" + "\u001B[0m");
+        System.out.println("\n\u001B[42m" + "\u001B[30m " + nomJoueur + " a gagné " + nombreParties + " parties " + "\u001B[0m");
     }
 
     public void endVictory(String joueur){
