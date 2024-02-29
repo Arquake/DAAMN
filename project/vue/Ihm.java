@@ -71,17 +71,18 @@ public class Ihm {
     public boolean replay() {
         Scanner scanner = new Scanner(System.in);
         String res ="";
-        System.out.println("rejouer ? (Y/N)");
-        scanner.nextLine();
-        if (scanner.hasNext()){ res = scanner.next(); }
-        System.out.println("1er" + res);
-        boolean test = scanner.hasNext() || (!res.equalsIgnoreCase("y") && !res.equalsIgnoreCase("n"));
-        while (test){
-            System.out.println("rejouer ? (Y/N)");
-            scanner.nextLine();
-            if (scanner.hasNext()){ res = scanner.next(); }
+
+        System.out.println("Rejouer ? (Y/N)");
+        while (true) {
+            if (scanner.hasNext()) {
+                res = scanner.next();
+            }
+            if (res.equalsIgnoreCase("y") || res.equalsIgnoreCase("n")){
+                return res.equalsIgnoreCase("y");
+            } else {
+                System.out.println("Rejouer ? (Y/N)");
+            }
         }
-        return res.equalsIgnoreCase("y");
     }
 
     /**
