@@ -1,4 +1,4 @@
-package project.Puissance;
+package project.view;
 
 public class PuissanceView {
 }

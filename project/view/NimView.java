@@ -1,4 +1,4 @@
-package project.Nim;
+package project.view;
 
 import java.util.Scanner;
 

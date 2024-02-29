@@ -1,7 +1,9 @@
-package project.Nim;
+package project.model;
 
 
-import java.util.Arrays;
+import project.controller.Heap;
+import project.controller.Joueur;
+
 import java.util.Scanner;
 
 public class NimModele {

@@ -1,4 +1,4 @@
-package project.Nim;
+package project.controller;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package project.Nim;
+package project.controller;
 
 public class Joueur implements Comparable<Joueur>  {
     private final String nom;

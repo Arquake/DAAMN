@@ -1,4 +1,4 @@
-package project.Puissance;
+package project.controller;
 
 public class PuissanceController {
 }

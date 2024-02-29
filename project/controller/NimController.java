@@ -1,4 +1,7 @@
-package project.Nim;
+package project.controller;
+
+import project.model.NimModele;
+import project.view.NimView;
 
 public class NimController {
     private Joueur[] joueurs;
