@@ -14,7 +14,6 @@ public class ControleurJeuNim {
     private final Ihm ihm;
 
     private int numberOfHeap;
-    private Joueur dernier_joueur;
 
     /**
      * Initialize the game
@@ -57,7 +56,8 @@ public class ControleurJeuNim {
 
         Heap jeu = new Heap(this.numberOfHeap);
 
-        dernier_joueur = joueurs[0];
+        Joueur dernier_joueur = joueurs[0];
+
         int playerTurn = 0;
 
         // game loop
@@ -71,7 +71,7 @@ public class ControleurJeuNim {
 
                 if ( model.jouerCoup(coup,jeu) ) {
 
-                    dernier_joueur= joueurs[playerTurn];
+                    dernier_joueur = joueurs[playerTurn];
 
                 }
 
@@ -82,7 +82,8 @@ public class ControleurJeuNim {
             }
 
         }
-        ihm.victory(dernier_joueur.getNom());dernier_joueur.increaseScore();
+        ihm.victory(dernier_joueur.getNom());
+        dernier_joueur.increaseScore();
     }
 
 

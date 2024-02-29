@@ -1,5 +1,8 @@
 package project.controleur;
 
+/**
+ * game board
+ */
 public class Heap {
     private final int[][] jeu;
 

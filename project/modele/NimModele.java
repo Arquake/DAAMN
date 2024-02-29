@@ -6,6 +6,9 @@ import project.controleur.Joueur;
 
 import java.util.Scanner;
 
+/**
+ * class to manipulate object
+ */
 public class NimModele {
 
 

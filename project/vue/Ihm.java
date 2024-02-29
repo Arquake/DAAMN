@@ -3,7 +3,7 @@ package project.vue;
 import java.util.Scanner;
 
 /**
- * Contains all the methods related to the View
+ * Contains all the methods related to the View and User input
  */
 public class Ihm {
 
