@@ -15,17 +15,20 @@ public class Heap {
     }
 
     /**
+     * remove matches n from the m heap
      * @author
      * @param n number of matches to subtract
      * @param m which heap to subtract the matches
      */
-
     public void removeMatches(int n, int m) {
         this.jeu[m - 1] = new int[this.jeu[m - 1].length - n];
 
     }
 
-
+    /**
+     * @author
+     * @return the current state of the game
+     */
     @Override
     public String toString() {
 
@@ -42,18 +45,36 @@ public class Heap {
         return res;
     }
 
+    /**
+     * @author
+     * @return the number of heap
+     */
     public int getNumberOfheap(){
         return jeu.length;
     }
 
+    /**
+     * @author
+     * @param index the heap index number
+     * @return the number of matches in the heap
+     */
     public int getNumberOfMatchesInHeap(int index) {
         return jeu[index-1].length;
     }
 
+    /**
+     * @author
+     * @param index the heap index number
+     * @return if the heap is empty
+     */
     public boolean heapIsEmpty(int index){
         return jeu[index-1].length == 0;
     }
 
+    /**
+     * @author
+     * @return if there is no matches left
+     */
     public boolean isEmpty(){
         for (int[] row: jeu) {
             if (row.length > 0) {return false;}
