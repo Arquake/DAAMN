@@ -72,27 +72,33 @@ public class NimModele {
         return tas.heapIsEmpty(coupAJouer[0]);
     }
 
-    public int winner(int lastMatches){
-        if (lastMatches>0){return 1;}
-        if (lastMatches<0){return -1;}
-        return 0;
-    }
-
+    /**
+     * @param response the string the user has given if he wants to replay or not
+     * @return true if the string is a Yes or No, false otherwise
+     */
     public boolean replayValidResponse(String response){
         Scanner scanner = new Scanner(response);
         if (!scanner.hasNext()) {return false;}
         String res = scanner.next();
-        if (scanner.hasNext() || (!res.equals("Y") && !res.equals("y") && !res.equals("N") && !res.equals("n"))) {return false;}
-        return true;
+        return !scanner.hasNext() && (res.equals("Y") || res.equals("y") || res.equals("N") || res.equals("n"));
     }
 
+    /**
+     * @param response the string the user has given if he wants to replay or not
+     * @return true if he wants to replay, false if he wants to stop
+     */
     public boolean isReplaying(String response){
         Scanner scanner = new Scanner(response);
         String res = scanner.next();
         return res.equals("Y") || res.equals("y");
     }
 
+    /**
+     * @param j1 first player
+     * @param j2 second player
+     * @return
+     */
     public String isBetter(Joueur j1, Joueur j2){
-        return j1.getScore()> j2.getScore() ? j1.getNom() : j2.getNom();
+        return j1.compareTo(j2) > 0 ? j1.getNom() : j2.getNom();
     }
 }

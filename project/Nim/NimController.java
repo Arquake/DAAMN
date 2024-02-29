@@ -3,13 +3,16 @@ package project.Nim;
 public class NimController {
     private Joueur[] joueurs;
 
-    private NimModele model = new NimModele();
+    private final NimModele model = new NimModele();
 
-    private NimView view = new NimView();
+    private final NimView view = new NimView();
 
     private int numberOfHeap;
     private Joueur dernier_joueur;
 
+    /**
+     * Initialize the game
+     */
     public NimController() {
         createBoard();
         createPlayers();
@@ -17,6 +20,7 @@ public class NimController {
 
     /**
      * @author Matteo Nicolas Amin
+     * Start the game and keep it running until the player wants to stop
      */
     public void jouer(){
 
@@ -36,6 +40,9 @@ public class NimController {
         }
     }
 
+    /**
+     * game loop until one player win
+     */
     private void playGame() {
 
         Heap jeu = new Heap(this.numberOfHeap);
@@ -65,11 +72,13 @@ public class NimController {
             }
 
         }
-        view.victory(dernier_joueur.getNom());joueurs[1].increaseScore();
+        view.victory(dernier_joueur.getNom());dernier_joueur.increaseScore();
     }
 
 
-
+    /**
+     * create two player and store them in this.joueurs Array
+     */
     private void createPlayers(){
         this.joueurs = new Joueur[2];
         // creating the players
@@ -78,8 +87,10 @@ public class NimController {
         }
     }
 
+    /**
+     * create the board game
+     */
     private void createBoard(){
-        // creating the game board
         while (true){
             this.numberOfHeap =  model.verifierCreationJeu( view.creerJeu() );
             // if numberOfHeap < 1 we can't create a heap out of it
@@ -90,15 +101,16 @@ public class NimController {
         }
     }
 
+    /**
+     * create a new game
+     * @return the choice if the player wants to replay
+     */
     private boolean startNewGame(){
         boolean running;
         String response = "";
         response = view.replay();
         while (!model.replayValidResponse(response)){
             response = view.replay();
-        }
-        for (Joueur j: joueurs) {
-            j.resetLastMatches();
         }
         return model.isReplaying(response);
     }
