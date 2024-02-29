@@ -8,19 +8,7 @@ import java.util.Scanner;
 
 public class NimModele {
 
-    public int verifierCreationJeu(String nombre){
-        Scanner scanner = new Scanner(nombre);
-        // scanner check if there's an int in the string
-        if ( !scanner.hasNextInt()) {
-            return -1;
-        }
-        // if there's an int we parse it to an int and store it
-        int res = Integer.parseInt(scanner.next());
-        // if scanner hase other information or res is invalid -1 returned
-        if (scanner.hasNext() ) { return -1; }
-        // if everything is valid we return the res
-        return res;
-    }
+
 
     /**
      * @author Nicolas

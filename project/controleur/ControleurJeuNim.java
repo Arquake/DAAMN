@@ -3,20 +3,26 @@ package project.controleur;
 import project.modele.NimModele;
 import project.vue.Ihm;
 
+/**
+ * Contains all methods related to the game's control to link the View and Model
+ */
 public class ControleurJeuNim {
     private Joueur[] joueurs;
 
     private final NimModele model = new NimModele();
 
-    private final Ihm view = new Ihm();
+    private final Ihm ihm;
 
     private int numberOfHeap;
     private Joueur dernier_joueur;
 
     /**
      * Initialize the game
+     * @author
+     * @param ihm the Ihm ( View )
      */
     public ControleurJeuNim(Ihm ihm) {
+        this.ihm = ihm;
         createBoard();
         createPlayers();
     }
@@ -34,12 +40,12 @@ public class ControleurJeuNim {
             running = startNewGame();
         }
         for (Joueur j: joueurs) {
-            view.partieGagnerJoueur(j.getScore(),j.getNom());
+            ihm.partieGagnerJoueur(j.getScore(),j.getNom());
         }
 
-        if (joueurs[0].getScore() == joueurs[1].getScore()) { view.endExeaquo(); }
+        if (joueurs[0].getScore() == joueurs[1].getScore()) { ihm.endExeaquo(); }
         else {
-            view.endVictory(model.isBetter(joueurs[0], joueurs[1]));
+            ihm.endVictory(model.isBetter(joueurs[0], joueurs[1]));
         }
     }
 
@@ -57,7 +63,7 @@ public class ControleurJeuNim {
         // game loop
         while ( ! model.gameFinished( jeu ) ){
 
-            String coup = view.demanderCoup( jeu.toString(), joueurs[playerTurn].getNom() );
+            String coup = ihm.demanderCoup( jeu.toString(), joueurs[playerTurn].getNom() );
 
             if ( model.verifierCoup( coup , jeu ) ) {
 
@@ -71,12 +77,12 @@ public class ControleurJeuNim {
 
             } else {
 
-                view.invalidData();
+                ihm.invalidData();
 
             }
 
         }
-        view.victory(dernier_joueur.getNom());dernier_joueur.increaseScore();
+        ihm.victory(dernier_joueur.getNom());dernier_joueur.increaseScore();
     }
 
 
@@ -88,7 +94,7 @@ public class ControleurJeuNim {
         this.joueurs = new Joueur[2];
         // creating the players
         for (int i = 0; i < 2; i++) {
-            this.joueurs[i] = new Joueur(view.creerJoueur(i));
+            this.joueurs[i] = new Joueur(ihm.creerJoueur(i));
         }
     }
 
@@ -98,12 +104,12 @@ public class ControleurJeuNim {
      */
     private void createBoard(){
         while (true){
-            this.numberOfHeap =  model.verifierCreationJeu( view.creerJeu() );
+            this.numberOfHeap =  ihm.creerJeu();
             // if numberOfHeap < 1 we can't create a heap out of it
             if ( this.numberOfHeap > 1 ) {
                 break;
             }
-            view.invalidData();
+            ihm.invalidData();
         }
     }
 
@@ -113,12 +119,6 @@ public class ControleurJeuNim {
      * @return the choice if the player wants to replay
      */
     private boolean startNewGame(){
-        boolean running;
-        String response = "";
-        response = view.replay();
-        while (!model.replayValidResponse(response)){
-            response = view.replay();
-        }
-        return model.isReplaying(response);
+        return ihm.replay();
     }
 }
