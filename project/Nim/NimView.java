@@ -41,10 +41,6 @@ public class NimView {
         System.out.println("\u001B[42m" + "\u001B[30m " + nomJoueur + " a gagné " + "\u001B[0m");
     }
 
-    public void egalite(){
-        System.out.println("\u001B[43m" + "\u001B[30m" + " ex aequo " + "\u001B[0m");
-    }
-
     public String replay() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("rejouer ? (Y/N)");
