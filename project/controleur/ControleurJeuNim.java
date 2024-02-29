@@ -1,14 +1,14 @@
-package project.controller;
+package project.controleur;
 
-import project.model.NimModele;
-import project.view.NimView;
+import project.modele.NimModele;
+import project.vue.Ihm;
 
-public class NimController {
+public class ControleurJeuNim {
     private Joueur[] joueurs;
 
     private final NimModele model = new NimModele();
 
-    private final NimView view = new NimView();
+    private final Ihm view = new Ihm();
 
     private int numberOfHeap;
     private Joueur dernier_joueur;
@@ -16,7 +16,7 @@ public class NimController {
     /**
      * Initialize the game
      */
-    public NimController() {
+    public ControleurJeuNim(Ihm ihm) {
         createBoard();
         createPlayers();
     }

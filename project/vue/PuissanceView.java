@@ -1,4 +1,4 @@
-package project.view;
+package project.vue;
 
 public class PuissanceView {
 }

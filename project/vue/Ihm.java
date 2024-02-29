@@ -1,8 +1,8 @@
-package project.view;
+package project.vue;
 
 import java.util.Scanner;
 
-public class NimView {
+public class Ihm {
 
     /**
      * @author Amin

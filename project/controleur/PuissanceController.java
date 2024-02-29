@@ -1,4 +1,4 @@
-package project.controller;
+package project.controleur;
 
 public class PuissanceController {
 }

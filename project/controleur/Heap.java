@@ -1,6 +1,4 @@
-package project.controller;
-
-import java.util.Arrays;
+package project.controleur;
 
 public class Heap {
     private final int[][] jeu;

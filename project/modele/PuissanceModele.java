@@ -1,4 +1,4 @@
-package project.model;
+package project.modele;
 
 public class PuissanceModele {
 }

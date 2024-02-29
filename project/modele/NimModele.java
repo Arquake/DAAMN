@@ -1,8 +1,8 @@
-package project.model;
+package project.modele;
 
 
-import project.controller.Heap;
-import project.controller.Joueur;
+import project.controleur.Heap;
+import project.controleur.Joueur;
 
 import java.util.Scanner;
 
