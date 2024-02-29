@@ -15,7 +15,7 @@ public class Heap {
     }
 
     /**
-     *
+     * @author
      * @param n number of matches to subtract
      * @param m which heap to subtract the matches
      */

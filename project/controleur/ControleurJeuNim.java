@@ -22,8 +22,8 @@ public class ControleurJeuNim {
     }
 
     /**
-     * @author Matteo Nicolas Amin
      * Start the game and keep it running until the player wants to stop
+     * @author Matteo Nicolas Amin
      */
     public void jouer(){
 
@@ -45,6 +45,7 @@ public class ControleurJeuNim {
 
     /**
      * game loop until one player win
+     * @author
      */
     private void playGame() {
 
@@ -81,6 +82,7 @@ public class ControleurJeuNim {
 
     /**
      * create two player and store them in this.joueurs Array
+     * @author
      */
     private void createPlayers(){
         this.joueurs = new Joueur[2];
@@ -92,6 +94,7 @@ public class ControleurJeuNim {
 
     /**
      * create the board game
+     * @author
      */
     private void createBoard(){
         while (true){
@@ -106,6 +109,7 @@ public class ControleurJeuNim {
 
     /**
      * create a new game
+     * @author
      * @return the choice if the player wants to replay
      */
     private boolean startNewGame(){

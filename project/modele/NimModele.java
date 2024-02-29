@@ -60,10 +60,22 @@ public class NimModele {
         return true;
     }
 
+    /**
+     * @author
+     * @param tas game object with heaps in it
+     * @return if all heaps in game object are empty
+     */
     public boolean gameFinished(Heap tas) {
         return tas.isEmpty();
     }
 
+    /**
+     * @author
+     * @param coup the move the player wants to execute
+     * @param tas the gam object with heaps in it
+     * @return if the move is valid
+     * if the move is valid execute the move otherwise don't
+     */
     public boolean jouerCoup(String coup, Heap tas) {
         Scanner scanner = new Scanner(coup);
         int[] coupAJouer = new int[2];
@@ -75,6 +87,7 @@ public class NimModele {
     }
 
     /**
+     * @author
      * @param response the string the user has given if he wants to replay or not
      * @return true if the string is a Yes or No, false otherwise
      */
@@ -86,6 +99,7 @@ public class NimModele {
     }
 
     /**
+     * @author
      * @param response the string the user has given if he wants to replay or not
      * @return true if he wants to replay, false if he wants to stop
      */
@@ -96,9 +110,10 @@ public class NimModele {
     }
 
     /**
+     * @author
      * @param j1 first player
      * @param j2 second player
-     * @return
+     * @return the name of the player with a better score
      */
     public String isBetter(Joueur j1, Joueur j2){
         return j1.compareTo(j2) > 0 ? j1.getNom() : j2.getNom();

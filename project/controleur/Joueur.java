@@ -16,8 +16,8 @@ public class Joueur implements Comparable<Joueur>  {
     }
 
     /**
-     * @author
      * Increase the score of the player by 1
+     * @author
      */
     public void increaseScore() {
         this.score++;

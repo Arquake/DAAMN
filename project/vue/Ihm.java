@@ -26,7 +26,11 @@ public class Ihm {
         return scanner.nextLine();
     }
 
-
+    /**
+     * receive user player name
+     * @param i which player si it
+     * @return the player name
+     */
     public String creerJoueur(int i){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nom du joueur "+i+" : ");
