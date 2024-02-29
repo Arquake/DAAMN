@@ -37,15 +37,15 @@ public class ControleurJeuNim {
         while (running){
             playGame();
 
-            running = startNewGame();
+            running = ihm.replay();
         }
         for (Joueur j: joueurs) {
             ihm.partieGagnerJoueur(j.getScore(),j.getNom());
         }
 
-        if (joueurs[0].getScore() == joueurs[1].getScore()) { ihm.endExeaquo(); }
+        if (joueurs[0].compareTo(joueurs[1]) == 0) { ihm.endExeaquo(); }
         else {
-            ihm.endVictory(model.isBetter(joueurs[0], joueurs[1]));
+            ihm.endVictory(joueurs[0].compareTo(joueurs[1]) > 0 ? joueurs[0].getNom() : joueurs[1].getNom());
         }
     }
 
@@ -61,7 +61,7 @@ public class ControleurJeuNim {
         int playerTurn = 0;
 
         // game loop
-        while ( ! model.gameFinished( jeu ) ){
+        while ( ! jeu.isEmpty() ){
 
             String coup = ihm.demanderCoup( jeu.toString(), joueurs[playerTurn].getNom() );
 
@@ -111,14 +111,5 @@ public class ControleurJeuNim {
             }
             ihm.invalidData();
         }
-    }
-
-    /**
-     * create a new game
-     * @author
-     * @return the choice if the player wants to replay
-     */
-    private boolean startNewGame(){
-        return ihm.replay();
     }
 }

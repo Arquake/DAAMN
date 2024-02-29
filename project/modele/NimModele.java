@@ -40,21 +40,9 @@ public class NimModele {
         // if the first item in coupIntCheck is inferior to the minimum number of heap or greater
         // if more matches want to be subtracted than the current number in the heap or inferior to 1
         // false is returned
-        if ( scanner.hasNext() ||
-            coupIntCheck[0] > jeu.getNumberOfheap() || coupIntCheck[0] < 1 ||
-            coupIntCheck[1] > jeu.getNumberOfMatchesInHeap(coupIntCheck[0]) || coupIntCheck[1] < 1
-        ) { return false; }
-
-        return true;
-    }
-
-    /**
-     * @author
-     * @param tas game object with heaps in it
-     * @return if all heaps in game object are empty
-     */
-    public boolean gameFinished(Heap tas) {
-        return tas.isEmpty();
+        return !scanner.hasNext() &&
+                coupIntCheck[0] <= jeu.getNumberOfheap() && coupIntCheck[0] >= 1 &&
+                coupIntCheck[1] <= jeu.getNumberOfMatchesInHeap(coupIntCheck[0]) && coupIntCheck[1] >= 1;
     }
 
     /**
@@ -72,38 +60,5 @@ public class NimModele {
         }
         tas.removeMatches(coupAJouer[1], coupAJouer[0]);
         return tas.heapIsEmpty(coupAJouer[0]);
-    }
-
-    /**
-     * @author
-     * @param response the string the user has given if he wants to replay or not
-     * @return true if the string is a Yes or No, false otherwise
-     */
-    public boolean replayValidResponse(String response){
-        Scanner scanner = new Scanner(response);
-        if (!scanner.hasNext()) {return false;}
-        String res = scanner.next();
-        return !scanner.hasNext() && (res.equals("Y") || res.equals("y") || res.equals("N") || res.equals("n"));
-    }
-
-    /**
-     * @author
-     * @param response the string the user has given if he wants to replay or not
-     * @return true if he wants to replay, false if he wants to stop
-     */
-    public boolean isReplaying(String response){
-        Scanner scanner = new Scanner(response);
-        String res = scanner.next();
-        return res.equals("Y") || res.equals("y");
-    }
-
-    /**
-     * @author
-     * @param j1 first player
-     * @param j2 second player
-     * @return the name of the player with a better score
-     */
-    public String isBetter(Joueur j1, Joueur j2){
-        return j1.compareTo(j2) > 0 ? j1.getNom() : j2.getNom();
     }
 }
