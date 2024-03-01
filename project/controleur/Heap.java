@@ -7,7 +7,6 @@ public class Heap {
     private final int[][] jeu;
 
     /**
-     * @author Nicolas
      * @param heapNumber how many number of heap to create
      */
     public Heap(int heapNumber) {
@@ -19,17 +18,14 @@ public class Heap {
 
     /**
      * remove matches n from the m heap
-     * @author
      * @param n number of matches to subtract
      * @param m which heap to subtract the matches
      */
     public void removeMatches(int n, int m) {
         this.jeu[m - 1] = new int[this.jeu[m - 1].length - n];
-
     }
 
     /**
-     * @author
      * @return the current state of the game
      */
     @Override
@@ -49,7 +45,6 @@ public class Heap {
     }
 
     /**
-     * @author
      * @return the number of heap
      */
     public int getNumberOfheap(){
@@ -57,7 +52,6 @@ public class Heap {
     }
 
     /**
-     * @author
      * @param index the heap index number
      * @return the number of matches in the heap
      */
@@ -66,7 +60,6 @@ public class Heap {
     }
 
     /**
-     * @author
      * @param index the heap index number
      * @return if the heap is empty
      */
@@ -75,7 +68,6 @@ public class Heap {
     }
 
     /**
-     * @author
      * @return if there is no matches left
      */
     public boolean isEmpty(){

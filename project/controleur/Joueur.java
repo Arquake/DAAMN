@@ -4,6 +4,9 @@ public class Joueur implements Comparable<Joueur>  {
     private final String nom;
     private int score = 0;
 
+    /**
+     * @param nom name of the player
+     */
     public Joueur(String nom) {
         this.nom = nom;
     }
@@ -17,14 +20,12 @@ public class Joueur implements Comparable<Joueur>  {
 
     /**
      * Increase the score of the player by 1
-     * @author
      */
     public void increaseScore() {
         this.score++;
     }
 
     /**
-     * @author
      * @return the score of the player
      */
     public int getScore() {
@@ -32,10 +33,9 @@ public class Joueur implements Comparable<Joueur>  {
     }
 
     /**
-     * @author
      * @param player the other player to compare score with
      * @return the difference between this player score and the other one
-     * @return -1 this player have a lower score | 0 players have an equal score | 1 this player have a better score
+     * -1 this player have a lower score | 0 players have an equal score | 1 this player have a better score
      */
     @Override
     public int compareTo(Joueur player) {

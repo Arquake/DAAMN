@@ -11,10 +11,13 @@ import java.util.Scanner;
  */
 public class NimModele {
 
-
+    /**
+     * create the model for game of Nim
+     */
+    public NimModele() {
+    }
 
     /**
-     * @author Nicolas
      * @param coup player's move in format of string = "int int"
      * @param jeu int[][] Array of Heap and the matches in those
      * @return true if the move is valid, false otherwise
@@ -49,7 +52,6 @@ public class NimModele {
     }
 
     /**
-     * @author
      * @param coup the move the player wants to execute
      * @param tas the gam object with heaps in it
      * @return if the move is valid
