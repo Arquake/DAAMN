@@ -27,6 +27,9 @@ public class ControleurJeuNim {
 
     /**
      * Starts the game and keeps it running until the player wants to stop
+     * uses playGame() to play the actual game
+     * after each full game it asks the players if they want to play the game again using the Ihm
+     * if they say no then it prints the stats
      */
     public void jouer(){
 
@@ -48,6 +51,9 @@ public class ControleurJeuNim {
 
     /**
      * game loops until one player wins
+     * makes the actual heap
+     * initializes game with joueur 0
+     *
      */
     private void playGame() {
 
@@ -64,7 +70,7 @@ public class ControleurJeuNim {
 
             if ( model.verifierCoup( coup , jeu ) ) {
 
-                playerTurn = (playerTurn + 1) % 2;
+                playerTurn = (playerTurn + 1) % 2; // this could've been done in an easier way? like playerTurn = not dernierJoueur ? idk
 
                 if ( model.jouerCoup(coup,jeu) ) {
 
@@ -80,7 +86,7 @@ public class ControleurJeuNim {
 
         }
         ihm.victory(dernier_joueur.getNom());
-        dernier_joueur.increaseScore();
+        dernier_joueur.increaseScore(); // dernier_joueur is not working as it should. weird stuff
     }
 
 
@@ -97,6 +103,9 @@ public class ControleurJeuNim {
 
     /**
      * creates the board game
+     * calls the ihm to make the board
+     * and then checks if the heap number is possible
+     * if invalid then it calls the ihm again to show the error message
      */
     private void createBoard(){
         while (true){

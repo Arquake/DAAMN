@@ -35,8 +35,8 @@ public class Ihm {
 
     /**
      * receives user player name
-     * @param i which player it is
-     * @return the player name
+     * @param i which player it is making right now
+     * @return the player name to the controller
      */
     public String creerJoueur(int i){
         Scanner scanner = new Scanner(System.in);
