@@ -8,7 +8,7 @@ import project.vue.Ihm;
  */
 public class Main {
     /**
-     * start the game
+     * starts the game
      * @param args args
      */
     public static void main(String[] args) {

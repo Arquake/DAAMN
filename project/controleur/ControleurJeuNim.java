@@ -26,7 +26,7 @@ public class ControleurJeuNim {
     }
 
     /**
-     * Start the game and keep it running until the player wants to stop
+     * Starts the game and keeps it running until the player wants to stop
      */
     public void jouer(){
 
@@ -47,7 +47,7 @@ public class ControleurJeuNim {
     }
 
     /**
-     * game loop until one player win
+     * game loops until one player wins
      */
     private void playGame() {
 
@@ -85,7 +85,7 @@ public class ControleurJeuNim {
 
 
     /**
-     * create two player and store them in this.joueurs Array
+     * creates two player and stores them in this.joueurs Array
      */
     private void createPlayers(){
         this.joueurs = new Joueur[2];
@@ -96,7 +96,7 @@ public class ControleurJeuNim {
     }
 
     /**
-     * create the board game
+     * creates the board game
      */
     private void createBoard(){
         while (true){

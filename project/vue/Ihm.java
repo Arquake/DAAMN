@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ihm {
 
     /**
-     * @param playerName the name of the player which is playing at this turn
+     * @param playerName the name of the players that are playing in this turn
      * @param matchSets int[][] Array of Heap and the matches in those
      * @return the user input for his move
      */
@@ -34,8 +34,8 @@ public class Ihm {
     }
 
     /**
-     * receive user player name
-     * @param i which player si it
+     * receives user player name
+     * @param i which player it is
      * @return the player name
      */
     public String creerJoueur(int i){
@@ -45,14 +45,14 @@ public class Ihm {
     }
 
     /**
-     * print to the screen if data is invalid
+     * prints to the screen if data is invalid
      */
     public void invalidData() {
         System.out.println("\u001B[41m" + "\u001B[30m" + " les données fournit sont invalides " + "\u001B[0m");
     }
 
     /**
-     * print which player have won
+     * prints which player have won
      * @param nomJoueur le nom du joueur
      */
     public void victory(String nomJoueur) {
@@ -60,9 +60,9 @@ public class Ihm {
     }
 
     /**
-     * ask the player if he wants to replay
+     * asks the player if they want to replay
      * @author Matteo
-     * @return the user intput that should be y|Y|n|N
+     * @return the user input should be y|Y|n|N
      */
     public boolean replay() {
         Scanner scanner = new Scanner(System.in);
@@ -82,8 +82,8 @@ public class Ihm {
     }
 
     /**
-     * print how many game the player have won
-     * @param nombreParties number of game the player won
+     * prints how many games the player has won
+     * @param nombreParties number of games the player has won
      * @param nomJoueur name of the player
      */
     public void partieGagnerJoueur(int nombreParties, String nomJoueur){
@@ -91,7 +91,7 @@ public class Ihm {
     }
 
     /**
-     * print which player have won the most games
+     * prints which player has won the most games
      * @param joueur the name of the player
      */
     public void endVictory(String joueur){
@@ -99,14 +99,14 @@ public class Ihm {
     }
 
     /**
-     * print "ex aequo" because two player have the same score
+     * print "ex aequo" because the two players have the same score
      */
     public void endExeaquo(){
         System.out.println("\n\u001B[43m" + "\u001B[30m " + " ex aequo " + "\u001B[0m");
     }
 
     /**
-     * check if the number of Heap is valid
+     * checks if the number of Heap is valid
      * @param nombre user input
      * @return number of Heap if valid, -1 otherwise
      */

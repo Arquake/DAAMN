@@ -33,16 +33,16 @@ public class NimModele {
         // the scanner is iterated 2 times to check if the two number are int
         for (int i = 0; i < 2; i++) {
 
-            // if the scanner do not find an int it returns false
+            // if the scanner does not find an int it returns false
             if ( !scanner.hasNextInt()) {
                 return false;
             }
 
-            // add the int that got check to the array
+            // add the int that got checked to the array
             coupIntCheck[i] = scanner.nextInt();
         }
 
-        // if scanner have something else after the second number the format is not validated
+        // if scanner has something else after the second number the format is not validated
         // if the first item in coupIntCheck is inferior to the minimum number of heap or greater
         // if more matches want to be subtracted than the current number in the heap or inferior to 1
         // false is returned
@@ -53,7 +53,7 @@ public class NimModele {
 
     /**
      * @param coup the move the player wants to execute
-     * @param tas the gam object with heaps in it
+     * @param tas the game object with heaps in it
      * @return if the move is valid
      * if the move is valid execute the move otherwise don't
      */

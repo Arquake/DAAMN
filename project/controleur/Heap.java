@@ -7,7 +7,7 @@ public class Heap {
     private final int[][] jeu;
 
     /**
-     * @param heapNumber how many number of heap to create
+     * @param heapNumber number of heaps to create
      */
     public Heap(int heapNumber) {
         this.jeu = new int[heapNumber][];
@@ -19,7 +19,7 @@ public class Heap {
     /**
      * remove matches n from the m heap
      * @param n number of matches to subtract
-     * @param m which heap to subtract the matches
+     * @param m which heap to subtract the matches from
      */
     public void removeMatches(int n, int m) {
         this.jeu[m - 1] = new int[this.jeu[m - 1].length - n];
