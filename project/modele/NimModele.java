@@ -52,10 +52,11 @@ public class NimModele {
     }
 
     /**
+     * if the move is valid it executes the move otherwise it doesn't
      * @param coup the move the player wants to execute
      * @param tas the game object with heaps in it
-     * @return if the move is valid
-     * if the move is valid execute the move otherwise don't
+     * @return true if the move is valid
+
      */
     public boolean jouerCoup(String coup, Heap tas) {
         Scanner scanner = new Scanner(coup);

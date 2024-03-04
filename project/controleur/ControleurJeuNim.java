@@ -58,36 +58,38 @@ public class ControleurJeuNim {
     private void playGame() {
 
         Heap jeu = new Heap(this.numberOfHeap);
-
         Joueur dernier_joueur = joueurs[0];
-
         int playerTurn = 0;
 
-        // game loop
-        while ( ! jeu.isEmpty() ){
+        // Game loop
+        while (!jeu.isEmpty()) {
+            // Ask the current player for their move
+            String coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom());
 
-            String coup = ihm.demanderCoup( jeu.toString(), joueurs[playerTurn].getNom() );
-
-            if ( model.verifierCoup( coup , jeu ) ) {
-
-                playerTurn = (playerTurn + 1) % 2; // this could've been done in an easier way? like playerTurn = not dernierJoueur ? idk
-
-                if ( model.jouerCoup(coup,jeu) ) {
-
+            // Verify and play the move if it's valid
+            if (model.verifierCoup(coup, jeu)) {
+                if (model.jouerCoup(coup, jeu)) {
+                    // If the move was successful, update the last player
                     dernier_joueur = joueurs[playerTurn];
 
+                    // Check if the game is over (heaps are empty) before changing turns
+                    if (jeu.isEmpty()) {
+                        break; // Exit the loop if the game is over
+                    }
                 }
-
+                // Move to the next player's turn only if the game continues
+                playerTurn = (playerTurn + 1) % 2;
             } else {
-
+                // Inform the player if the input data was invalid
                 ihm.invalidData();
-
             }
 
         }
+        // Announce the winner and update their score
         ihm.victory(dernier_joueur.getNom());
-        dernier_joueur.increaseScore(); // dernier_joueur is not working as it should. weird stuff
+        dernier_joueur.increaseScore();
     }
+
 
 
     /**

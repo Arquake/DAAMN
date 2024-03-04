@@ -45,7 +45,7 @@ public class Heap {
     }
 
     /**
-     * @return the number of heap
+     * @return the number of heaps
      */
     public int getNumberOfheap(){
         return jeu.length;
@@ -61,7 +61,7 @@ public class Heap {
 
     /**
      * @param index the heap index number
-     * @return if the heap is empty
+     * @return if the specific heap is empty
      */
     public boolean heapIsEmpty(int index){
         return jeu[index-1].length == 0;
