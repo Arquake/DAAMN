@@ -116,7 +116,6 @@ public class ControleurJeuNim {
             if ( this.numberOfHeap > 1 ) {
                 break;
             }
-            ihm.invalidData();
         }
     }
 }

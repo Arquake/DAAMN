@@ -22,12 +22,14 @@ public class Ihm {
      * @return int with the user input that should represent the number of heap
      */
     public int creerJeu(){
-        int res =-1;
+        int res = -1;
         Scanner scanner = new Scanner("");
-        while ( res == -1 ) {
+        while ( true ) {
             System.out.print("Nombre de tas : ");
             scanner = new Scanner(System.in);
             res = verifierCreationJeu(scanner.nextLine());
+            if (res != -1) { break; }
+            invalidData();
         }
 
         return res;
@@ -121,6 +123,6 @@ public class Ihm {
         // if scanner hase other information or res is invalid -1 returned
         if (scanner.hasNext() ) { return -1; }
         // if everything is valid we return the res
-        return res;
+        return res > 1 ? res : -1;
     }
 }
