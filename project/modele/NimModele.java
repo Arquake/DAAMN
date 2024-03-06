@@ -1,9 +1,6 @@
 package project.modele;
 
 
-import project.controleur.Heap;
-import project.controleur.Joueur;
-
 import java.util.Scanner;
 
 /**
@@ -67,4 +64,5 @@ public class NimModele {
         tas.removeMatches(coupAJouer[1], coupAJouer[0]);
         return tas.heapIsEmpty(coupAJouer[0]);
     }
+
 }

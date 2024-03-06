@@ -1,5 +1,7 @@
 package project.controleur;
 
+import project.modele.Heap;
+import project.modele.Joueur;
 import project.modele.NimModele;
 import project.vue.Ihm;
 
@@ -111,7 +113,7 @@ public class ControleurJeuNim {
      */
     private void createBoard(){
         while (true){
-            this.numberOfHeap =  ihm.creerJeu();
+            this.numberOfHeap = ihm.creerJeu();
             // if numberOfHeap < 1 we can't create a heap out of it
             if ( this.numberOfHeap > 1 ) {
                 break;

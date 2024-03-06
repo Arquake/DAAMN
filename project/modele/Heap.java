@@ -1,4 +1,4 @@
-package project.controleur;
+package project.modele;
 
 /**
  * game board

@@ -1,4 +1,4 @@
-package project.controleur;
+package project.modele;
 
 public class Joueur implements Comparable<Joueur>  {
     private final String nom;
