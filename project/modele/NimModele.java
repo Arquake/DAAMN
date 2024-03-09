@@ -19,7 +19,7 @@ public class NimModele {
      * @param jeu int[][] Array of Heap and the matches in those
      * @return true if the move is valid, false otherwise
      */
-    public boolean verifierCoup(String coup, Heap jeu){
+    public boolean verifierCoup(String coup, Plateau jeu){
 
         // a scanner is instantiated
         Scanner scanner = new Scanner(coup);
@@ -55,7 +55,7 @@ public class NimModele {
      * @return true if the move is valid
 
      */
-    public boolean jouerCoup(String coup, Heap tas) {
+    public boolean jouerCoup(String coup, Plateau tas) {
         Scanner scanner = new Scanner(coup);
         int[] coupAJouer = new int[2];
         for (int i = 0; i < 2; i++) {

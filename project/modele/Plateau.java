@@ -3,13 +3,13 @@ package project.modele;
 /**
  * game board
  */
-public class Heap {
+public class Plateau {
     private final int[][] jeu;
 
     /**
      * @param heapNumber number of heaps to create
      */
-    public Heap(int heapNumber) {
+    public Plateau(int heapNumber) {
         this.jeu = new int[heapNumber][];
         for (int i = 0; i < heapNumber; i++) {
             this.jeu[i] = new int[ 2*i +1 ];

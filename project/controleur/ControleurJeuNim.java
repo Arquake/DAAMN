@@ -1,6 +1,6 @@
 package project.controleur;
 
-import project.modele.Heap;
+import project.modele.Plateau;
 import project.modele.Joueur;
 import project.modele.NimModele;
 import project.vue.Ihm;
@@ -59,7 +59,7 @@ public class ControleurJeuNim {
      */
     private void playGame() {
 
-        Heap jeu = new Heap(this.numberOfHeap);
+        Plateau jeu = new Plateau(this.numberOfHeap);
         Joueur dernier_joueur = joueurs[0];
         int playerTurn = 0;
 
