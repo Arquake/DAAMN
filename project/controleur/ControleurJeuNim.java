@@ -115,7 +115,7 @@ public class ControleurJeuNim {
         while (true){
             this.numberOfHeap = ihm.creerJeu();
             // if numberOfHeap < 1 we can't create a heap out of it
-            if ( this.numberOfHeap > 1 ) {
+            if ( this.numberOfHeap >= 1 ) {
                 break;
             }
         }

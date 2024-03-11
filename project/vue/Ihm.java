@@ -15,7 +15,9 @@ public class Ihm {
     public String demanderCoup(String matchSets, String playerName) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(matchSets + playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
-        return scanner.nextLine();
+        String line = scanner.nextLine();
+        scanner.close();
+        return line;
     }
 
     /**
@@ -32,6 +34,7 @@ public class Ihm {
             invalidData();
         }
 
+        scanner.close();
         return res;
     }
 
@@ -43,7 +46,9 @@ public class Ihm {
     public String creerJoueur(int i){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nom du joueur "+i+" : ");
-        return scanner.nextLine();
+        String line = scanner.nextLine();
+        scanner.close();
+        return line;
     }
 
     /**
@@ -76,6 +81,7 @@ public class Ihm {
                 res = scanner.next();
             }
             if (res.equalsIgnoreCase("y") || res.equalsIgnoreCase("n")){
+                scanner.close();
                 return res.equalsIgnoreCase("y");
             } else {
                 System.out.println("Rejouer ? (Y/N)");
@@ -123,6 +129,7 @@ public class Ihm {
         // if scanner hase other information or res is invalid -1 returned
         if (scanner.hasNext() ) { return -1; }
         // if everything is valid we return the res
-        return res > 1 ? res : -1;
+        scanner.close();
+        return res >= 1 ? res : -1;
     }
 }
