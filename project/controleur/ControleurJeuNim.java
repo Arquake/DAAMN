@@ -94,8 +94,7 @@ public class ControleurJeuNim {
      */
     private void createPlayers(){
         this.joueurs = new Joueur[2];
-        // creating the players
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++) {        // creating the players
             this.joueurs[i] = new Joueur(ihm.creerJoueur(i));
         }
     }
@@ -109,7 +108,7 @@ public class ControleurJeuNim {
     private void createBoard(){
         do {
             this.numberOfHeap = ihm.creerJeu();
-            // if numberOfHeap < 1 we can't create a heap out of it
-        } while (this.numberOfHeap < 1);
+        } while (this.numberOfHeap < 1); // if numberOfHeap < 1 we can't create a heap out of it
+
     }
 }
