@@ -44,7 +44,7 @@ public class NimModele {
         // if more matches want to be subtracted than the current number in the heap or inferior to 1
         // false is returned
         return !scanner.hasNext() &&
-                coupIntCheck[0] <= jeu.getNumberOfheap() && coupIntCheck[0] >= 1 &&
+                coupIntCheck[0] <= jeu.getNumberOfHeap() && coupIntCheck[0] >= 1 &&
                 coupIntCheck[1] <= jeu.getNumberOfMatchesInHeap(coupIntCheck[0]) && coupIntCheck[1] >= 1;
     }
 

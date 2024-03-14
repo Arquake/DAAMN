@@ -46,7 +46,7 @@ public class Plateau {
     /**
      * @return the number of heaps
      */
-    public int getNumberOfheap(){
+    public int getNumberOfHeap(){
         return jeu.length;
     }
 
