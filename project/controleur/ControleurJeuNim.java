@@ -2,7 +2,6 @@ package project.controleur;
 
 import project.modele.Plateau;
 import project.modele.Joueur;
-import project.modele.NimModele;
 import project.vue.Ihm;
 
 /**
@@ -10,8 +9,6 @@ import project.vue.Ihm;
  */
 public class ControleurJeuNim {
     private Joueur[] joueurs;
-
-    private final NimModele model = new NimModele();
 
     private final Ihm ihm;
 
@@ -66,18 +63,14 @@ public class ControleurJeuNim {
         // Game loop
         while (!jeu.isEmpty()) {
             // Ask the current player for their move
-            String coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom());
+            int[] coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom());
 
-            // Verify and play the move if it's valid
-            if (model.verifierCoup(coup, jeu)) {
-                if (model.jouerCoup(coup, jeu)) {
-                    // If the move was successful, update the last player
-                    dernier_joueur = joueurs[playerTurn];
-                }
-                // Move to the next player's turn only if the game continues
+
+            try {
+                jeu.removeMatches(coup);
+                dernier_joueur = joueurs[playerTurn];
                 playerTurn = (playerTurn + 1) % 2;
-            } else {
-                // Inform the player if the input data was invalid
+            } catch (Exception e) {
                 ihm.invalidData();
             }
 

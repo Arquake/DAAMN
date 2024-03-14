@@ -1,28 +1,29 @@
 package project.modele;
 
+import java.util.Scanner;
+
 /**
  * game board
  */
 public class Plateau {
-    private final int[][] jeu;
+    private final int[] jeu;
 
     /**
      * @param heapNumber number of heaps to create
      */
     public Plateau(int heapNumber) {
-        this.jeu = new int[heapNumber][];
+        this.jeu = new int[heapNumber];
         for (int i = 0; i < heapNumber; i++) {
-            this.jeu[i] = new int[ 2*i +1 ];
+            this.jeu[i] = i*2+1;
         }
     }
 
     /**
-     * remove matches n from the m heap
-     * @param n number of matches to subtract
-     * @param m which heap to subtract the matches from
+     * @param target {Heap;number of matches} which heap to subtract the matches from
      */
-    public void removeMatches(int n, int m) {
-        this.jeu[m - 1] = new int[this.jeu[m - 1].length - n];
+    public void removeMatches(int[] target) {
+        if ( target[0] > jeu.length || jeu[target[0] - 1] > target[1] ) {throw new RuntimeException("The number of the Heap or the matches was greater than expected");}
+        jeu[target[0]] = jeu[target[0]] - target[1];
     }
 
     /**
@@ -35,45 +36,18 @@ public class Plateau {
         int gameLength = this.jeu.length;
 
         for (int i = 0; i < gameLength; i++) {
-            // ancienne version : Integer.toString(i+1) + "\t:\t"+"\t".repeat(gameLength-i);
-            res.append("\t".repeat(gameLength - i));
-            res.append("|\t".repeat(this.jeu[i].length));
-            res.append("\n");
+            res.append(Integer.toString(i+1) + "\t:\t"+"\t".repeat(this.jeu.length - i)+"|\t".repeat(this.jeu[i]) + "\n");
         }
         return res.toString();
-    }
-
-    /**
-     * @return the number of heaps
-     */
-    public int getNumberOfHeap(){
-        return jeu.length;
-    }
-
-    /**
-     * @param index the heap index number
-     * @return the number of matches in the heap
-     */
-    public int getNumberOfMatchesInHeap(int index) {
-        return jeu[index-1].length;
-    }
-
-    /**
-     * @param index the heap index number
-     * @return if the specific heap is empty
-     */
-    public boolean heapIsEmpty(int index){
-        return jeu[index-1].length == 0;
     }
 
     /**
      * @return if there is no matches left
      */
     public boolean isEmpty(){
-        for (int[] row: jeu) {
-            if (row.length > 0) {return false;}
+        for (int row: jeu) {
+            if (row > 0) {return false;}
         }
         return true;
     }
-
 }

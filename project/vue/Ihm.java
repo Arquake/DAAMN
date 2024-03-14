@@ -9,13 +9,26 @@ public class Ihm {
 
     /**
      * @param playerName the name of the players that are playing in this turn
-     * @param matchSets int[][] Array of Heap and the matches in those
-     * @return the user input for his move
+     * @param matchSets String Array of the board
+     * @return new int{Number Of Matches , Heap Number}
      */
-    public String demanderCoup(String matchSets, String playerName) {
+    public int[] demanderCoup(String matchSets, String playerName) {
+        int[] coup = new int[]{0, 0};
         Scanner scanner = new Scanner(System.in);
         System.out.println(matchSets + playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
-        return scanner.nextLine();
+        while ( coup[0] <= 0 || coup[1] <= 0 ) {
+            for (int i = 0; i < 2; i++) {
+                if (scanner.hasNextInt()) {
+                    System.out.println(scanner.nextInt());
+                }
+            }
+            for (int i = 0; i < 2; i++) {
+                if (scanner.hasNextInt()) {
+                    coup[i] = scanner.nextInt();
+                } else { coup = new int[]{0, 0}; break; }
+            }
+        }
+        return coup;
     }
 
     /**
