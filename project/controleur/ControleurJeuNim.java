@@ -73,11 +73,6 @@ public class ControleurJeuNim {
                 if (model.jouerCoup(coup, jeu)) {
                     // If the move was successful, update the last player
                     dernier_joueur = joueurs[playerTurn];
-
-                    // Check if the game is over (heaps are empty) before changing turns
-                    if (jeu.isEmpty()) {
-                        break; // Exit the loop if the game is over
-                    }
                 }
                 // Move to the next player's turn only if the game continues
                 playerTurn = (playerTurn + 1) % 2;
