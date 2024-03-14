@@ -1,10 +1,19 @@
 package project;
 
-import project.Nim.NimController;
+import project.controleur.ControleurJeuNim;
+import project.vue.Ihm;
 
+/**
+ * main class
+ */
 public class Main {
+    /**
+     * starts the game
+     * @param args args
+     */
     public static void main(String[] args) {
-        NimController nim = new NimController();
-        nim.jouer();
+        Ihm ihm = new Ihm();
+        ControleurJeuNim controleurJeuNim = new ControleurJeuNim(ihm);
+        controleurJeuNim.jouer();
     }
 }
