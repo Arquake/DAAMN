@@ -16,18 +16,15 @@ public class Ihm {
         int[] coup = new int[]{0, 0};
         Scanner scanner = new Scanner(System.in);
         System.out.println(matchSets + playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
-        while ( coup[0] <= 0 || coup[1] <= 0 ) {
-            for (int i = 0; i < 2; i++) {
-                if (scanner.hasNextInt()) {
-                    System.out.println(scanner.nextInt());
-                }
-            }
-            for (int i = 0; i < 2; i++) {
-                if (scanner.hasNextInt()) {
-                    coup[i] = scanner.nextInt();
-                } else { coup = new int[]{0, 0}; break; }
+        scanner = new Scanner(scanner.nextLine());
+        for (int i = 0; i < 2; i++) {
+            if (scanner.hasNextInt()){
+                coup[i] = scanner.nextInt();
+            } else {
+                throw new RuntimeException("Invalid Input");
             }
         }
+        if (scanner.hasNext()){throw new RuntimeException("Invalid Input");}
         return coup;
     }
 
@@ -36,7 +33,7 @@ public class Ihm {
      */
     public int creerJeu(){
         int res = -1;
-        Scanner scanner = new Scanner("");
+        Scanner scanner;
         while ( true ) {
             System.out.print("Nombre de tas : ");
             scanner = new Scanner(System.in);

@@ -4,6 +4,8 @@ import project.modele.Plateau;
 import project.modele.Joueur;
 import project.vue.Ihm;
 
+import java.util.Arrays;
+
 /**
  * Contains all methods related to the game's control to link the View and Model
  */
@@ -31,20 +33,21 @@ public class ControleurJeuNim {
      * if they say no then it prints the stats
      */
     public void jouer(){
-
-        boolean running = true;
-        while (running){
+        while (true){
             playGame();
 
-            running = ihm.replay();
+            if (!ihm.replay()){break;}
         }
         for (Joueur j: joueurs) {
             ihm.partieGagnerJoueur(j.getScore(),j.getNom());
         }
 
-        if (joueurs[0].compareTo(joueurs[1]) == 0) { ihm.endExeaquo(); }
-        else {
-            ihm.endVictory(joueurs[0].compareTo(joueurs[1]) > 0 ? joueurs[0].getNom() : joueurs[1].getNom());
+
+        int compareValue = joueurs[0].compareTo(joueurs[1]);
+        if (compareValue == -1) {
+            ihm.endExeaquo();
+        } else {
+            ihm.endVictory(joueurs[compareValue].getNom());
         }
     }
 
@@ -52,7 +55,6 @@ public class ControleurJeuNim {
      * game loops until one player wins
      * makes the actual heap
      * initializes game with joueur 0
-     *
      */
     private void playGame() {
 
@@ -63,10 +65,11 @@ public class ControleurJeuNim {
         // Game loop
         while (!jeu.isEmpty()) {
             // Ask the current player for their move
-            int[] coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom());
 
 
             try {
+                int[] coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom());
+
                 jeu.removeMatches(coup);
                 dernier_joueur = joueurs[playerTurn];
                 playerTurn = (playerTurn + 1) % 2;

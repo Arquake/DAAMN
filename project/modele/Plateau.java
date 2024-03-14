@@ -1,5 +1,6 @@
 package project.modele;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -22,8 +23,9 @@ public class Plateau {
      * @param target {Heap;number of matches} which heap to subtract the matches from
      */
     public void removeMatches(int[] target) {
-        if ( target[0] > jeu.length || jeu[target[0] - 1] > target[1] ) {throw new RuntimeException("The number of the Heap or the matches was greater than expected");}
-        jeu[target[0]] = jeu[target[0]] - target[1];
+        if ( target[0] > jeu.length ) {throw new RuntimeException("The number of the Heap was greater than expected");}
+        if ( jeu[target[0] - 1] < target[1] ) {throw new RuntimeException("The number of matches was greater than expected");}
+        jeu[target[0]-1] -= target[1];
     }
 
     /**
@@ -36,8 +38,15 @@ public class Plateau {
         int gameLength = this.jeu.length;
 
         for (int i = 0; i < gameLength; i++) {
-            res.append(Integer.toString(i+1) + "\t:\t"+"\t".repeat(this.jeu.length - i)+"|\t".repeat(this.jeu[i]) + "\n");
+            res.append(
+                    Integer.toString(i + 1)).append("\t:\t"
+            ).append(
+                    "\t".repeat(this.jeu.length - i)
+            ).append(
+                    "|\t".repeat(this.jeu[i])
+            ).append("\n");
         }
+
         return res.toString();
     }
 
