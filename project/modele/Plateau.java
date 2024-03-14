@@ -31,18 +31,16 @@ public class Plateau {
     @Override
     public String toString() {
 
-        String res = "";
+        StringBuilder res = new StringBuilder();
         int gameLength = this.jeu.length;
 
         for (int i = 0; i < gameLength; i++) {
             // ancienne version : Integer.toString(i+1) + "\t:\t"+"\t".repeat(gameLength-i);
-            res += "\t".repeat(gameLength-i);
-            for (int j = 0; j < this.jeu[i].length; j++) {
-                res += "|\t";
-            }
-            res += "\n";
+            res.append("\t".repeat(gameLength - i));
+            res.append("|\t".repeat(this.jeu[i].length));
+            res.append("\n");
         }
-        return res;
+        return res.toString();
     }
 
     /**
