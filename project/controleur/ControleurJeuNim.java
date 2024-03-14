@@ -107,12 +107,9 @@ public class ControleurJeuNim {
      * if invalid then it calls the ihm again to show the error message
      */
     private void createBoard(){
-        while (true){
+        do {
             this.numberOfHeap = ihm.creerJeu();
             // if numberOfHeap < 1 we can't create a heap out of it
-            if ( this.numberOfHeap >= 1 ) {
-                break;
-            }
-        }
+        } while (this.numberOfHeap < 1);
     }
 }
