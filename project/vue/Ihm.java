@@ -15,8 +15,7 @@ public class Ihm {
     public String demanderCoup(String matchSets, String playerName) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(matchSets + playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
-        String line = scanner.nextLine();
-        return line;
+        return scanner.nextLine();
     }
 
     /**
@@ -44,8 +43,7 @@ public class Ihm {
     public String creerJoueur(int i){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nom du joueur "+i+" : ");
-        String line = scanner.nextLine();
-        return line;
+        return scanner.nextLine();
     }
 
     /**
@@ -65,7 +63,6 @@ public class Ihm {
 
     /**
      * asks the player if they want to replay
-     * @author Matteo
      * @return the user input should be y|Y|n|N
      */
     public boolean replay() {
