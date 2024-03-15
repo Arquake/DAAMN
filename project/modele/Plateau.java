@@ -1,7 +1,7 @@
 package project.modele;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import project.exception.heapNumberException;
+import project.exception.matchesNumberException;
 
 /**
  * game board
@@ -22,9 +22,9 @@ public class Plateau {
     /**
      * @param target {Heap;number of matches} which heap to subtract the matches from
      */
-    public void removeMatches(int[] target) {
-        if ( target[0] > jeu.length ) {throw new RuntimeException("The number of the Heap was greater than expected");}
-        if ( jeu[target[0] - 1] < target[1] ) {throw new RuntimeException("The number of matches was greater than expected");}
+    public void removeMatches(int[] target) throws matchesNumberException, heapNumberException {
+        if ( target[0] > jeu.length ) {throw new heapNumberException();}
+        if ( jeu[target[0] - 1] < target[1] ) {throw new matchesNumberException();}
         jeu[target[0]-1] -= target[1];
     }
 

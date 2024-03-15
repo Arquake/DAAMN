@@ -4,8 +4,6 @@ import project.modele.Plateau;
 import project.modele.Joueur;
 import project.vue.Ihm;
 
-import java.util.Arrays;
-
 /**
  * Contains all methods related to the game's control to link the View and Model
  */
@@ -33,11 +31,10 @@ public class ControleurJeuNim {
      * if they say no then it prints the stats
      */
     public void jouer(){
-        while (true){
+        do {
             playGame();
 
-            if (!ihm.replay()){break;}
-        }
+        } while (ihm.replay());
         for (Joueur j: joueurs) {
             ihm.partieGagnerJoueur(j.getScore(),j.getNom());
         }
