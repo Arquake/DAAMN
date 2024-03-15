@@ -66,7 +66,6 @@ public class ControleurJeuNim {
         while (!jeu.isEmpty()) {
             // Ask the current player for their move
 
-
             try {
                 int[] coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom());
 
@@ -76,7 +75,6 @@ public class ControleurJeuNim {
             } catch (Exception e) {
                 ihm.invalidData();
             }
-
         }
         // Announce the winner and update their score
         ihm.victory(dernier_joueur.getNom());
