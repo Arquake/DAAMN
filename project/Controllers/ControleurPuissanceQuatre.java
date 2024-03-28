@@ -1,6 +1,7 @@
 package project.Controllers;
 
 
+import project.Models.Exception.invalidColumException;
 import project.Models.PlateauPuissance;
 import project.Views.AbstractView;
 import project.Views.IhmPuissance;
@@ -50,10 +51,11 @@ public class ControleurPuissanceQuatre extends AbstractController {
                     ihm.noWinBoardFull(jeu.toString());
                     break;
                 }
+                ihm.afficherPlateau(jeu.toString());
                 // If the move was successful, update the next player
                 playerTurn = (playerTurn + 1) % 2;
             }
-            catch (invalidColumnException e){
+            catch (invalidColumException e) {
                 ihm.invalidData();
             }
         }

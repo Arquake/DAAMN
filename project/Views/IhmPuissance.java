@@ -31,10 +31,7 @@ public class IhmPuissance extends AbstractView {
         return coup;
     }
 
-    /**
-     * Affiche le plateau de jeu dans la console
-     * @param jeu le string du plateau
-     */
+
 
 
     /**

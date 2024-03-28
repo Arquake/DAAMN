@@ -83,7 +83,8 @@ public abstract class AbstractView {
     }
 
     /**
-     *
+     * Affiche le plateau de jeu dans la console
+     * @param plateau le string du plateau
      */
     public void afficherPlateau(String plateau){
         System.out.println(plateau);

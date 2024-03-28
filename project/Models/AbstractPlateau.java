@@ -12,5 +12,6 @@ public abstract class AbstractPlateau {
      */
     public abstract boolean boardCompleted();
 
+
     public abstract void jouerCoup(int[] values) throws matchesNumberException, heapNumberException, invalidColumException;
 }
