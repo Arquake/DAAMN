@@ -24,12 +24,14 @@ public class IhmPuissance extends AbstractView {
             System.out.println(plateau + playerName + " à vous de jouer ! Indiquez le numéro de la colone visée. \nVotre coup : ");
         }
         String coup = scanner.nextLine();
-        Pattern pattern = Pattern.compile("[1-7]", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(coup);
-        if (matcher.find()) {
-            return Integer.parseInt(coup);
+        try{
+            int val = Integer.parseInt(coup);
+            if ( val < 1 || val > 7) {throw new invalidColumException();}
+            return val;
+        } catch (Exception e) {
+            throw new invalidColumException();
         }
-        throw new invalidColumException();
+
     }
 
     /**
