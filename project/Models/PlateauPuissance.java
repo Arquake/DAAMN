@@ -1,8 +1,7 @@
 package project.Models;
 
 
-import project.Models.AbstractPlateau;
-import project.Models.Exception.invalidCellException;
+import project.Models.Exception.invalidColumException;
 
 public class PlateauPuissance extends AbstractPlateau {
 
@@ -34,19 +33,22 @@ public class PlateauPuissance extends AbstractPlateau {
     }
 
     /**
-     *
+     * play the move given in the parameters by a given player
      * @param data [column numeroJoueur]
      *              column : number as column entered by the player - 1 if the player wrote 1 the number given should be 0
      *              numeroJoueur : number of the player
+     * @throws invalidColumException if the column selected is less than 0 or greater than the number of columns
      */
-    public void jouerCoup(int[] data) throws invalidCellException {
-        if ((data[0] < 0) || (data[0] >=terrain[0].length) || terrain[0][data[0]] != 0){throw new invalidCellException();}
+    public void jouerCoup(int[] data) throws invalidColumException {
+        if ((data[0] < 0) || (data[0] >=terrain[0].length) || terrain[0][data[0]] != 0){throw new invalidColumException();};
         for (int i = terrain.length-1; i >= 0 ; i--) {
-            if (terrain[i][data[0]] == 0) {terrain[i][data[0]] = data[1];break;}
+            if (terrain[i][data[0]] == 0) {terrain[i][data[0]] = data[1];return;}
         }
+        throw new invalidColumException();
     }
 
     /**
+     * check if a player have won the game
      * @return the player who won | 0 otherwise
      */
     public int checkWin(){
@@ -155,6 +157,7 @@ public class PlateauPuissance extends AbstractPlateau {
     }
 
     /**
+     * check if the board have no more playable space available
      * @return true if the board is full
      */
     public boolean boardCompleted(){

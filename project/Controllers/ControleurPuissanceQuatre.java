@@ -7,6 +7,8 @@ import project.Views.IhmPuissance;
 
 public class ControleurPuissanceQuatre extends AbstractController {
 
+    private PlateauPuissance jeu;
+
     /**
      * Initialize the game
      *
@@ -28,37 +30,30 @@ public class ControleurPuissanceQuatre extends AbstractController {
         int playerTurn = 0;
         IhmPuissance ihm = (IhmPuissance) super.getIhm();
 
-
-        PlateauPuissance jeu = new PlateauPuissance();
+        jeu = new PlateauPuissance();
+        ihm.afficherPlateau(jeu.toString());
 
         int coup;
-        boolean erone = false;
         // Game loop
         while (true) {
-            try {
                 // Ask the current player for their move
-                coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom(), erone);
-                erone = false;
+            coup = ihm.demanderCoup(joueurs[playerTurn].getNom());
 
-                try {
-                    jeu.jouerCoup(new int[]{coup - 1, playerTurn + 1});
-                    if (jeu.checkWin() != -1) {
-                        joueurs[playerTurn].increaseScore();
-                        ihm.victory(joueurs[playerTurn].getNom(), jeu.toString());
-                        break;
-                    }
-                    if (jeu.boardCompleted()) {
-                        ihm.noWinBoardFull(jeu.toString());
-                        break;
-                    }
-                    // If the move was successful, update the next player
-                    playerTurn = (playerTurn + 1) % 2;
+            try {
+                jeu.jouerCoup(new int[]{coup - 1, playerTurn + 1});
+                if (jeu.checkWin() != -1) {
+                    joueurs[playerTurn].increaseScore();
+                    ihm.victory(joueurs[playerTurn].getNom(), jeu.toString());
+                    break;
                 }
-                catch (Exception e) {
-                    ihm.invalidData();
+                if (jeu.boardCompleted()) {
+                    ihm.noWinBoardFull(jeu.toString());
+                    break;
                 }
-            } catch (Exception e) {
-                erone = true;
+                // If the move was successful, update the next player
+                playerTurn = (playerTurn + 1) % 2;
+            }
+            catch (invalidColumnException e){
                 ihm.invalidData();
             }
         }

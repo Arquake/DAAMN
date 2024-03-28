@@ -12,27 +12,30 @@ public class IhmPuissance extends AbstractView {
 
     /**
      * Ask the player to play on a column
-     * @param plateau Board of the game
      * @param playerName Player asked
-     * @return a toi de jouer !
+     * @return Column played
      */
-    public int demanderCoup(String plateau, String playerName, Boolean erreur) throws invalidColumException {
+    public int demanderCoup(String playerName) {
         Scanner scanner = new Scanner(System.in);
-        if (erreur){
-            System.out.println(playerName + " c'est encore à vous ! Indiquez le numéro (entre 1 et 7) de la colone visée. \nVotre coup : ");
-        } else {
-            System.out.println(plateau + playerName + " à vous de jouer ! Indiquez le numéro de la colone visée. \nVotre coup : ");
-        }
-        String coup = scanner.nextLine();
-        try{
-            int val = Integer.parseInt(coup);
-            if ( val < 1 || val > 7) {throw new invalidColumException();}
-            return val;
-        } catch (Exception e) {
-            throw new invalidColumException();
-        }
+        System.out.println(playerName + " à vous de jouer ! Indiquez le numéro de la colone visée. \nVotre coup : ");
 
+        int coup = -1;
+        while (scanner.hasNext()) {
+            if ( scanner.hasNextInt()) {
+                coup = scanner.nextInt();
+                break;
+            } else {
+                scanner = new Scanner(System.in);
+            }
+        }
+        return coup;
     }
+
+    /**
+     * Affiche le plateau de jeu dans la console
+     * @param jeu le string du plateau
+     */
+
 
     /**
      * prints which player have won
@@ -48,9 +51,5 @@ public class IhmPuissance extends AbstractView {
      */
     public void noWinBoardFull(String jeu){
         System.out.println(jeu + "\n\u001B[43m" + "\u001B[30m " + "La grille est complête et personne n'a aligné 4 jetons ! C'est un match nul. \u001B[0m");
-    }
-
-    public void AfficherPlateau(String plateau){
-        // afficher plateau
     }
 }

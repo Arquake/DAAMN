@@ -1,7 +1,7 @@
 package project.Models;
 
 import project.Models.Exception.heapNumberException;
-import project.Models.Exception.invalidCellException;
+import project.Models.Exception.invalidColumException;
 import project.Models.Exception.matchesNumberException;
 
 public abstract class AbstractPlateau {
@@ -12,5 +12,5 @@ public abstract class AbstractPlateau {
      */
     public abstract boolean boardCompleted();
 
-    public abstract void jouerCoup(int[] values) throws matchesNumberException, heapNumberException, invalidCellException;
+    public abstract void jouerCoup(int[] values) throws matchesNumberException, heapNumberException, invalidColumException;
 }

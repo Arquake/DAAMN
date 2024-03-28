@@ -85,5 +85,7 @@ public abstract class AbstractView {
     /**
      *
      */
-    abstract void AfficherPlateau(String plateau);
+    public void afficherPlateau(String plateau){
+        System.out.println(plateau);
+    };
 }
