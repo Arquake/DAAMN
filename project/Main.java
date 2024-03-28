@@ -1,7 +1,11 @@
 package project;
 
-import project.Controllers.controleurNim.ControleurJeuNim;
+import project.Controllers.AbstractController;
+import project.Controllers.ControleurJeuNim;
+import project.Controllers.ControleurPuissanceQuatre;
+import project.Views.AbstractView;
 import project.Views.IhmNim;
+import project.Views.IhmPuissance;
 
 /**
  * main class
@@ -12,9 +16,9 @@ public class Main {
      * @param args args
      */
     public static void main(String[] args) {
-        IhmNim ihm = new IhmNim();
-        ControleurJeuNim controleurJeuNim = new ControleurJeuNim(ihm);
-        controleurJeuNim.jouer();
+        AbstractView ihm = new IhmPuissance();
+        AbstractController controller = new ControleurPuissanceQuatre(ihm);
+        controller.jouer();
     }
 }
 

@@ -1,7 +1,10 @@
-package project.Models.Exception;
+package project.Models;
 
 
-public class Plateau {
+import project.Models.AbstractPlateau;
+import project.Models.Exception.invalidCellException;
+
+public class PlateauPuissance extends AbstractPlateau {
 
     /**
      * terrain int[line][column]
@@ -32,18 +35,15 @@ public class Plateau {
 
     /**
      *
-     * @param column column number as column entered by the player - 1
-     *               if the player wrote 1 the number given should be 0
-     * @param numeroJoueur number of the player
+     * @param data [column numeroJoueur]
+     *              column : number as column entered by the player - 1 if the player wrote 1 the number given should be 0
+     *              numeroJoueur : number of the player
      */
-    public boolean jouerCoup(int column, int numeroJoueur) throws invalidCellException {
-        if ((column < 0) || (column >=terrain[0].length) || terrain[0][column] != 0){throw new invalidCellException();};
-
+    public void jouerCoup(int[] data) throws invalidCellException {
+        if ((data[0] < 0) || (data[0] >=terrain[0].length) || terrain[0][data[0]] != 0){throw new invalidCellException();}
         for (int i = terrain.length-1; i >= 0 ; i--) {
-            if (terrain[i][column] == 0) {terrain[i][column] = numeroJoueur;break;}
+            if (terrain[i][data[0]] == 0) {terrain[i][data[0]] = data[1];break;}
         }
-
-        return true;
     }
 
     /**
@@ -158,7 +158,7 @@ public class Plateau {
     /**
      * @return true if the board is full
      */
-    public boolean boardIsFull(){
+    public boolean boardCompleted(){
         for (int[] line : terrain) {
             for (int element : line) {
                 if (element == 0){return false;}

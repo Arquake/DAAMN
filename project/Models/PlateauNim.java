@@ -1,4 +1,4 @@
-package project.Models.modeleNim;
+package project.Models;
 
 import project.Models.AbstractPlateau;
 import project.Models.Exception.heapNumberException;
@@ -7,13 +7,13 @@ import project.Models.Exception.matchesNumberException;
 /**
  * game board
  */
-public class Plateau extends AbstractPlateau {
+public class PlateauNim extends AbstractPlateau {
     private final int[] jeu;
 
     /**
      * @param heapNumber number of heaps to create
      */
-    public Plateau(int heapNumber) {
+    public PlateauNim(int heapNumber) {
         this.jeu = new int[heapNumber];
         for (int i = 0; i < heapNumber; i++) {
             this.jeu[i] = i*2+1;
@@ -25,7 +25,7 @@ public class Plateau extends AbstractPlateau {
      */
     public void jouerCoup(int[] target) throws matchesNumberException, heapNumberException {
         if ( target[0] > jeu.length ) {throw new heapNumberException();}
-        if ( jeu[target[0] - 1] < target[1] ) {throw new matchesNumberException();}
+        if ( jeu[target[0] - 1] < target[1] || target[1] < 1 ) {throw new matchesNumberException();}
         jeu[target[0]-1] -= target[1];
     }
 

@@ -12,7 +12,7 @@ public abstract class AbstractView {
      */
     public String creerJoueur(int i){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Nom du joueur "+(i+1)+" : ");
+        System.out.print("Nom du joueur "+(i)+" : ");
         return scanner.nextLine();
     }
 
