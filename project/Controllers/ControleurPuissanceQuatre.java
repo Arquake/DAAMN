@@ -42,7 +42,6 @@ public class ControleurPuissanceQuatre extends AbstractController {
 
                 try {
                     jeu.jouerCoup(new int[]{coup - 1, playerTurn + 1});
-                    System.out.println(jeu.toString());
                     if (jeu.checkWin() != -1) {
                         joueurs[playerTurn].increaseScore();
                         ihm.victory(joueurs[playerTurn].getNom(), jeu.toString());
