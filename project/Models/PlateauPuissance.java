@@ -53,6 +53,7 @@ public class PlateauPuissance extends AbstractPlateau {
         int column = checkColumn();
         int row = checkRow();
         int diagonal = checkDiagonal();
+        System.out.println(column +" | "+ row +" | "+ diagonal);
         return column != -1? column:row != -1? row:diagonal;
     }
 
@@ -73,7 +74,6 @@ public class PlateauPuissance extends AbstractPlateau {
                             return terrain[i][j]-1;
                         }
                     }
-                    break;
                 }
             }
         }
