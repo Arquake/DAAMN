@@ -1,4 +1,4 @@
-package project.exception;
+package project.Models.Exception;
 
 public class heapNumberException extends Exception{
     public heapNumberException() {

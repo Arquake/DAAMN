@@ -1,4 +1,4 @@
 project
-project.controleur
-project.modele
-project.vue
+project.Controllers.controleurNim
+project.Models.modeleNim
+project.Views.vueNim

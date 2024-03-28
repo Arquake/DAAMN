@@ -1,4 +1,4 @@
-package project.exception;
+package project.Models.Exception;
 
 public class matchesNumberException extends Exception{
     public matchesNumberException() {

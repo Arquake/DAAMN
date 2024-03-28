@@ -1,5 +1,5 @@
 project
-project.controleur
-project.exception
-project.modele
-project.vue
+project.Controllers.controleurNim
+project.exceptionNim
+project.Models.modeleNim
+project.Views.vueNim

@@ -1,4 +1,4 @@
-package project.modele;
+package project.Models;
 
 public class Joueur implements Comparable<Joueur>  {
     private final String nom;
@@ -35,12 +35,12 @@ public class Joueur implements Comparable<Joueur>  {
     /**
      * @param player the other player to compare score with
      * @return the difference between this player score and the other one
-     * -1 players has an equal score | 0 this player has a lower score | 1 this player has a higher score
+     * -1 this player has a lower score | 0 players has an equal score | 1 this player has a higher score
      */
     @Override
     public int compareTo(Joueur player) {
         int score = this.score - player.score;
-        return score < 0? 1 : score > 0 ? 0 : -1 ;
+        return score < 0? -1 : score > 0 ? 1 : 0 ;
     }
 
 

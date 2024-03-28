@@ -1,4 +1,4 @@
-package project.exception;
+package project.Models.Exception;
 
 public class coupException extends Exception{
     public coupException() {

@@ -1,8 +1,8 @@
-package project.controleur;
+package project.Controllers.controleurNim;
 
-import project.modele.Plateau;
-import project.modele.Joueur;
-import project.vue.Ihm;
+import project.Models.modeleNim.Plateau;
+import project.Models.Joueur;
+import project.Views.IhmNim;
 
 /**
  * Contains all methods related to the game's control to link the View and Model
@@ -10,7 +10,7 @@ import project.vue.Ihm;
 public class ControleurJeuNim {
     private Joueur[] joueurs;
 
-    private final Ihm ihm;
+    private final IhmNim ihm;
 
     private int numberOfHeap;
 
@@ -18,7 +18,7 @@ public class ControleurJeuNim {
      * Initialize the game
      * @param ihm the Ihm ( View )
      */
-    public ControleurJeuNim(Ihm ihm) {
+    public ControleurJeuNim(IhmNim ihm) {
         this.ihm = ihm;
         createBoard();
         createPlayers();

@@ -1,12 +1,13 @@
-package project.modele;
+package project.Models.modeleNim;
 
-import project.exception.heapNumberException;
-import project.exception.matchesNumberException;
+import project.Models.AbstractPlateau;
+import project.Models.Exception.heapNumberException;
+import project.Models.Exception.matchesNumberException;
 
 /**
  * game board
  */
-public class Plateau {
+public class Plateau extends AbstractPlateau {
     private final int[] jeu;
 
     /**
@@ -22,7 +23,7 @@ public class Plateau {
     /**
      * @param target {Heap;number of matches} which heap to subtract the matches from
      */
-    public void removeMatches(int[] target) throws matchesNumberException, heapNumberException {
+    public void jouerCoup(int[] target) throws matchesNumberException, heapNumberException {
         if ( target[0] > jeu.length ) {throw new heapNumberException();}
         if ( jeu[target[0] - 1] < target[1] ) {throw new matchesNumberException();}
         jeu[target[0]-1] -= target[1];
@@ -51,9 +52,9 @@ public class Plateau {
     }
 
     /**
-     * @return if there is no matches left
+     * @return true if there is no matches left
      */
-    public boolean isEmpty(){
+    public boolean boardCompleted(){
         for (int row: jeu) {
             if (row > 0) {return false;}
         }

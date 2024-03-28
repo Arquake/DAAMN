@@ -1,7 +1,7 @@
 package project;
 
-import project.controleur.ControleurJeuNim;
-import project.vue.Ihm;
+import project.Controllers.controleurNim.ControleurJeuNim;
+import project.Views.IhmNim;
 
 /**
  * main class
@@ -12,7 +12,7 @@ public class Main {
      * @param args args
      */
     public static void main(String[] args) {
-        Ihm ihm = new Ihm();
+        IhmNim ihm = new IhmNim();
         ControleurJeuNim controleurJeuNim = new ControleurJeuNim(ihm);
         controleurJeuNim.jouer();
     }
