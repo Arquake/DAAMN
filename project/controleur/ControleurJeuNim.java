@@ -86,7 +86,7 @@ public class ControleurJeuNim {
     private void createPlayers(){
         this.joueurs = new Joueur[2];
         for (int i = 0; i < 2; i++) {        // creating the players
-            this.joueurs[i] = new Joueur(ihm.creerJoueur(i));
+            this.joueurs[i] = new Joueur(ihm.creerJoueur(i+1));
         }
     }
 
