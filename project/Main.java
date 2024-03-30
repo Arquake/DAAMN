@@ -16,8 +16,8 @@ public class Main {
      * @param args args
      */
     public static void main(String[] args) {
-        AbstractView ihm = new IhmPuissance();
-        AbstractController controller = new ControleurPuissanceQuatre(ihm);
+        AbstractView ihm = new IhmNim();
+        AbstractController controller = new ControleurJeuNim(ihm);
         controller.jouer();
     }
 }
