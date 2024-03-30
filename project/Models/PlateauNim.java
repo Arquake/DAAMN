@@ -1,10 +1,7 @@
 package project.Models;
 
-import project.Models.AbstractPlateau;
 import project.Models.Exception.heapNumberException;
 import project.Models.Exception.matchesNumberException;
-
-import java.util.Optional;
 
 /**
  * game board
