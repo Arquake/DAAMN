@@ -15,7 +15,7 @@ public class ControleurJeuNim extends AbstractController {
 
     /**
      * Initialize the game
-     * initialise le jeu
+     * Initialise le jeu
      * @param ihm the Ihm ( View )
      *            la vue
      */

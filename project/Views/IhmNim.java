@@ -101,4 +101,30 @@ public class IhmNim extends AbstractView {
             }
         }
     }
+
+
+    /**
+     * asks the player if they want to play with constraints
+     * demande au joueur s'il veut jouer avec des contraintes
+     * @return boolean if the player wants to play with constraints
+     *        boolean si le joueur veut jouer avec des contraintes
+     */
+    public boolean demanderContrainte (){
+        Scanner scanner = new Scanner(System.in);
+        String res ="";
+
+        System.out.println("Voulez-vous jouer avec des contraintes ? (Y/N)");
+        while (true) {
+            if (scanner.hasNext()) {
+                res = scanner.next();
+            }
+            if (res.equalsIgnoreCase("y") || res.equalsIgnoreCase("n")){
+                return res.equalsIgnoreCase("y");
+            } else {
+
+                System.out.println("Voulez-vous jouer avec des contraintes ? (Y/N)");
+            }
+        }
+
+    }
 }
