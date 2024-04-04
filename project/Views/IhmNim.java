@@ -81,11 +81,6 @@ public class IhmNim extends AbstractView {
         return res;
     }
 
-    public void AfficherPlateau(String plateau){
-        // afficher plateau
-
-    }
-
 
     /**
      * @return int with the user input that should represent the max number of matches that can be removed
