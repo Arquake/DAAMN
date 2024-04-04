@@ -99,7 +99,6 @@ public class PlateauPuissance extends AbstractPlateau {
                             return terrain[j][i]-1;
                         }
                     }
-                    break;
                 }
             }
         }
