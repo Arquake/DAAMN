@@ -103,4 +103,7 @@ public class IhmNim extends AbstractIhm {
             }
         }
     }
+    public void afficherErreur(Exception e){
+        System.out.println(e.getMessage());
+    }
 }

@@ -12,26 +12,30 @@ public class PlateauNim extends AbstractPlateau {
      * Tableau d'entier contenant le nombre d'allumette dans chaque tas
      */
     private final int[] jeu;
+    private int maxMatches = 0;
 
     /**
      * @param heapNumber number of heaps to create
      *                   nombre de tas à créer
      */
-    public PlateauNim(int heapNumber) {
+    public PlateauNim(int heapNumber, int maxMatches) {
         this.jeu = new int[heapNumber];
         for (int i = 0; i < heapNumber; i++) {
             this.jeu[i] = i*2+1;
         }
+        this.maxMatches = maxMatches;
     }
 
     /**
      * @param target {Heap;number of matches} which heap to subtract the matches from
      *               {Tas;nombre d'allumettes} quel tas soustraire les allumettes
      */
-    public void jouerCoup(int[] target) throws MatchesNumberException, HeapNumberException {
+    public void jouerCoup(int[] target) throws MatchesNumberException, HeapNumberException{
         if ( target[0] > jeu.length ) {throw new HeapNumberException();}
         if ( jeu[target[0] - 1] < target[1] || target[1] < 1 ) {throw new MatchesNumberException();}
+        if ( maxMatches < target[1] && maxMatches != 0 ) {throw new MatchesNumberException();}
         jeu[target[0]-1] -= target[1];
+
     }
 
     /**

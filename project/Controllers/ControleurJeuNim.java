@@ -40,10 +40,11 @@ public class ControleurJeuNim extends AbstractController {
     protected void playGame() {
         IhmNim ihm = (IhmNim) super.getIhm();
 
-        PlateauNim jeu = new PlateauNim(this.numberOfHeap);
+
         Joueur dernier_joueur = joueurs[0];
         int playerTurn = 0;
         int allumetteMax = ihm.demanderContrainte();
+        PlateauNim jeu = new PlateauNim(this.numberOfHeap, allumetteMax);
         // Game loop
         // Boucle de jeu
         while (!jeu.boardCompleted()) {
@@ -52,10 +53,6 @@ public class ControleurJeuNim extends AbstractController {
             try {
                 ihm.afficherPlateau(jeu.toString());
                 int[] coup = ihm.demanderCoup(joueurs[playerTurn].getNom());
-                if (allumetteMax < coup[1] && allumetteMax != 0) {
-                    ihm.invalidData();
-                    continue;
-                }
                 jeu.jouerCoup(coup);
 
                 dernier_joueur = joueurs[playerTurn];
