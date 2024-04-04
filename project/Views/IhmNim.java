@@ -86,45 +86,29 @@ public class IhmNim extends AbstractView {
 
     }
 
+
     /**
      * @return int with the user input that should represent the max number of matches that can be removed
+     *         if the user doesn't want to play with constraints, 0 is returned
      *     int avec l'entrée utilisateur qui devrait représenter le nombre maximum d'allumettes pouvant être retirées
+     *     si l'utilisateur ne veut pas jouer avec des contraintes, 0 est renvoyé
      */
-    public int demanderAllumettesMax(){
+    public int demanderContrainte (){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nombre d'allumettes maximum à retirer : ");
+        int res = 0;
+
+        System.out.println("Voulez-vous jouer avec des contraintes ? si oui tapez le nombre d'allumettes maximum à retirer sinon tapez 0");
         while (true) {
             if (scanner.hasNextInt()) {
-                return scanner.nextInt();
+                res = scanner.nextInt();
+                if (res < 0) {
+                    invalidData();
+                } else {
+                    return res;
+                }
             } else {
                 invalidData();
             }
         }
-    }
-
-
-    /**
-     * asks the player if they want to play with constraints
-     * demande au joueur s'il veut jouer avec des contraintes
-     * @return boolean if the player wants to play with constraints
-     *        boolean si le joueur veut jouer avec des contraintes
-     */
-    public boolean demanderContrainte (){
-        Scanner scanner = new Scanner(System.in);
-        String res ="";
-
-        System.out.println("Voulez-vous jouer avec des contraintes ? (Y/N)");
-        while (true) {
-            if (scanner.hasNext()) {
-                res = scanner.next();
-            }
-            if (res.equalsIgnoreCase("y") || res.equalsIgnoreCase("n")){
-                return res.equalsIgnoreCase("y");
-            } else {
-
-                System.out.println("Voulez-vous jouer avec des contraintes ? (Y/N)");
-            }
-        }
-
     }
 }

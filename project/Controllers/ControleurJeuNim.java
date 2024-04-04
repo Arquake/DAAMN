@@ -39,24 +39,15 @@ public class ControleurJeuNim extends AbstractController {
         PlateauNim jeu = new PlateauNim(this.numberOfHeap);
         Joueur dernier_joueur = joueurs[0];
         int playerTurn = 0;
-        boolean withconst = ihm.demanderContrainte();
-
-        //c'est une solution temporaire pour le moment
-        int allumetteMax = 100;
-        //c'est une solution temporaire pour le moment
-
-        if (withconst) {
-            allumetteMax = ihm.demanderAllumettesMax();
-        }
+        int allumetteMax = ihm.demanderContrainte();
         // Game loop
         // Boucle de jeu
         while (!jeu.boardCompleted()) {
             // Ask the current player for their move
             // Demander au joueur actuel son coup
-
             try {
                 int[] coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom());
-                if (allumetteMax < coup[1]) {
+                if (allumetteMax < coup[1] && allumetteMax != 0) {
                     ihm.invalidData();
                     continue;
                 }
