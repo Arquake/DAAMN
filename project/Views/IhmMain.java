@@ -12,7 +12,8 @@ public class IhmMain {
      * @return La reponse : "N" pour Nim et "P" pour Puissance 4
      */
     public String demanderJeu(){
-        System.out.print("A quel jeu souhaitez vous jouer ? N : Nim, P : Puissance 4");
+        System.out.println("A quel jeu souhaitez vous jouer ? (N : Nim, P : Puissance 4)");
+        System.out.println("Votre choix : ");
         Scanner sc = new Scanner(System.in);
         String rep = null;
 

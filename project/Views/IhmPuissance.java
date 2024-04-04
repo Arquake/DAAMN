@@ -14,7 +14,7 @@ public class IhmPuissance extends AbstractIhm {
      */
     public String demanderCoup(String playerName) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(playerName + " à vous de jouer ! Indiquez le numéro de la colonne visée. \nVotre coup : ");
+        System.out.println(playerName + " à vous de jouer ! Indiquez le numéro de la colonne visée ou H/A pour tourner la grille dans le sens Horaire ou Anti-Horaire. \nVotre coup : ");
         return scanner.next();
     }
 

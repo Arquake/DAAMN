@@ -171,9 +171,9 @@ public class PlateauPuissance extends AbstractPlateau {
     }
 
     /**
-     * Tourne la grille dans le sens horaire et y applique la gravité
+     * Tourne la grille dans le sens anti horaire et y applique la gravité
      */
-    public void tournerSensHoraire(){
+    public void tournerSensAntiHoraire(){
         int nbLignes = terrain.length;
         int nbColonnes = terrain[1].length;
         int[][] newTerrain = new int[nbLignes][nbColonnes];
@@ -188,9 +188,9 @@ public class PlateauPuissance extends AbstractPlateau {
     }
 
     /**
-     * Tourne la grille dans le sens anti horaire et y appliqye la gravité
+     * Tourne la grille dans le sens horaire et y appliqye la gravité
      */
-    public void tournerSensAntiHoraire(){
+    public void tournerSensHoraire(){
         int nbLignes = terrain.length;
         int nbColonnes = terrain[1].length;
         int[][] newTerrain = new int[nbLignes][nbColonnes];
