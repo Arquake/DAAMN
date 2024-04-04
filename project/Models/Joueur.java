@@ -40,7 +40,7 @@ public class Joueur implements Comparable<Joueur>  {
     @Override
     public int compareTo(Joueur player) {
         int score = this.score - player.score;
-        return score < 0? -1 : score > 0 ? 1 : 0 ;
+        return Integer.compare(score, 0);
     }
 
 

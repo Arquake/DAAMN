@@ -1,28 +1,43 @@
 package project.Views;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
-public class IhmPuissance extends AbstractView {
+public class IhmPuissance extends AbstractIhm {
 
     /**
      * Ask the player to play on a column
+     *
      * @param playerName Player asked
      * @return Column played
      */
-    public int demanderCoup(String playerName) {
+    public String demanderCoup(String playerName) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(playerName + " à vous de jouer ! Indiquez le numéro de la colone visée. \nVotre coup : ");
+        System.out.println(playerName + " à vous de jouer ! Indiquez le numéro de la colonne visée. \nVotre coup : ");
+        return scanner.next();
+    }
 
-        int coup = -1;
-        while (scanner.hasNext()) {
-            if ( scanner.hasNextInt()) {
-                coup = scanner.nextInt();
+    /**
+     * Demandes aux joueurs s'ils veulent activer les rotations pour leur partie
+     * @return La reponse, Y ou N, respectivement oui ou non
+     */
+    public String demanderRotation(){
+        System.out.print("Souhaitez vous jouer avec les rotations ? (Y/N)");
+        Scanner sc = new Scanner(System.in);
+        String rep = null;
+
+        List<String> listeRep = new ArrayList<>(Arrays.asList("N","Y"));
+
+        while (sc.hasNext()) {
+            rep = sc.next();
+            if (listeRep.contains(rep.toUpperCase())) {
                 break;
             } else {
-                scanner = new Scanner(System.in);
+                sc = new Scanner(System.in);
             }
         }
-        return coup;
+        return rep;
     }
 
 

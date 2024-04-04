@@ -1,7 +1,7 @@
 package project.Models.Exception;
 
-public class heapNumberException extends Exception{
-    public heapNumberException() {
+public class HeapNumberException extends Exception{
+    public HeapNumberException() {
         super("The number of the Heap was greater than expected");
     }
 

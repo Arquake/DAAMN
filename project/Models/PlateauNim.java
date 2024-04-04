@@ -1,13 +1,16 @@
 package project.Models;
 
-import project.Models.Exception.heapNumberException;
-import project.Models.Exception.matchesNumberException;
+import project.Models.Exception.HeapNumberException;
+import project.Models.Exception.MatchesNumberException;
 
 /**
  * game board
  * plateau de jeu
  */
 public class PlateauNim extends AbstractPlateau {
+    /**
+     * Tableau d'entier contenant le nombre d'allumette dans chaque tas
+     */
     private final int[] jeu;
 
     /**
@@ -25,9 +28,9 @@ public class PlateauNim extends AbstractPlateau {
      * @param target {Heap;number of matches} which heap to subtract the matches from
      *               {Tas;nombre d'allumettes} quel tas soustraire les allumettes
      */
-    public void jouerCoup(int[] target) throws matchesNumberException, heapNumberException {
-        if ( target[0] > jeu.length ) {throw new heapNumberException();}
-        if ( jeu[target[0] - 1] < target[1] || target[1] < 1 ) {throw new matchesNumberException();}
+    public void jouerCoup(int[] target) throws MatchesNumberException, HeapNumberException {
+        if ( target[0] > jeu.length ) {throw new HeapNumberException();}
+        if ( jeu[target[0] - 1] < target[1] || target[1] < 1 ) {throw new MatchesNumberException();}
         jeu[target[0]-1] -= target[1];
     }
 

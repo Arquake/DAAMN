@@ -1,7 +1,7 @@
 package project.Models.Exception;
 
-public class createGameException extends Exception {
-    public createGameException() {
+public class CreateGameException extends Exception {
+    public CreateGameException() {
         super("Invalid data");
     }
 

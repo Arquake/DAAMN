@@ -2,7 +2,7 @@ package project.Views;
 
 import java.util.Scanner;
 
-public abstract class AbstractView {
+public abstract class AbstractIhm {
 
 
     /**
@@ -89,4 +89,8 @@ public abstract class AbstractView {
     public void afficherPlateau(String plateau){
         System.out.println(plateau);
     };
+
+    public void afficherErreur(String message) {
+        System.out.println("\u001B[41m" + "\u001B[30m " + message + " \u001B[0m");
+    }
 }

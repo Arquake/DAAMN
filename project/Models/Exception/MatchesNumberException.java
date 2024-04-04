@@ -1,7 +1,7 @@
 package project.Models.Exception;
 
-public class matchesNumberException extends Exception{
-    public matchesNumberException() {
+public class MatchesNumberException extends Exception{
+    public MatchesNumberException() {
         super("The number of matches was greater than expected");
     }
 

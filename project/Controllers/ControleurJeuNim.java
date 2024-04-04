@@ -1,8 +1,9 @@
 package project.Controllers;
 
+import project.Models.Exception.*;
 import project.Models.PlateauNim;
 import project.Models.Joueur;
-import project.Views.AbstractView;
+import project.Views.AbstractIhm;
 import project.Views.IhmNim;
 
 /**
@@ -11,15 +12,18 @@ import project.Views.IhmNim;
  */
 public class ControleurJeuNim extends AbstractController {
 
+    /**
+     * Nombre de tas sur le plateau
+     */
     private int numberOfHeap;
 
     /**
      * Initialize the game
-     * Initialise le jeu
+     * Initialize le jeu
      * @param ihm the Ihm ( View )
      *            la vue
      */
-    public ControleurJeuNim(AbstractView ihm) {
+    public ControleurJeuNim(AbstractIhm ihm) {
         super.setIhm(ihm);
         createBoard();
         super.createPlayers();
@@ -56,8 +60,12 @@ public class ControleurJeuNim extends AbstractController {
 
                 dernier_joueur = joueurs[playerTurn];
                 playerTurn = (playerTurn + 1) % 2;
-            } catch (Exception e) {
-                ihm.invalidData();
+            } catch (HeapNumberException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (CoupException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (MatchesNumberException e) {
+                ihm.afficherErreur(e.getMessage());
             }
         }
         // Announce the winner and update their score

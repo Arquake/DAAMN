@@ -1,8 +1,7 @@
 package project.Views;
 
-import project.Models.Exception.coupException;
-import project.Models.Exception.createGameException;
-import project.Views.AbstractView;
+import project.Models.Exception.CoupException;
+import project.Models.Exception.CreateGameException;
 
 import java.util.Scanner;
 
@@ -10,17 +9,17 @@ import java.util.Scanner;
  * Contains all the methods related to the View and User input
  * contient toutes les méthodes liées à la vue et à l'entrée utilisateur
  */
-public class IhmNim extends AbstractView {
+public class IhmNim extends AbstractIhm {
 
     /**
      * @param playerName the name of the players that are playing in this turn
      *                   le nom des joueurs qui jouent ce tour
      * @return new int{Number Of Matches , Heap Number}
      *        nouveau int{Nombre d'allumettes , Nombre de tas}
-     * @throws coupException if the input is invalid
+     * @throws CoupException if the input is invalid
      *                  si l'entrée est invalide
      */
-    public int[] demanderCoup(String playerName) throws coupException {
+    public int[] demanderCoup(String playerName) throws CoupException {
         int[] coup = new int[]{0, 0};
         Scanner scanner = new Scanner(System.in);
         System.out.println(playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
@@ -29,10 +28,10 @@ public class IhmNim extends AbstractView {
             if (scanner.hasNextInt()){
                 coup[i] = scanner.nextInt();
             } else {
-                throw new coupException();
+                throw new CoupException();
             }
         }
-        if (scanner.hasNext()){throw new coupException();}
+        if (scanner.hasNext()){throw new CoupException();}
         return coup;
     }
 
@@ -61,12 +60,12 @@ public class IhmNim extends AbstractView {
      * @return number of Heap if valid, -1 otherwise
      *        nombre de tas si valide, -1 sinon
      */
-    private int verifierCreationJeu(String nombre) throws createGameException {
+    private int verifierCreationJeu(String nombre) throws CreateGameException {
         Scanner scanner = new Scanner(nombre);
         // scanner check if there's an int in the string
         // scanner vérifie s'il y a un int dans la chaîne
         if ( !scanner.hasNextInt()) {
-            throw new createGameException();
+            throw new CreateGameException();
         }
         // if there's an int we parse it to an int and store it
         // si un int est trouvé, nous le stockons
@@ -74,7 +73,7 @@ public class IhmNim extends AbstractView {
         // if scanner hase other information or res is invalid -1 returned
         // si le scanner contient d'autres informations ou si res est invalide, -1 est renvoyé
         if (scanner.hasNext() || res < 1 ) {
-            throw new createGameException();
+            throw new CreateGameException();
         }
         return res;
     }

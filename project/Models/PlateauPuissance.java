@@ -1,7 +1,9 @@
 package project.Models;
 
 
-import project.Models.Exception.invalidColumException;
+import project.Models.Exception.InvalidColumException;
+
+import java.util.Arrays;
 
 public class PlateauPuissance extends AbstractPlateau {
 
@@ -9,7 +11,7 @@ public class PlateauPuissance extends AbstractPlateau {
      * terrain int[line][column]
      * 0 0 bottom left corner
      */
-    private final int[][] terrain = new int[7][7];
+    private int[][] terrain = new int[7][7];
 
     /**
      * @return the power 4 grid with pieces in it
@@ -37,14 +39,14 @@ public class PlateauPuissance extends AbstractPlateau {
      * @param data [column numeroJoueur]
      *              column : number as column entered by the player - 1 if the player wrote 1 the number given should be 0
      *              numeroJoueur : number of the player
-     * @throws invalidColumException if the column selected is less than 0 or greater than the number of columns
+     * @throws InvalidColumException if the column selected is less than 0 or greater than the number of columns
      */
-    public void jouerCoup(int[] data) throws invalidColumException {
-        if ((data[0] < 0) || (data[0] >=terrain[0].length) || terrain[0][data[0]] != 0){throw new invalidColumException();};
+    public void jouerCoup(int[] data) throws InvalidColumException {
+        if ((data[0] < 0) || (data[0] >=terrain[0].length) || terrain[0][data[0]] != 0){throw new InvalidColumException();};
         for (int i = terrain.length-1; i >= 0 ; i--) {
             if (terrain[i][data[0]] == 0) {terrain[i][data[0]] = data[1];return;}
         }
-        throw new invalidColumException();
+        throw new InvalidColumException();
     }
 
     /**
@@ -167,5 +169,71 @@ public class PlateauPuissance extends AbstractPlateau {
             }
         }
         return true;
+    }
+
+    /**
+     * Tourne la grille dans le sens horaire et y applique la gravité
+     */
+    public void tournerSensHoraire(){
+        int nbLignes = terrain.length;
+        int nbColonnes = terrain[1].length;
+        int[][] newTerrain = new int[nbLignes][nbColonnes];
+
+        for (int lignes = 0; lignes < nbLignes; lignes++) {
+            for (int colonnes = 0; colonnes < nbColonnes; colonnes++) {
+                newTerrain[colonnes][nbColonnes-1-lignes] = terrain[lignes][colonnes];
+            }
+        }
+        gravite(newTerrain);
+        terrain = newTerrain;
+    }
+
+    /**
+     * Tourne la grille dans le sens anti horaire et y appliqye la gravité
+     */
+    public void tournerSensAntiHoraire(){
+        int nbLignes = terrain.length;
+        int nbColonnes = terrain[1].length;
+        int[][] newTerrain = new int[nbLignes][nbColonnes];
+
+        for (int lignes = 0; lignes < nbLignes; lignes++) {
+            for (int colonnes = 0; colonnes < nbColonnes; colonnes++) {
+                newTerrain[nbLignes-1-colonnes][lignes] = terrain[lignes][colonnes];
+            }
+        }
+
+        for (int[] ints : newTerrain) {
+            System.out.println(Arrays.toString(ints));
+        }
+        System.out.println();
+        gravite(newTerrain);
+        terrain = newTerrain;
+        for (int[] ints : terrain) {
+            System.out.println(Arrays.toString(ints));
+        }
+    }
+
+    /**
+     * Applique la gravité sur le terrain
+     * @param terrain le terrain sur lequel appliqué la gravité
+     */
+    public static void gravite(int[][] terrain) {
+        for (int colonne = 0; colonne < terrain[0].length; colonne++) { //get la colonne (de gauche a droite)
+            for (int ligneActuelle = terrain.length-1; ligneActuelle > 0; ligneActuelle--) { //get la ligne (de bas en haut)
+
+                if (terrain[ligneActuelle][colonne] == 0 ) { // si la case traité est un 0
+
+                    for (int i = ligneActuelle; i > 0; i--) { // on parcours tout les nums de lignes de bas en haut a partir de la où se trouve le zero (s'arrete avant de passer a 0)
+                        terrain[i][colonne] = terrain[i-1][colonne]; // prend la case de la ligne au dessus et la "descend" d'une ligne*
+                        if (terrain[i-1][colonne] != 0){
+                            ligneActuelle=terrain.length;
+                        }
+                        //System.out.println(terrain[i][colonne] + " devient " + terrain[i-1][colonne] + " || i=" + i +" colonne : " + colonne);
+                    }
+
+                    terrain[0][colonne] = 0; //set la case de la premiere ligne de la colonne traitée a 0 ("on remonte le zero jusqu'en haut")
+                }
+            }
+        }
     }
 }

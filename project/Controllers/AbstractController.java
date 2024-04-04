@@ -1,13 +1,13 @@
 package project.Controllers;
 
 import project.Models.Joueur;
-import project.Views.AbstractView;
+import project.Views.AbstractIhm;
 
 public abstract class AbstractController {
 
     protected Joueur[] joueurs;
 
-    AbstractView ihm;
+    AbstractIhm ihm;
 
     public void jouer(){
         do {
@@ -35,9 +35,9 @@ public abstract class AbstractController {
         }
     }
 
-    protected void setIhm(AbstractView ihm){this.ihm = ihm;};
+    protected void setIhm(AbstractIhm ihm){this.ihm = ihm;};
 
-    protected AbstractView getIhm(){return this.ihm;}
+    protected AbstractIhm getIhm(){return this.ihm;}
 
     protected abstract void playGame();
 }

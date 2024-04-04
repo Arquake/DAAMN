@@ -1,7 +1,7 @@
 package project.Models.Exception;
 
-public class coupException extends Exception{
-    public coupException() {
+public class CoupException extends Exception{
+    public CoupException() {
         super("Invalid Input");
     }
 
