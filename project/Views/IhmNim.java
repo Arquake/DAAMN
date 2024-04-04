@@ -15,17 +15,15 @@ public class IhmNim extends AbstractView {
     /**
      * @param playerName the name of the players that are playing in this turn
      *                   le nom des joueurs qui jouent ce tour
-     * @param matchSets String Array of the board
-     *                  tableau de chaînes de caractères du plateau
      * @return new int{Number Of Matches , Heap Number}
      *        nouveau int{Nombre d'allumettes , Nombre de tas}
      * @throws coupException if the input is invalid
      *                  si l'entrée est invalide
      */
-    public int[] demanderCoup(String matchSets, String playerName) throws coupException {
+    public int[] demanderCoup(String playerName) throws coupException {
         int[] coup = new int[]{0, 0};
         Scanner scanner = new Scanner(System.in);
-        System.out.println(matchSets + playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
+        System.out.println(playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
         scanner = new Scanner(scanner.nextLine());
         for (int i = 0; i < 2; i++) {
             if (scanner.hasNextInt()){
@@ -79,11 +77,6 @@ public class IhmNim extends AbstractView {
             throw new createGameException();
         }
         return res;
-    }
-
-    public void AfficherPlateau(String plateau){
-        // afficher plateau
-
     }
 
 

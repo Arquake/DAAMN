@@ -46,12 +46,14 @@ public class ControleurJeuNim extends AbstractController {
             // Ask the current player for their move
             // Demander au joueur actuel son coup
             try {
-                int[] coup = ihm.demanderCoup(jeu.toString(), joueurs[playerTurn].getNom());
+                ihm.afficherPlateau(jeu.toString());
+                int[] coup = ihm.demanderCoup(joueurs[playerTurn].getNom());
                 if (allumetteMax < coup[1] && allumetteMax != 0) {
                     ihm.invalidData();
                     continue;
                 }
                 jeu.jouerCoup(coup);
+
                 dernier_joueur = joueurs[playerTurn];
                 playerTurn = (playerTurn + 1) % 2;
             } catch (Exception e) {
@@ -60,6 +62,7 @@ public class ControleurJeuNim extends AbstractController {
         }
         // Announce the winner and update their score
         // Annoncez le vainqueur et mettez à jour son score
+        
         ihm.victory(dernier_joueur.getNom());
         dernier_joueur.increaseScore();
     }
