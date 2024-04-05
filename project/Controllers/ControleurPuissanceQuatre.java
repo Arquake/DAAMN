@@ -1,9 +1,9 @@
 package project.Controllers;
 
 
+import project.Models.Exception.InvalidColumException;
 import project.Models.Exception.NombreRotationMaximumAtteintException;
 import project.Models.Exception.RotationInactiveException;
-import project.Models.Exception.InvalidColumException;
 import project.Models.Joueur;
 import project.Models.PlateauPuissance;
 import project.Views.AbstractIhm;
@@ -13,13 +13,10 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.lang.Character.isDigit;
-
 public class ControleurPuissanceQuatre extends AbstractController {
 
     private PlateauPuissance jeu;
-    private IhmPuissance ihm;
-    Boolean isRotationActive;
+    private final IhmPuissance ihm;
 
     HashMap<Joueur,Integer> nbRestantDeRotation = new HashMap<>();
 
@@ -96,8 +93,8 @@ public class ControleurPuissanceQuatre extends AbstractController {
             throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
         if (!(coup.isBlank() || coup.isEmpty())) {
             Pattern patternChiffre = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
-            Pattern patternRotaHoraire = Pattern.compile("[A]", Pattern.CASE_INSENSITIVE);
-            Pattern patternRotaAntiHoraire = Pattern.compile("[H]", Pattern.CASE_INSENSITIVE);
+            Pattern patternRotaHoraire = Pattern.compile("A", Pattern.CASE_INSENSITIVE);
+            Pattern patternRotaAntiHoraire = Pattern.compile("H", Pattern.CASE_INSENSITIVE);
 
             Matcher matcherChiffre = patternChiffre.matcher(coup);
             Matcher matcherRotaHoraire = patternRotaHoraire.matcher(coup);
