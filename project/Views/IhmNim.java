@@ -87,7 +87,7 @@ public class IhmNim extends AbstractIhm {
      */
     public int demanderContrainte (){
         Scanner scanner = new Scanner(System.in);
-        int res = 0;
+        int res;
 
         System.out.println("Voulez-vous jouer avec des contraintes ? Si oui tapez le nombre d'allumettes maximum à retirer sinon tapez 0.");
         while (true) {
