@@ -19,19 +19,35 @@ public class IhmNim extends AbstractIhm {
      * @throws CoupException if the input is invalid
      *                  si l'entrée est invalide
      */
-    public int[] demanderCoup(String playerName) throws CoupException {
+    public int[] demanderCoup(String playerName) {
         int[] coup = new int[]{0, 0};
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
-        scanner = new Scanner(scanner.nextLine());
-        for (int i = 0; i < 2; i++) {
-            if (scanner.hasNextInt()){
-                coup[i] = scanner.nextInt();
-            } else {
-                throw new CoupException();
+        Scanner actualScanner = new Scanner(System.in);
+        boolean validInput = false;
+
+        while (!validInput) {
+            System.out.println(playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
+            String input = actualScanner.nextLine();
+            Scanner checkingScanner = new Scanner(input);
+
+            if (checkingScanner.hasNextInt()) {
+                coup[0] = checkingScanner.nextInt();
+                if (checkingScanner.hasNextInt()) {
+                    coup[1] = checkingScanner.nextInt();
+                    // Check if both integers are greater than or equal to 1
+                    if (coup[0] >= 1 && coup[1] >= 1) {
+                        validInput = true;
+                    } else {
+                        System.out.println("\u001B[41m" +"Les nombres saisis doivent être supérieurs ou égaux à 1."+"\u001B[0m");
+                        continue;
+                    }
+                }
             }
+
+            if (!validInput) {
+                System.out.println("\u001B[41m" +"Format incorrect. Veuillez saisir deux entiers séparés par un espace."+"\u001B[0m");
+            }
+
         }
-        if (scanner.hasNext()){throw new CoupException();}
         return coup;
     }
 
@@ -39,14 +55,15 @@ public class IhmNim extends AbstractIhm {
      * @return int with the user input that should represent the number of heap
      *     int avec l'entrée utilisateur qui devrait représenter le nombre de tas
      */
-    public int creerJeu(){
+    public int creerJeu() {
         Scanner scanner;
-        while ( true ) {
+        while (true) {
             System.out.print("Nombre de tas : ");
             scanner = new Scanner(System.in);
-            try {
-                return verifierCreationJeu(scanner.nextLine());
-            } catch(Exception e) {
+            int result = verifierCreationJeu(scanner.nextLine());
+            if (result != -1) {
+                return result;
+            } else {
                 invalidData();
             }
         }
@@ -60,23 +77,22 @@ public class IhmNim extends AbstractIhm {
      * @return number of Heap if valid, -1 otherwise
      *        nombre de tas si valide, -1 sinon
      */
-    private int verifierCreationJeu(String nombre) throws CreateGameException {
+    private int verifierCreationJeu(String nombre) {
         Scanner scanner = new Scanner(nombre);
-        // scanner check if there's an int in the string
-        // scanner vérifie s'il y a un int dans la chaîne
-        if ( !scanner.hasNextInt()) {
-            throw new CreateGameException();
+
+        if (!scanner.hasNextInt()) {
+            return -1;
         }
-        // if there's an int we parse it to an int and store it
-        // si un int est trouvé, nous le stockons
+
         int res = scanner.nextInt();
-        // if scanner hase other information or res is invalid -1 returned
-        // si le scanner contient d'autres informations ou si res est invalide, -1 est renvoyé
-        if (scanner.hasNext() || res < 1 ) {
-            throw new CreateGameException();
+
+        if (scanner.hasNext() || res < 1) {
+            return -1;
         }
+
         return res;
     }
+
 
 
     /**

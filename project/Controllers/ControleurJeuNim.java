@@ -59,9 +59,9 @@ public class ControleurJeuNim extends AbstractController {
                 playerTurn = (playerTurn + 1) % 2;
             } catch (HeapNumberException e) {
                 ihm.afficherErreur(e.getMessage());
-            } catch (CoupException e) {
-                ihm.afficherErreur(e.getMessage());
             } catch (MatchesNumberException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (EmptyHeapException e) {
                 ihm.afficherErreur(e.getMessage());
             }
         }

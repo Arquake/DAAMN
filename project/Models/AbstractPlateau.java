@@ -1,8 +1,6 @@
 package project.Models;
 
-import project.Models.Exception.HeapNumberException;
-import project.Models.Exception.InvalidColumException;
-import project.Models.Exception.MatchesNumberException;
+import project.Models.Exception.*;
 
 public abstract class AbstractPlateau {
 
@@ -20,5 +18,5 @@ public abstract class AbstractPlateau {
      * @throws HeapNumberException exception for Nim if the heap can't be played on
      * @throws InvalidColumException exception for puissance 4 if the column entered is invalid
      */
-    public abstract void jouerCoup(int[] values) throws MatchesNumberException, HeapNumberException, InvalidColumException;
+    public abstract void jouerCoup(int[] values) throws MatchesNumberException, HeapNumberException, InvalidColumException, EmptyHeapException, NotEnoughMatchesException;
 }
