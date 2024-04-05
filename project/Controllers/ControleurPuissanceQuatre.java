@@ -13,6 +13,10 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/**
+ * Controller for the Puissance 4
+ */
 public class ControleurPuissanceQuatre extends AbstractController {
 
     private PlateauPuissance jeu;

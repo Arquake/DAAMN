@@ -9,6 +9,10 @@ public abstract class AbstractController {
 
     AbstractIhm ihm;
 
+    /**
+     * method to start any game
+     * It will start the game and when it stops show the winner and how many game each player Won
+     */
     public void jouer(){
         do {
             playGame();
@@ -35,9 +39,20 @@ public abstract class AbstractController {
         }
     }
 
+    /**
+     * method to set an ihm for the game
+     * @param ihm the ihm that will be used
+     */
     protected void setIhm(AbstractIhm ihm){this.ihm = ihm;};
 
+    /**
+     * get the ihm that have been created
+     * @return the Ihm
+     */
     protected AbstractIhm getIhm(){return this.ihm;}
 
+    /**
+     * method to be implemented to be able to play a game
+     */
     protected abstract void playGame();
 }

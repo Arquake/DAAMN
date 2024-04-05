@@ -91,6 +91,5 @@ public class ControleurJeuNim extends AbstractController {
             this.numberOfHeap = ((IhmNim) super.getIhm()).creerJeu();
         } while (this.numberOfHeap < 1); // if numberOfHeap < 1 we can't create a heap out of it
                                         // si numberOfHeap < 1, nous ne pouvons pas en créer un tas
-
     }
 }
