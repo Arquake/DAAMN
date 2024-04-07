@@ -90,6 +90,10 @@ public abstract class AbstractIhm {
         System.out.println(plateau);
     };
 
+    /**
+     * permet d'afficher une erreur avec le formatage de couleur
+     * @param message le message à formater
+     */
     public void afficherErreur(String message) {
         System.out.println("\u001B[41m" + "\u001B[30m " + message + " \u001B[0m");
     }

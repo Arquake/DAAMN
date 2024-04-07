@@ -1,8 +1,5 @@
 package project.Views;
 
-import project.Models.Exception.CoupException;
-import project.Models.Exception.CreateGameException;
-
 import java.util.Scanner;
 
 /**
@@ -16,39 +13,32 @@ public class IhmNim extends AbstractIhm {
      *                   le nom des joueurs qui jouent ce tour
      * @return new int{Number Of Matches , Heap Number}
      *        nouveau int{Nombre d'allumettes , Nombre de tas}
-     * @throws CoupException if the input is invalid
-     *                  si l'entrée est invalide
      */
     public int[] demanderCoup(String playerName) {
-        int[] coup = new int[]{0, 0};
-        Scanner actualScanner = new Scanner(System.in);
-        boolean validInput = false;
+        int[] coup = new int[2];
+        Scanner scanner;
 
-        while (!validInput) {
+        while (true) {
+            scanner = new Scanner(System.in);
             System.out.println(playerName + " à vous de jouer un coup sous la forme 'm n' où m est le tas choisi et n le nombre d'allumettes à retirer dans ce tas.\n coup : ");
-            String input = actualScanner.nextLine();
-            Scanner checkingScanner = new Scanner(input);
+            String input = scanner.nextLine();
+            scanner = new Scanner(input);
 
-            if (checkingScanner.hasNextInt()) {
-                coup[0] = checkingScanner.nextInt();
-                if (checkingScanner.hasNextInt()) {
-                    coup[1] = checkingScanner.nextInt();
+            if (scanner.hasNextInt()) {
+                coup[0] = scanner.nextInt();
+                if (scanner.hasNextInt()) {
+                    coup[1] = scanner.nextInt();
                     // Check if both integers are greater than or equal to 1
                     if (coup[0] >= 1 && coup[1] >= 1) {
-                        validInput = true;
+                        return coup;
                     } else {
-                        System.out.println("\u001B[41m" +"Les nombres saisis doivent être supérieurs ou égaux à 1."+"\u001B[0m");
+                        afficherErreur("\u001B[41m" +"Les nombres saisis doivent être supérieurs ou égaux à 1."+"\u001B[0m");
                         continue;
                     }
                 }
             }
-
-            if (!validInput) {
-                System.out.println("\u001B[41m" +"Format incorrect. Veuillez saisir deux entiers séparés par un espace."+"\u001B[0m");
-            }
-
+            afficherErreur("\u001B[41m" +"Format incorrect. Veuillez saisir deux entiers séparés par un espace."+"\u001B[0m");
         }
-        return coup;
     }
 
     /**

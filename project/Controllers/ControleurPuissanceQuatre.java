@@ -97,12 +97,10 @@ public class ControleurPuissanceQuatre extends AbstractController {
             throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
         if (!(coup.isBlank() || coup.isEmpty())) {
             Pattern patternChiffre = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
-            Pattern patternRotaHoraire = Pattern.compile("A", Pattern.CASE_INSENSITIVE);
-            Pattern patternRotaAntiHoraire = Pattern.compile("H", Pattern.CASE_INSENSITIVE);
 
             Matcher matcherChiffre = patternChiffre.matcher(coup);
-            Matcher matcherRotaHoraire = patternRotaHoraire.matcher(coup);
-            Matcher matcherRotaAntiHoraire = patternRotaAntiHoraire.matcher(coup);
+            boolean matcherRotaHoraire = coup.equalsIgnoreCase("H");
+            boolean matcherRotaAntiHoraire = coup.equalsIgnoreCase("A");
 
             if (matcherChiffre.find()) {
                 int[] data = new int[2];
@@ -110,22 +108,20 @@ public class ControleurPuissanceQuatre extends AbstractController {
                 data[1] = playerTurn+1;
                 jeu.jouerCoup(data);
             }
-            else if (matcherRotaHoraire.find()) {
+            else if (matcherRotaHoraire || matcherRotaAntiHoraire) {
                 if (isRotationActive) {
                     if (nbRestantDeRotation.get(joueurs[playerTurn]) > 0) {
-                        jeu.tournerSensHoraire();
+                        if (matcherRotaHoraire) {
+                            jeu.tournerSensHoraire();
+                        } else {
+                            jeu.tournerSensAntiHoraire();
+                        }
                         nbRestantDeRotation.replace(joueurs[playerTurn], nbRestantDeRotation.get(joueurs[playerTurn]) - 1);
                     } else { throw new NombreRotationMaximumAtteintException(); }
                 } else { throw new RotationInactiveException(); }
-            } else if (matcherRotaAntiHoraire.find()){
-                if (isRotationActive) {
-                    if (nbRestantDeRotation.get(joueurs[playerTurn])>0) {
-                        jeu.tournerSensAntiHoraire();
 
-                        nbRestantDeRotation.replace(joueurs[playerTurn], nbRestantDeRotation.get(joueurs[playerTurn]) - 1);
-                    } else { throw new NombreRotationMaximumAtteintException(); }
-                } else { throw new RotationInactiveException(); }
-            } else { throw new InvalidColumException(); }
+            }
+            else { throw new InvalidColumException();}
         } else { throw new InvalidColumException(); }
     }
 }
