@@ -200,16 +200,8 @@ public class PlateauPuissance extends AbstractPlateau {
                 newTerrain[nbLignes-1-colonnes][lignes] = terrain[lignes][colonnes];
             }
         }
-
-        for (int[] ints : newTerrain) {
-            System.out.println(Arrays.toString(ints));
-        }
-        System.out.println();
         gravite(newTerrain);
         terrain = newTerrain;
-        for (int[] ints : terrain) {
-            System.out.println(Arrays.toString(ints));
-        }
     }
 
     /**
