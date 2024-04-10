@@ -63,6 +63,10 @@ public class ControleurJeuNim extends AbstractController {
                 ihm.afficherErreur(e.getMessage());
             } catch (EmptyHeapException e) {
                 ihm.afficherErreur(e.getMessage());
+            } catch (NotEnoughMatchesException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (CoupException e) {
+                ihm.afficherErreur(e.getMessage());
             }
         }
         // Announce the winner and update their score

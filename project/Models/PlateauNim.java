@@ -1,8 +1,6 @@
 package project.Models;
 
-import project.Models.Exception.EmptyHeapException;
-import project.Models.Exception.HeapNumberException;
-import project.Models.Exception.MatchesNumberException;
+import project.Models.Exception.*;
 
 /**
  * game board
@@ -31,27 +29,29 @@ public class PlateauNim extends AbstractPlateau {
      * @param target {Heap;number of matches} which heap to subtract the matches from
      *               {Tas;nombre d'allumettes} quel tas soustraire les allumettes
      */
-    public void jouerCoup(int[] target) throws HeapNumberException,MatchesNumberException, EmptyHeapException{
+    public void jouerCoup(int[] target) throws HeapNumberException, MatchesNumberException, EmptyHeapException , CoupException, NotEnoughMatchesException {
         // Check if the target heap number is valid
         if (target[0] > jeu.length || target[0] < 1) {
             throw new HeapNumberException();
         }
 
-        // Check if the number of matches to remove is valid
-        if (target[1] < 1) {
-            throw new EmptyHeapException();
-        }
+        // Check if the heap is empty
         if (jeu[target[0] - 1] == 0) {
-            throw new EmptyHeapException();
+            throw new CoupException();
+        }
+
+        // Check if the number of matches to remove is greater than 0
+        if (target[1] < 1) {
+            throw new MatchesNumberException();
         }
 
         // Check if there are enough matches in the heap
         if (target[1] > jeu[target[0] - 1]) {
-            throw new MatchesNumberException();
+            throw new NotEnoughMatchesException();
         }
 
         // Check if the number of matches to remove exceeds the maximum allowed
-        if (maxMatches != 0 && target[1] > maxMatches) {
+        if (maxMatches > 0 && target[1] > maxMatches) {
             throw new MatchesNumberException();
         }
 
