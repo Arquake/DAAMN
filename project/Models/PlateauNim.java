@@ -14,8 +14,12 @@ public class PlateauNim extends AbstractPlateau {
     private int maxMatches = 0;
 
     /**
+     * makes the actual plateau
+     * stores the maximum number of matches that can be removed
      * @param heapNumber number of heaps to create
      *                   nombre de tas à créer
+     * @param maxMatches maximum number of matches that can be removed
+     *                   nombre maximum d'allumettes qui peuvent être retirées
      */
     public PlateauNim(int heapNumber, int maxMatches) {
         this.jeu = new int[heapNumber];
@@ -26,8 +30,18 @@ public class PlateauNim extends AbstractPlateau {
     }
 
     /**
+     * plays each turn of the game
      * @param target {Heap;number of matches} which heap to subtract the matches from
      *               {Tas;nombre d'allumettes} quel tas soustraire les allumettes
+     *               {1;2} remove 2 matches from heap 1
+     * @ throws HeapNumberException if the heap number is invalid
+     * @ throws MatchesNumberException if the number of matches to remove is bigger than the maximum allowed
+     * @ throws EmptyHeapException if the heap is empty
+     * @ throws CoupException if the number of matches to remove is invalid or the heap is empty
+     * @ throws NotEnoughMatchesException if there are not enough matches in the heap
+     *
+     *
+     *
      */
     public void jouerCoup(int[] target) throws HeapNumberException, MatchesNumberException, EmptyHeapException , CoupException, NotEnoughMatchesException {
         // Check if the target heap number is valid
@@ -42,7 +56,7 @@ public class PlateauNim extends AbstractPlateau {
 
         // Check if the number of matches to remove is greater than 0
         if (target[1] < 1) {
-            throw new MatchesNumberException();
+            throw new CoupException();
         }
 
         // Check if there are enough matches in the heap
@@ -84,6 +98,7 @@ public class PlateauNim extends AbstractPlateau {
     }
 
     /**
+     * checks if there are no matches left
      * @return true if there is no matches left
      *        vrai s'il ne reste plus d'allumettes
      */

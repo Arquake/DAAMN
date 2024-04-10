@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class IhmNim extends AbstractIhm {
 
     /**
+     * asks the user for their move
      * @param playerName the name of the players that are playing in this turn
      *                   le nom des joueurs qui jouent ce tour
      * @return new int{Number Of Matches , Heap Number}
@@ -42,6 +43,7 @@ public class IhmNim extends AbstractIhm {
     }
 
     /**
+     * asks the user for the number of heaps
      * @return int with the user input that should represent the number of heap
      *     int avec l'entrée utilisateur qui devrait représenter le nombre de tas
      */
@@ -86,6 +88,8 @@ public class IhmNim extends AbstractIhm {
 
 
     /**
+     * asks the user if they want to play with constraints
+     * 
      * @return int with the user input that should represent the max number of matches that can be removed
      *         if the user doesn't want to play with constraints, 0 is returned
      *     int avec l'entrée utilisateur qui devrait représenter le nombre maximum d'allumettes pouvant être retirées
