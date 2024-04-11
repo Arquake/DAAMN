@@ -1,6 +1,9 @@
 package project.Controllers;
 
 
+import project.Models.Exception.InvalidColumException;
+import project.Models.Exception.NombreRotationMaximumAtteintException;
+import project.Models.Exception.RotationInactiveException;
 import project.Models.PlateauPuissance;
 import project.Views.AbstractIhm;
 import project.Views.IhmPuissance;
@@ -63,8 +66,11 @@ public class ControleurPuissanceQuatre extends AbstractController {
                 ihm.afficherPlateau(jeu.toString());
                 // If the move was successful, update the next player
                 playerTurn = (playerTurn + 1) % 2;
-            }
-            catch (Exception e) {
+            } catch (RotationInactiveException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (InvalidColumException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (NombreRotationMaximumAtteintException e) {
                 ihm.afficherErreur(e.getMessage());
             }
         }
