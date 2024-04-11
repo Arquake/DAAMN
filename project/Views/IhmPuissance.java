@@ -46,6 +46,7 @@ public class IhmPuissance extends AbstractIhm {
     /**
      * prints which player have won
      * @param nomJoueur player's name
+     * @param plateau the string of the current board
      */
     public void victory(String nomJoueur, String plateau) {
         System.out.println(plateau + "\n\u001B[42m" + "\u001B[30m " + nomJoueur + " a gagné !\u001B[0m");

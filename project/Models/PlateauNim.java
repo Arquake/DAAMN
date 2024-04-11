@@ -34,11 +34,11 @@ public class PlateauNim extends AbstractPlateau {
      * @param target {Heap;number of matches} which heap to subtract the matches from
      *               {Tas;nombre d'allumettes} quel tas soustraire les allumettes
      *               {1;2} remove 2 matches from heap 1
-     * @ throws HeapNumberException if the heap number is invalid
-     * @ throws MatchesNumberException if the number of matches to remove is bigger than the maximum allowed
-     * @ throws EmptyHeapException if the heap is empty
-     * @ throws CoupException if the number of matches to remove is invalid or the heap is empty
-     * @ throws NotEnoughMatchesException if there are not enough matches in the heap
+     * @throws HeapNumberException if the heap number is invalid
+     * @throws MatchesNumberException if the number of matches to remove is bigger than the maximum allowed
+     * @throws EmptyHeapException if the heap is empty
+     * @throws CoupException if the number of matches to remove is invalid or the heap is empty
+     * @throws NotEnoughMatchesException if there are not enough matches in the heap
      *
      *
      *

@@ -36,7 +36,6 @@ public abstract class AbstractIhm {
 
     /**
      * asks the player if they want to replay
-     * @author Matteo
      * @return the user input should be y|Y|n|N
      */
     public boolean replay() {
