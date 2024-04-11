@@ -39,11 +39,12 @@ public class ControleurPuissanceQuatre extends AbstractController {
         String rotation = ihm.demanderRotation();
         boolean isRotationActive = rotation.equalsIgnoreCase("Y");
 
-        jeu.setNombreRotation(joueurs);
+
 
         int playerTurn = 0;
 
         jeu = new PlateauPuissance();
+        jeu.setNombreRotation(joueurs);
         ihm.afficherPlateau(jeu.toString());
 
         String coup;
