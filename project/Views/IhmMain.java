@@ -26,6 +26,7 @@ public class IhmMain {
             } else {
                 sc = new Scanner(System.in);
             }
+            System.out.println("\u001B[41m" + "\u001B[30m " + "Choix incorrecte veuillez réessayer :" + " \u001B[0m");
         }
         return rep;
     }
