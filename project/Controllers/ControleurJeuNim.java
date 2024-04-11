@@ -61,8 +61,6 @@ public class ControleurJeuNim extends AbstractController {
                 ihm.afficherErreur(e.getMessage());
             } catch (MatchesNumberException e) {
                 ihm.afficherErreur(e.getMessage());
-            } catch (EmptyHeapException e) {
-                ihm.afficherErreur(e.getMessage());
             } catch (NotEnoughMatchesException e) {
                 ihm.afficherErreur(e.getMessage());
             } catch (CoupException e) {
