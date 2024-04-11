@@ -2,8 +2,12 @@ package project.Models;
 
 
 import project.Models.Exception.InvalidColumException;
+import project.Models.Exception.NombreRotationMaximumAtteintException;
+import project.Models.Exception.RotationInactiveException;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PlateauPuissance extends AbstractPlateau {
 
@@ -12,6 +16,10 @@ public class PlateauPuissance extends AbstractPlateau {
      * 0 0 bottom left corner
      */
     private int[][] terrain = new int[7][7];
+    /**
+     * Stock le nombre de rotation restante a chaque joueur.
+     */
+    HashMap<Joueur,Integer> nbRestantDeRotation = new HashMap<>();
 
     /**
      * @return the power 4 grid with pieces in it
@@ -227,4 +235,60 @@ public class PlateauPuissance extends AbstractPlateau {
             }
         }
     }
+
+
+    /**
+     * Met le nombre de rotation maximum des joueurs a 4 a chaque debut de partie.
+     * @param joueurs Liste des joueurs en jeu
+     */
+    public void setNombreRotation(Joueur[] joueurs) {
+        for (Joueur joueur : joueurs){
+            nbRestantDeRotation.put(joueur,4);
+        }
+        System.out.println(nbRestantDeRotation);
+        System.out.println(nbRestantDeRotation.get(joueurs[0]));
+    }
+
+    /**
+     * Recoit le coup du joueur, le traite et le joue s'il est correcte
+     * @param coup Le coup du joueur sous forme de string
+     * @param joueurs La liste des joueurs
+     * @param playerTurn Le tour du joueur actuel en int
+     * @param isRotationActive Un boolean qui represente si la possibilité de tourner la grille est active
+     * @throws InvalidColumException Erreur si le numero de colone jouer n'est pas valide (hors grille ou colonne pleine)
+     * @throws NombreRotationMaximumAtteintException Erreur si le joueur tente de faire une rotation alors qu'il n'a plus de rotation possible
+     * @throws RotationInactiveException Erreur si le joueur tente une rotation alors qu'elles ne sont pas active
+     */
+    public void gestionCoup(String coup, Joueur[] joueurs, int playerTurn, boolean isRotationActive)
+            throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
+        if (!(coup.isBlank() || coup.isEmpty())) {
+            Pattern patternChiffre = Pattern.compile("^[0-9]$", Pattern.CASE_INSENSITIVE);
+
+            Matcher matcherChiffre = patternChiffre.matcher(coup);
+            boolean matcherRotaHoraire = coup.equalsIgnoreCase("H");
+            boolean matcherRotaAntiHoraire = coup.equalsIgnoreCase("A");
+
+            if (matcherChiffre.find()) {
+                int[] data = new int[2];
+                data[0] = Integer.parseInt(matcherChiffre.group())-1;
+                data[1] = playerTurn+1;
+                jouerCoup(data);
+            }
+            else if (matcherRotaHoraire || matcherRotaAntiHoraire) {
+                if (isRotationActive) {
+                    if (nbRestantDeRotation.get(joueurs[playerTurn]) > 0) {
+                        if (matcherRotaHoraire) {
+                            tournerSensHoraire();
+                        } else {
+                            tournerSensAntiHoraire();
+                        }
+                        nbRestantDeRotation.replace(joueurs[playerTurn], nbRestantDeRotation.get(joueurs[playerTurn]) - 1);
+                    } else { throw new NombreRotationMaximumAtteintException(); }
+                } else { throw new RotationInactiveException(); }
+
+            }
+            else { throw new InvalidColumException();}
+        } else { throw new InvalidColumException(); }
+    }
 }
+

@@ -22,8 +22,6 @@ public class ControleurPuissanceQuatre extends AbstractController {
     private PlateauPuissance jeu;
     private final IhmPuissance ihm;
 
-    HashMap<Joueur,Integer> nbRestantDeRotation = new HashMap<>();
-
     /**
      * Initialize the game
      *
@@ -33,6 +31,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
         super.setIhm(ihm);
         super.createPlayers();
         this.ihm = (IhmPuissance) super.getIhm();
+        jeu = new PlateauPuissance();
     }
 
     /**
@@ -45,9 +44,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
         String rotation = ihm.demanderRotation();
         boolean isRotationActive = rotation.equalsIgnoreCase("Y");
 
-        for (Joueur joueur : joueurs){
-            nbRestantDeRotation.put(joueur,4);
-        }
+        jeu.setNombreRotation(joueurs);
 
         int playerTurn = 0;
 
@@ -60,7 +57,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
             // Ask the current player for their move
             coup = ihm.demanderCoup(joueurs[playerTurn].getNom());
             try {
-                gestionCoup(coup, playerTurn, isRotationActive);
+                jeu.gestionCoup(coup, joueurs, playerTurn, isRotationActive);
 
                 if (jeu.checkWin() != -1) {
                     joueurs[playerTurn].increaseScore();
