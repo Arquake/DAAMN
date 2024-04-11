@@ -5,6 +5,7 @@ public class Joueur implements Comparable<Joueur>  {
     private int score = 0;
 
     /**
+     * instantiate the player
      * @param nom player's name
      */
     public Joueur(String nom) {
@@ -12,6 +13,7 @@ public class Joueur implements Comparable<Joueur>  {
     }
 
     /**
+     * get the nom of the player
      * @return the name of the player
      */
     public String getNom() {
@@ -26,6 +28,7 @@ public class Joueur implements Comparable<Joueur>  {
     }
 
     /**
+     * get the score of the player
      * @return the score of the player
      */
     public int getScore() {
@@ -33,6 +36,7 @@ public class Joueur implements Comparable<Joueur>  {
     }
 
     /**
+     * compare two player scores
      * @param player the other player to compare score with
      * @return the difference between this player score and the other one
      * -1 this player has a lower score | 0 players has an equal score | 1 this player has a higher score
