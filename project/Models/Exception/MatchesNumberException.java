@@ -9,6 +9,10 @@ public class MatchesNumberException extends Exception{
         super("The number of matches was greater than expected");
     }
 
+    /**
+     * get le message
+     * @return message
+     */
     @Override
     public String getMessage() {
         return super.getMessage();
