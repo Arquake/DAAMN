@@ -18,5 +18,5 @@ public abstract class AbstractPlateau {
      * @throws HeapNumberException exception for Nim if the heap can't be played on
      * @throws InvalidColumException exception for puissance 4 if the column entered is invalid
      */
-    public abstract void jouerCoup(int[] values) throws MatchesNumberException, HeapNumberException, InvalidColumException, EmptyHeapException, NotEnoughMatchesException, CoupException;
+    public abstract void jouerCoup(int[] values) throws MatchesNumberException, HeapNumberException, InvalidColumException, NotEnoughMatchesException, CoupException;
 }
