@@ -2,7 +2,7 @@ package project.Models.Exception;
 
 public class InvalidColumException extends Exception {
     /**
-     * Exception appelée quand la colonne visée n'existe pas.
+     * Exception appelée quand la colonne visée n'existe pas ou est pleine .
      */
     public InvalidColumException() {
         super();
@@ -14,6 +14,6 @@ public class InvalidColumException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "La colonne visée n'existe pas.";
+        return "La colonne visée n'existe pas ou est pleine.";
     }
 }
