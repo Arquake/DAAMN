@@ -82,42 +82,4 @@ public class ControleurPuissanceQuatre extends AbstractController {
         }
     // Announce the winner and update their score
     }
-
-    /**
-     * Recoit le coup du joueur, le traite et le joue s'il est correcte
-     * @param coup Le coup du joueur
-     * @param playerTurn Le numero du joueur qui effectue le coup
-     * @param isRotationActive Si la rotation du jeu est possible
-     * @throws InvalidColumException Leve invalidColumnException si
-     */
-    private void gestionCoup(String coup, int playerTurn, boolean isRotationActive) throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
-        if (!(coup.isBlank() || coup.isEmpty())) {
-            Pattern patternChiffre = Pattern.compile("^[0-9]", Pattern.CASE_INSENSITIVE);
-
-            Matcher matcherChiffre = patternChiffre.matcher(coup);
-            boolean matcherRotaHoraire = coup.equalsIgnoreCase("H");
-            boolean matcherRotaAntiHoraire = coup.equalsIgnoreCase("A");
-
-            if (matcherChiffre.find()) {
-                int[] data = new int[2];
-                data[0] = Integer.parseInt(matcherChiffre.group())-1;
-                data[1] = playerTurn+1;
-                jeu.jouerCoup(data);
-            }
-            else if (matcherRotaHoraire || matcherRotaAntiHoraire) {
-                if (isRotationActive) {
-                    if (nbRestantDeRotation.get(joueurs[playerTurn]) > 0) {
-                        if (matcherRotaHoraire) {
-                            jeu.tournerSensHoraire();
-                        } else {
-                            jeu.tournerSensAntiHoraire();
-                        }
-                        nbRestantDeRotation.replace(joueurs[playerTurn], nbRestantDeRotation.get(joueurs[playerTurn]) - 1);
-                    } else { throw new NombreRotationMaximumAtteintException(); }
-                } else { throw new RotationInactiveException(); }
-
-            }
-            else { throw new InvalidColumException();}
-        } else { throw new InvalidColumException(); }
-    }
 }
