@@ -17,7 +17,6 @@ public abstract class AbstractPlateau {
      * @throws MatchesNumberException exception for Nim when the number of matches is too big to be played
      * @throws HeapNumberException exception for Nim if the heap can't be played on
      * @throws InvalidColumException exception for puissance 4 if the column entered is invalid
-     * @throws EmptyHeapException exception for Nim if the heap is empty
      * @throws NotEnoughMatchesException exception for Nim if there is not enough matches in the heap
      * @throws CoupException exception for NIM if the move can't be played
      */
