@@ -93,8 +93,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
      * @param isRotationActive Si la rotation du jeu est possible
      * @throws InvalidColumException Leve invalidColumnException si
      */
-    private void gestionCoup(String coup, int playerTurn, boolean isRotationActive)
-            throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
+    private void gestionCoup(String coup, int playerTurn, boolean isRotationActive) throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
         if (!(coup.isBlank() || coup.isEmpty())) {
             Pattern patternChiffre = Pattern.compile("^[0-9]", Pattern.CASE_INSENSITIVE);
 
