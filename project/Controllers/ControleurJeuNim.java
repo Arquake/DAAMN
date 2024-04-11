@@ -1,5 +1,9 @@
 package project.Controllers;
 
+import project.Models.Exception.CoupException;
+import project.Models.Exception.HeapNumberException;
+import project.Models.Exception.MatchesNumberException;
+import project.Models.Exception.NotEnoughMatchesException;
 import project.Models.PlateauNim;
 import project.Models.Joueur;
 import project.Views.AbstractIhm;
@@ -56,7 +60,13 @@ public class ControleurJeuNim extends AbstractController {
 
                 dernier_joueur = joueurs[playerTurn];
                 playerTurn = (playerTurn + 1) % 2;
-            } catch (Exception e) {
+            } catch (HeapNumberException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (CoupException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (MatchesNumberException e) {
+                ihm.afficherErreur(e.getMessage());
+            } catch (NotEnoughMatchesException e) {
                 ihm.afficherErreur(e.getMessage());
             }
         }
