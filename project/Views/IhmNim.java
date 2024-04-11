@@ -89,7 +89,7 @@ public class IhmNim extends AbstractIhm {
 
     /**
      * asks the user if they want to play with constraints
-     * 
+     *
      * @return int with the user input that should represent the max number of matches that can be removed
      *         if the user doesn't want to play with constraints, 0 is returned
      *     int avec l'entrée utilisateur qui devrait représenter le nombre maximum d'allumettes pouvant être retirées

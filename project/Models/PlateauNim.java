@@ -43,7 +43,7 @@ public class PlateauNim extends AbstractPlateau {
      *
      *
      */
-    public void jouerCoup(int[] target) throws HeapNumberException, MatchesNumberException, EmptyHeapException , CoupException, NotEnoughMatchesException {
+    public void jouerCoup(int[] target) throws HeapNumberException, MatchesNumberException , CoupException, NotEnoughMatchesException {
         // Check if the target heap number is valid
         if (target[0] > jeu.length || target[0] < 1) {
             throw new HeapNumberException();
