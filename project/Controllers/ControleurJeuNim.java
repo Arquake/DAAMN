@@ -5,7 +5,6 @@ import project.Models.Exception.HeapNumberException;
 import project.Models.Exception.MatchesNumberException;
 import project.Models.Exception.NotEnoughMatchesException;
 import project.Models.PlateauNim;
-import project.Models.Joueur;
 import project.Views.AbstractIhm;
 import project.Views.IhmNim;
 
@@ -14,6 +13,8 @@ import project.Views.IhmNim;
  * contient toutes les méthodes liées au contrôle du jeu pour lier la vue et le modèle
  */
 public class ControleurJeuNim extends AbstractController {
+
+    PlateauNim jeu;
 
     /**
      * Nombre de tas sur le plateau
@@ -33,55 +34,6 @@ public class ControleurJeuNim extends AbstractController {
     }
 
     /**
-     * game loops until one player wins
-     * boucle de jeu jusqu'à ce qu'un joueur gagne
-     * makes the actual heap
-     * fait le tas actuel
-     * initializes game with joueur 0
-     * initialise le jeu avec le joueur 0
-     */
-    protected void playGame() {
-        IhmNim ihm = (IhmNim) super.getIhm();
-
-
-        Joueur dernier_joueur = joueurs[0];
-        int playerTurn = 0;
-        int allumetteMax = ihm.demanderContrainte();
-        PlateauNim jeu = new PlateauNim(this.numberOfHeap, allumetteMax);
-        // Game loop
-        // Boucle de jeu
-        while (!jeu.boardCompleted()) {
-            // Ask the current player for their move
-            // Demander au joueur actuel son coup
-            try {
-                ihm.afficherPlateau(jeu.toString());
-                int[] coup = ihm.demanderCoup(joueurs[playerTurn].getNom());
-                jeu.jouerCoup(coup);
-
-                dernier_joueur = joueurs[playerTurn];
-                playerTurn = (playerTurn + 1) % 2;
-            } catch (HeapNumberException e) {
-                ihm.afficherErreur(e.getMessage());
-            } catch (CoupException e) {
-                ihm.afficherErreur(e.getMessage());
-            } catch (MatchesNumberException e) {
-                ihm.afficherErreur(e.getMessage());
-            } catch (NotEnoughMatchesException e) {
-                ihm.afficherErreur(e.getMessage());
-            }
-        }
-        // Announce the winner and update their score
-        // Annoncez le vainqueur et mettez à jour son score
-        
-        ihm.victory(dernier_joueur.getNom());
-        dernier_joueur.increaseScore();
-    }
-
-
-
-
-
-    /**
      * creates the board game
      * crée le plateau de jeu
      * calls the ihm to make the board
@@ -95,6 +47,59 @@ public class ControleurJeuNim extends AbstractController {
         do {
             this.numberOfHeap = ((IhmNim) super.getIhm()).creerJeu();
         } while (this.numberOfHeap < 1); // if numberOfHeap < 1 we can't create a heap out of it
-                                        // si numberOfHeap < 1, nous ne pouvons pas en créer un tas
+            // si numberOfHeap < 1, nous ne pouvons pas en créer un tas
+    }
+
+
+    @Override
+    void createConstraint() {
+        int allumetteMax = ((IhmNim) super.getIhm()).demanderContrainte();
+        jeu = new PlateauNim(this.numberOfHeap, allumetteMax);
+    }
+
+
+    @Override
+    void handleWin() {
+        running = !jeu.boardCompleted();
+        if (!running){
+            // Announce the winner and update their score
+            // Annoncez le vainqueur et mettez à jour son score
+            ihm.victory(joueurs[playerTurn].getNom());
+            joueurs[playerTurn].increaseScore();
+        }
+    }
+
+
+    @Override
+    void nextTurn() {
+        if (running && validLastMove) {
+            // If the move was successful, update the next player
+            playerTurn = (playerTurn + 1) % 2;
+        }
+    }
+
+
+    @Override
+    void manageMove() {
+        // Ask the current player for their move
+        // Demander au joueur actuel son coup
+        try {
+            ihm.afficherPlateau(jeu.toString());
+            int[] coup = ((IhmNim) super.getIhm()).demanderCoup(joueurs[playerTurn].getNom());
+            jeu.jouerCoup(coup);
+            validLastMove = true;
+        } catch (HeapNumberException e) {
+            ihm.afficherErreur(e.getMessage());
+            validLastMove = false;
+        } catch (CoupException e) {
+            ihm.afficherErreur(e.getMessage());
+            validLastMove = false;
+        } catch (MatchesNumberException e) {
+            ihm.afficherErreur(e.getMessage());
+            validLastMove = false;
+        } catch (NotEnoughMatchesException e) {
+            ihm.afficherErreur(e.getMessage());
+            validLastMove = false;
+        }
     }
 }

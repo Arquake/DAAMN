@@ -6,10 +6,14 @@ import project.Models.Exception.NombreRotationMaximumAtteintException;
 import project.Models.Exception.RotationInactiveException;
 
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PlateauPuissance extends AbstractPlateau {
+
+    /**
+     * if the game have rotations active for player to play those moves
+     */
+    boolean isRotationActive = false;
+
 
     /**
      * terrain int[line][column]
@@ -254,23 +258,19 @@ public class PlateauPuissance extends AbstractPlateau {
      * @param coup Le coup du joueur sous forme de string
      * @param joueurs La liste des joueurs
      * @param playerTurn Le tour du joueur actuel en int
-     * @param isRotationActive Un boolean qui represente si la possibilité de tourner la grille est active
      * @throws InvalidColumException Erreur si le numero de colone jouer n'est pas valide (hors grille ou colonne pleine)
      * @throws NombreRotationMaximumAtteintException Erreur si le joueur tente de faire une rotation alors qu'il n'a plus de rotation possible
      * @throws RotationInactiveException Erreur si le joueur tente une rotation alors qu'elles ne sont pas active
      */
-    public void gestionCoup(String coup, Joueur[] joueurs, int playerTurn, boolean isRotationActive)
+    public void gestionCoup(String coup, Joueur[] joueurs, int playerTurn)
             throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
         if (!(coup.isBlank() || coup.isEmpty())) {
-            Pattern patternChiffre = Pattern.compile("^[0-9]$", Pattern.CASE_INSENSITIVE);
-
-            Matcher matcherChiffre = patternChiffre.matcher(coup);
             boolean matcherRotaHoraire = coup.equalsIgnoreCase("H");
             boolean matcherRotaAntiHoraire = coup.equalsIgnoreCase("A");
 
-            if (matcherChiffre.find()) {
+            if (coup.matches("^[0-9]*$")) {
                 int[] data = new int[2];
-                data[0] = Integer.parseInt(matcherChiffre.group())-1;
+                data[0] = Integer.parseInt(coup)-1;
                 data[1] = playerTurn+1;
                 jouerCoup(data);
             }
@@ -289,6 +289,10 @@ public class PlateauPuissance extends AbstractPlateau {
             }
             else { throw new InvalidColumException();}
         } else { throw new InvalidColumException(); }
+    }
+
+    public void setRotationActive(boolean rotationActive) {
+        isRotationActive = rotationActive;
     }
 }
 

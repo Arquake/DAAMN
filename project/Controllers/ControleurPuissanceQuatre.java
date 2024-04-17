@@ -15,7 +15,7 @@ import project.Views.IhmPuissance;
 public class ControleurPuissanceQuatre extends AbstractController {
 
     private PlateauPuissance jeu;
-    private final IhmPuissance ihm;
+
 
     /**
      * Initialize the game
@@ -25,56 +25,62 @@ public class ControleurPuissanceQuatre extends AbstractController {
     public ControleurPuissanceQuatre(AbstractIhm ihm) {
         super.setIhm(ihm);
         super.createPlayers();
-        this.ihm = (IhmPuissance) super.getIhm();
         jeu = new PlateauPuissance();
     }
 
-    /**
-     * game loops until one player wins
-     * makes the actual heap
-     * initializes game with joueur 0
-     */
 
-    protected void playGame() {
-        String rotation = ihm.demanderRotation();
-        boolean isRotationActive = rotation.equalsIgnoreCase("Y");
-
-
-
-        int playerTurn = 0;
-
+    @Override
+    void createConstraint() {
         jeu = new PlateauPuissance();
-        jeu.setNombreRotation(joueurs);
+        String rotation = ((IhmPuissance) super.getIhm()).demanderRotation();
+        jeu.setRotationActive(rotation.equalsIgnoreCase("Y"));
+        if (rotation.equalsIgnoreCase("Y")) {jeu.setNombreRotation(joueurs);}
         ihm.afficherPlateau(jeu.toString());
+    }
 
-        String coup;
-        // Game loop
-        while (true) {
-            // Ask the current player for their move
-            coup = ihm.demanderCoup(joueurs[playerTurn].getNom());
-            try {
-                jeu.gestionCoup(coup, joueurs, playerTurn, isRotationActive);
 
-                if (jeu.checkWin() != -1) {
-                    joueurs[playerTurn].increaseScore();
-                    ihm.victory(joueurs[playerTurn].getNom(), jeu.toString());
-                    break;
-                }
-                if (jeu.boardCompleted()) {
-                    ihm.noWinBoardFull(jeu.toString());
-                    break;
-                }
-                ihm.afficherPlateau(jeu.toString());
-                // If the move was successful, update the next player
-                playerTurn = (playerTurn + 1) % 2;
-            } catch (RotationInactiveException e) {
-                ihm.afficherErreur(e.getMessage());
-            } catch (InvalidColumException e) {
-                ihm.afficherErreur(e.getMessage());
-            } catch (NombreRotationMaximumAtteintException e) {
-                ihm.afficherErreur(e.getMessage());
-            }
+    @Override
+    void handleWin() {
+        if (jeu.checkWin() != -1) {
+            joueurs[playerTurn].increaseScore();
+            ((IhmPuissance) super.getIhm()).victory(joueurs[playerTurn].getNom(), jeu.toString());
+            running = false;
+            ihm.afficherPlateau(jeu.toString());
         }
-    // Announce the winner and update their score
+        else if (jeu.boardCompleted()) {
+            ((IhmPuissance) super.getIhm()).noWinBoardFull(jeu.toString());
+            running = false;
+            ihm.afficherPlateau(jeu.toString());
+        }
+    }
+
+
+    @Override
+    void nextTurn() {
+        if (running && validLastMove) {
+            // If the move was successful, update the next player
+            playerTurn = (playerTurn + 1) % 2;
+            ihm.afficherPlateau(jeu.toString());
+        }
+    }
+
+
+    @Override
+    void manageMove() {
+        // Ask the current player for their move
+        String coup = ((IhmPuissance) super.getIhm()).demanderCoup(joueurs[playerTurn].getNom());
+        try {
+            jeu.gestionCoup(coup, joueurs, playerTurn);
+            validLastMove = true;
+        } catch (RotationInactiveException e) {
+            ihm.afficherErreur(e.getMessage());
+            validLastMove = false;
+        } catch (InvalidColumException e) {
+            ihm.afficherErreur(e.getMessage());
+            validLastMove = false;
+        } catch (NombreRotationMaximumAtteintException e) {
+            ihm.afficherErreur(e.getMessage());
+            validLastMove = false;
+        }
     }
 }

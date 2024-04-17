@@ -5,8 +5,29 @@ import project.Views.AbstractIhm;
 
 public abstract class AbstractController {
 
+    /**
+     * if the last move made by a player was valid or not
+     */
+    protected boolean validLastMove = false;
+
+    /**
+     * true if the game is running false if it has to stop
+     */
+    protected boolean running = false;
+
+    /**
+     * current player turn
+     */
+    protected int playerTurn;
+
+    /**
+     * array of all the players in the game
+     */
     protected Joueur[] joueurs;
 
+    /**
+     * ihm to use during the game
+     */
     AbstractIhm ihm;
 
     /**
@@ -52,7 +73,39 @@ public abstract class AbstractController {
     protected AbstractIhm getIhm(){return this.ihm;}
 
     /**
-     * method to be implemented to be able to play a game
+     * method to create constraint in the game
      */
-    protected abstract void playGame();
+    abstract void createConstraint();
+
+    /**
+     * method to handle win or stalemate in the game
+     */
+    abstract void handleWin();
+
+    /**
+     * method to go the next person's turn
+     */
+    abstract void nextTurn();
+
+    /**
+     * method to manage moves
+     */
+    abstract void manageMove();
+
+    /**
+     * method to play a game
+     */
+    public void playGame() {
+
+        playerTurn = 0;
+        createConstraint();
+        running = true;
+        // Game loop
+        // Boucle de jeu
+        while (running) {
+            manageMove();
+            handleWin();
+            nextTurn();
+        }
+    }
 }
