@@ -30,4 +30,24 @@ public class IhmMain {
         }
         return rep;
     }
+
+    public boolean demanderIA(){
+        System.out.println("Voulez vous jouer contre une IA ? (Y : oui | N : non)");
+        System.out.println("Votre choix : ");
+        Scanner sc = new Scanner(System.in);
+        String rep = null;
+
+        List<String> listeRep = new ArrayList<>(Arrays.asList("Y","N"));
+
+        while (sc.hasNext()) {
+            rep = sc.next();
+            if (listeRep.contains(rep.toUpperCase())) {
+                break;
+            } else {
+                sc = new Scanner(System.in);
+            }
+            System.out.println("\u001B[41m" + "\u001B[30m " + "Choix incorrecte veuillez réessayer :" + " \u001B[0m");
+        }
+        return rep.equalsIgnoreCase("Y");
+    }
 }

@@ -21,13 +21,7 @@ public class Main {
         IhmMain ihmMain = new IhmMain();
         String jeu = ihmMain.demanderJeu();
 
-        /**
-         * Methode pour IA ou HUMAIN
-         */
-        boolean bot = true;
-        /**
-         * à implémenter
-         */
+        boolean bot = ihmMain.demanderIA();
 
         if (jeu.equalsIgnoreCase("N")){
             AbstractIhm ihm = new IhmNim();
