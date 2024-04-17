@@ -1,6 +1,7 @@
 package project.Controllers;
 
 
+import project.Models.AI.PuissanceAI;
 import project.Models.Exception.InvalidColumException;
 import project.Models.Exception.NombreRotationMaximumAtteintException;
 import project.Models.Exception.RotationInactiveException;
@@ -22,10 +23,16 @@ public class ControleurPuissanceQuatre extends AbstractController {
      *
      * @param ihm the Ihm ( View )
      */
-    public ControleurPuissanceQuatre(AbstractIhm ihm) {
+    public ControleurPuissanceQuatre(AbstractIhm ihm, boolean aiPlayer) {
         super.setIhm(ihm);
+        if (aiPlayer) {
+            super.createAi(new PuissanceAI(jeu));
+        }
         super.createPlayers();
         jeu = new PlateauPuissance();
+        if (aiPlayer) {
+            super.setBoardAi(jeu);
+        }
     }
 
 
@@ -67,6 +74,11 @@ public class ControleurPuissanceQuatre extends AbstractController {
 
     @Override
     void manageMove() {
+        // if the current player is a bot
+        if (!joueurs[playerTurn].isHuman()) {
+            ((PuissanceAI) joueurs[playerTurn]).makeMove();
+            return;
+        }
         // Ask the current player for their move
         String coup = ((IhmPuissance) super.getIhm()).demanderCoup(joueurs[playerTurn].getNom());
         try {

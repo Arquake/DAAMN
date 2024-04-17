@@ -1,9 +1,17 @@
 package project.Controllers;
 
+import project.Models.AI.AbstractAI;
+import project.Models.AbstractPlateau;
+import project.Models.AbstractPlayer;
 import project.Models.Joueur;
 import project.Views.AbstractIhm;
 
 public abstract class AbstractController {
+
+    /**
+     * if at least one player is an AI
+     */
+    private boolean containsAiPlayer;
 
     /**
      * if the last move made by a player was valid or not
@@ -23,7 +31,7 @@ public abstract class AbstractController {
     /**
      * array of all the players in the game
      */
-    protected Joueur[] joueurs;
+    protected AbstractPlayer[] joueurs = new AbstractPlayer[2];
 
     /**
      * ihm to use during the game
@@ -39,7 +47,7 @@ public abstract class AbstractController {
             playGame();
 
         } while (ihm.replay());
-        for (Joueur j : joueurs) {
+        for (AbstractPlayer j : joueurs) {
             ihm.partieGagnerJoueur(j.getScore(), j.getNom());
         }
 
@@ -54,10 +62,8 @@ public abstract class AbstractController {
      * creates two player and stores them in this.joueurs Array
      */
     protected void createPlayers(){
-        this.joueurs = new Joueur[2];
-        for (int i = 0; i < 2; i++) {        // creating the players
-            this.joueurs[i] = new Joueur(ihm.creerJoueur(i+1));
-        }
+        this.joueurs[0] = new Joueur(ihm.creerJoueur(1));
+        if (!containsAiPlayer) {this.joueurs[1] = new Joueur(ihm.creerJoueur(2));}
     }
 
     /**
@@ -107,5 +113,14 @@ public abstract class AbstractController {
             handleWin();
             nextTurn();
         }
+    }
+
+    void createAi(AbstractAI ai){
+        containsAiPlayer = true;
+        this.joueurs[1] = ai;
+    }
+
+    void setBoardAi(AbstractPlateau jeu){
+        ((AbstractAI)this.joueurs[1]).setBoard(jeu);
     }
 }

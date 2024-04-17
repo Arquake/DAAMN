@@ -14,6 +14,10 @@ public class PlateauPuissance extends AbstractPlateau {
      */
     boolean isRotationActive = false;
 
+    public void setRotationActive(boolean rotationActive) {
+        isRotationActive = rotationActive;
+    }
+
 
     /**
      * terrain int[line][column]
@@ -23,7 +27,7 @@ public class PlateauPuissance extends AbstractPlateau {
     /**
      * Stock le nombre de rotation restante a chaque joueur.
      */
-    HashMap<Joueur,Integer> nbRestantDeRotation = new HashMap<>();
+    HashMap<AbstractPlayer,Integer> nbRestantDeRotation = new HashMap<>();
 
     /**
      * @return the power 4 grid with pieces in it
@@ -54,7 +58,7 @@ public class PlateauPuissance extends AbstractPlateau {
      * @throws InvalidColumException if the column selected is less than 0 or greater than the number of columns
      */
     public void jouerCoup(int[] data) throws InvalidColumException {
-        if ((data[0] < 0) || (data[0] >=terrain[0].length) || terrain[0][data[0]] != 0){throw new InvalidColumException();};
+        if ((data[0] < 0) || (data[0] >=terrain[0].length) || terrain[0][data[0]] != 0){throw new InvalidColumException();}
         for (int i = terrain.length-1; i >= 0 ; i--) {
             if (terrain[i][data[0]] == 0) {terrain[i][data[0]] = data[1];return;}
         }
@@ -245,12 +249,10 @@ public class PlateauPuissance extends AbstractPlateau {
      * Met le nombre de rotation maximum des joueurs a 4 a chaque debut de partie.
      * @param joueurs Liste des joueurs en jeu
      */
-    public void setNombreRotation(Joueur[] joueurs) {
-        for (Joueur joueur : joueurs){
+    public void setNombreRotation(AbstractPlayer[] joueurs) {
+        for (AbstractPlayer joueur : joueurs){
             nbRestantDeRotation.put(joueur,4);
         }
-        System.out.println(nbRestantDeRotation);
-        System.out.println(nbRestantDeRotation.get(joueurs[0]));
     }
 
     /**
@@ -262,37 +264,40 @@ public class PlateauPuissance extends AbstractPlateau {
      * @throws NombreRotationMaximumAtteintException Erreur si le joueur tente de faire une rotation alors qu'il n'a plus de rotation possible
      * @throws RotationInactiveException Erreur si le joueur tente une rotation alors qu'elles ne sont pas active
      */
-    public void gestionCoup(String coup, Joueur[] joueurs, int playerTurn)
+    public void gestionCoup(String coup, AbstractPlayer[] joueurs, int playerTurn)
             throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
         if (!(coup.isBlank() || coup.isEmpty())) {
-            boolean matcherRotaHoraire = coup.equalsIgnoreCase("H");
-            boolean matcherRotaAntiHoraire = coup.equalsIgnoreCase("A");
 
             if (coup.matches("^[0-9]*$")) {
                 int[] data = new int[2];
                 data[0] = Integer.parseInt(coup)-1;
                 data[1] = playerTurn+1;
                 jouerCoup(data);
+                return;
             }
-            else if (matcherRotaHoraire || matcherRotaAntiHoraire) {
-                if (isRotationActive) {
-                    if (nbRestantDeRotation.get(joueurs[playerTurn]) > 0) {
-                        if (matcherRotaHoraire) {
-                            tournerSensHoraire();
-                        } else {
-                            tournerSensAntiHoraire();
-                        }
-                        nbRestantDeRotation.replace(joueurs[playerTurn], nbRestantDeRotation.get(joueurs[playerTurn]) - 1);
-                    } else { throw new NombreRotationMaximumAtteintException(); }
-                } else { throw new RotationInactiveException(); }
 
+            boolean isClockwiseRotation = coup.equalsIgnoreCase("H");
+            boolean isCounterClockwiseRotation = coup.equalsIgnoreCase("A");
+
+            if (isClockwiseRotation || isCounterClockwiseRotation) {
+                makeRotation(isClockwiseRotation, joueurs, playerTurn);
             }
             else { throw new InvalidColumException();}
         } else { throw new InvalidColumException(); }
     }
 
-    public void setRotationActive(boolean rotationActive) {
-        isRotationActive = rotationActive;
+
+    private void makeRotation(boolean isClockwiseRotation, AbstractPlayer[] joueurs, int playerTurn) throws NombreRotationMaximumAtteintException, RotationInactiveException {
+        if (isRotationActive) {
+            if (nbRestantDeRotation.get(joueurs[playerTurn]) > 0) {
+                if (isClockwiseRotation) {
+                    tournerSensHoraire();
+                } else {
+                    tournerSensAntiHoraire();
+                }
+                nbRestantDeRotation.replace(joueurs[playerTurn], nbRestantDeRotation.get(joueurs[playerTurn]) - 1);
+            } else { throw new NombreRotationMaximumAtteintException(); }
+        } else { throw new RotationInactiveException(); }
     }
 }
 

@@ -1,5 +1,6 @@
 package project.Controllers;
 
+import project.Models.AI.NimAI;
 import project.Models.Exception.CoupException;
 import project.Models.Exception.HeapNumberException;
 import project.Models.Exception.MatchesNumberException;
@@ -27,10 +28,16 @@ public class ControleurJeuNim extends AbstractController {
      * @param ihm the Ihm ( View )
      *            la vue
      */
-    public ControleurJeuNim(AbstractIhm ihm) {
+    public ControleurJeuNim(AbstractIhm ihm, boolean aiPlayer) {
         super.setIhm(ihm);
-        createBoard();
+        if (aiPlayer) {
+            super.createAi(new NimAI(jeu));
+        }
         super.createPlayers();
+        createBoard();
+        if (aiPlayer) {
+            super.setBoardAi(jeu);
+        }
     }
 
     /**
@@ -81,6 +88,11 @@ public class ControleurJeuNim extends AbstractController {
 
     @Override
     void manageMove() {
+        // if the current player is a bot
+        if (!joueurs[playerTurn].isHuman()) {
+            ((NimAI) joueurs[playerTurn]).makeMove();
+            return;
+        }
         // Ask the current player for their move
         // Demander au joueur actuel son coup
         try {

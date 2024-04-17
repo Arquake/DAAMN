@@ -18,18 +18,24 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        System.out.println();
-
         IhmMain ihmMain = new IhmMain();
         String jeu = ihmMain.demanderJeu();
 
+        /**
+         * Methode pour IA ou HUMAIN
+         */
+        boolean bot = true;
+        /**
+         * à implémenter
+         */
+
         if (jeu.equalsIgnoreCase("N")){
             AbstractIhm ihm = new IhmNim();
-            AbstractController controller = new ControleurJeuNim(ihm);
+            AbstractController controller = new ControleurJeuNim(ihm, bot);
             controller.jouer();
         } else {
             AbstractIhm ihm = new IhmPuissance();
-            AbstractController controller = new ControleurPuissanceQuatre(ihm);
+            AbstractController controller = new ControleurPuissanceQuatre(ihm, bot);
             controller.jouer();
         }
     }
