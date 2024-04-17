@@ -21,17 +21,19 @@ public class Main {
         IhmMain ihmMain = new IhmMain();
         String jeu = ihmMain.demanderJeu();
 
-        boolean bot = ihmMain.demanderIA();
+        AbstractController controller;
+
+        boolean bot = ihmMain.askAI();
 
         if (jeu.equalsIgnoreCase("N")){
             AbstractIhm ihm = new IhmNim();
-            AbstractController controller = new ControleurJeuNim(ihm, bot);
-            controller.jouer();
+            controller = new ControleurJeuNim(ihm, bot);
+
         } else {
             AbstractIhm ihm = new IhmPuissance();
-            AbstractController controller = new ControleurPuissanceQuatre(ihm, bot);
-            controller.jouer();
+            controller = new ControleurPuissanceQuatre(ihm, bot);
         }
+        controller.jouer();
     }
 }
 
