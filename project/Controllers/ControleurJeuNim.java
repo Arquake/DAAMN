@@ -28,16 +28,21 @@ public class ControleurJeuNim extends AbstractController {
      * @param ihm the Ihm ( View )
      *            la vue
      */
+
     public ControleurJeuNim(AbstractIhm ihm, boolean aiPlayer) {
         super.setIhm(ihm);
         if (aiPlayer) {
+            // it took me a whole fucking day to find out why this wasnt working, turns out it was because you were using the jeu variable before making it
             super.createAi(new NimAI(jeu));
         }
         super.createPlayers();
         createBoard();
         if (aiPlayer) {
             super.setBoardAi(jeu);
+            //even overhere the jeu variable has still not been completely declared for some fucking reason
+            // DAMN YOU JAVA !!!!!!!!!
         }
+
     }
 
     /**
@@ -90,6 +95,8 @@ public class ControleurJeuNim extends AbstractController {
     void manageMove() {
         // if the current player is a bot
         if (!joueurs[playerTurn].isHuman()) {
+            //ended up setting the jeu over here to make sure it would actually fucking work
+            ((NimAI) joueurs[playerTurn]).setBoard(jeu);
             ((NimAI) joueurs[playerTurn]).makeMove();
             return;
         }
