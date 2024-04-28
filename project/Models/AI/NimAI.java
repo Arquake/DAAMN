@@ -7,6 +7,10 @@ import project.Models.Exception.MatchesNumberException;
 import project.Models.Exception.NotEnoughMatchesException;
 import project.Models.PlateauNim;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 public class NimAI extends AbstractAI {
 
     /**
@@ -18,8 +22,11 @@ public class NimAI extends AbstractAI {
         super(jeu);
     }
 
-    @Override
-    public void makeMove() {
+    /**
+     * method to get the winning strategy for the AI
+     * @return winning strategy
+     */
+    public int[] getStrategieGagnante(){
         System.out.println("AI is playing");
         int[] plateau= ((PlateauNim)jeu).getPlateau();
         int resultatXOR = 0;
@@ -33,7 +40,9 @@ public class NimAI extends AbstractAI {
                 if (plateau[i] >0){
                     coup[0] = i+1;
                     coup[1] = 1;
-                    break;
+
+                    return coup;
+
                 }
             }
         } else {
@@ -42,10 +51,52 @@ public class NimAI extends AbstractAI {
                 if (resultat < plateau[i]){
                     coup[0] = i+1;
                     coup[1] = plateau[i] - resultat;
-                    break;
+                    return coup;
+
                 }
             }
         }
+        return new int[] { -1, -1 }; // this should never happen
+        // feel free to test it out and find bugs in it idc
+    }
+
+    public int[] getStrategieAleatoire(){
+        int[] plateau= ((PlateauNim)jeu).getPlateau();
+        int maxMatches = ((PlateauNim)jeu).getMaxMatches();
+        ArrayList<int[]> possibleMoves = new ArrayList<>();
+        for (int i= 0; i< plateau.length; i++){
+            if (plateau[i] > 0){
+                for (int j = 1; j <= plateau[i] && j<= maxMatches; j++){
+                    possibleMoves.add(new int[]{i+1,j});
+                }
+
+            }
+        }
+        Random random = new Random(); // Create a Random object
+        int randomIndex = random.nextInt(possibleMoves.size());
+        int [] coup = possibleMoves.get(randomIndex); // I know coup is redundant, but it's good for readability
+        /**
+         * to test out if the possible moves are correct
+        for (int[] move : possibleMoves) {
+            System.out.println(Arrays.toString(move));
+        }
+        */
+        return coup;
+
+    }
+
+
+
+    @Override
+    public void makeMove() {
+        int[] coup = new int[]{1,1};
+        if ( !((PlateauNim)jeu).hasConstraints()){
+            coup = getStrategieGagnante();
+        }
+        else {
+            coup = getStrategieAleatoire();
+        }
+
         try {
             ((PlateauNim)jeu).jouerCoup(coup);
         } catch (HeapNumberException | MatchesNumberException | CoupException | NotEnoughMatchesException e) {

@@ -111,4 +111,7 @@ public class PlateauNim extends AbstractPlateau {
     public boolean hasConstraints() {
         return maxMatches > 0;
     }
+    public int getMaxMatches() {
+        return maxMatches;
+    }
 }
