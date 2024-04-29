@@ -32,14 +32,14 @@ public class ControleurJeuNim extends AbstractController {
     public ControleurJeuNim(AbstractIhm ihm, boolean aiPlayer) {
         super.setIhm(ihm);
         if (aiPlayer) {
-            // it took me a whole fucking day to find out why this wasnt working, turns out it was because you were using the jeu variable before making it
+            // it took me a whole fucking day to find out why this wasn't working, turns out it was because you were using the jeu variable before making it
             super.createAi(new NimAI(jeu));
         }
         super.createPlayers();
         createBoard();
         if (aiPlayer) {
             super.setBoardAi(jeu);
-            //even overhere the jeu variable has still not been completely declared for some fucking reason
+            // even over here the jeu variable has still not been completely declared for some fucking reason
             // DAMN YOU JAVA !!!!!!!!!
         }
 

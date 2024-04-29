@@ -16,7 +16,7 @@ public class NimAI extends AbstractAI {
     /**
      * instantiate the AI
      *
-     * @param jeu
+     * @param jeu board of the game
      */
     public NimAI(AbstractPlateau jeu) {
         super(jeu);
@@ -27,14 +27,12 @@ public class NimAI extends AbstractAI {
      * @return winning strategy
      */
     public int[] getStrategieGagnante(){
-        System.out.println("AI is playing");
         int[] plateau= ((PlateauNim)jeu).getPlateau();
         int resultatXOR = 0;
-        int[] coup = new int[]{0,0};
-        for (int i= 0; i< plateau.length; i++){
-            resultatXOR = resultatXOR ^ plateau[i];
+        int[] coup = new int[2];
+        for (int j : plateau) {
+            resultatXOR = resultatXOR ^ j;
         }
-        System.out.println("resultatXOR = " + resultatXOR);
         if (resultatXOR == 0){
             for (int i= 0; i< plateau.length; i++){
                 if (plateau[i] >0){
@@ -89,7 +87,7 @@ public class NimAI extends AbstractAI {
 
     @Override
     public void makeMove() {
-        int[] coup = new int[]{1,1};
+        int[] coup = new int[2];
         if ( !((PlateauNim)jeu).hasConstraints()){
             coup = getStrategieGagnante();
         }
@@ -102,7 +100,6 @@ public class NimAI extends AbstractAI {
         } catch (HeapNumberException | MatchesNumberException | CoupException | NotEnoughMatchesException e) {
             throw new RuntimeException(e);
         }
-        return;
     }
 
 }
