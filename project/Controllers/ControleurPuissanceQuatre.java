@@ -77,6 +77,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
         // if the current player is a bot
         if (!joueurs[playerTurn].isHuman()) {
             ((PuissanceAI) joueurs[playerTurn]).makeMove();
+            System.out.println("IA joue");
             return;
         }
         // Ask the current player for their move

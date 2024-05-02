@@ -299,5 +299,19 @@ public class PlateauPuissance extends AbstractPlateau {
             } else { throw new NombreRotationMaximumAtteintException(); }
         } else { throw new RotationInactiveException(); }
     }
+
+
+    //IA
+    public boolean rotationActive(){
+        return isRotationActive;
+    }
+
+    public int[][] getTerrain() {
+        return terrain;
+    }
+
+    public void setTerrain(int[][] terrain) {
+        this.terrain = terrain;
+    }
 }
 

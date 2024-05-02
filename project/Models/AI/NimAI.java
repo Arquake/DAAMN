@@ -87,7 +87,7 @@ public class NimAI extends AbstractAI {
 
     @Override
     public void makeMove() {
-        int[] coup = new int[2];
+        int[] coup;
         if ( !((PlateauNim)jeu).hasConstraints()){
             coup = getStrategieGagnante();
         }
