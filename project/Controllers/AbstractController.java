@@ -116,19 +116,40 @@ public abstract class AbstractController {
         }
     }
 
+    /**
+     * method to create an ai
+     * @param ai the ai to create
+     */
     void createAi(AbstractAI ai){
         containsAiPlayer = true;
         this.joueurs[1] = ai;
     }
 
+    /**
+     * set the board to the ai
+     */
     void setBoardAi(){
         ((AbstractAI)this.joueurs[1]).setBoard(jeu);
     }
 
+    /**
+     * method to create the game board
+     */
     abstract void createBoard();
 
+
+    /**
+     * method to create an ai
+     * @return the ai created
+     */
     abstract AbstractAI createAI();
 
+
+    /**
+     * method to initialize the board with the players
+     * @param ihm the game ihm
+     * @param aiPlayer the boolean to indicate if there is an ai player
+     */
     protected void boardInit(AbstractIhm ihm, boolean aiPlayer){
         setIhm(ihm);
         if (aiPlayer) {
