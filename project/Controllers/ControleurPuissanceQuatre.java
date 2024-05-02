@@ -25,7 +25,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
      * @param ihm the Ihm ( View )
      */
     public ControleurPuissanceQuatre(AbstractIhm ihm, boolean aiPlayer) {
-        boardInit( ihm, aiPlayer, jeu);
+        boardInit( ihm, aiPlayer);
     }
 
 

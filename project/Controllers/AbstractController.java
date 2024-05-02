@@ -8,6 +8,7 @@ import project.Views.AbstractIhm;
 
 public abstract class AbstractController {
 
+    AbstractPlateau jeu;
     /**
      * if at least one player is an AI
      */
@@ -70,7 +71,7 @@ public abstract class AbstractController {
      * method to set an ihm for the game
      * @param ihm the ihm that will be used
      */
-    protected void setIhm(AbstractIhm ihm){this.ihm = ihm;};
+    protected void setIhm(AbstractIhm ihm){this.ihm = ihm;}
 
     /**
      * get the ihm that have been created
@@ -120,7 +121,7 @@ public abstract class AbstractController {
         this.joueurs[1] = ai;
     }
 
-    void setBoardAi(AbstractPlateau jeu){
+    void setBoardAi(){
         ((AbstractAI)this.joueurs[1]).setBoard(jeu);
     }
 
@@ -128,7 +129,7 @@ public abstract class AbstractController {
 
     abstract AbstractAI createAI();
 
-    protected void boardInit(AbstractIhm ihm, boolean aiPlayer, AbstractPlateau jeu){
+    protected void boardInit(AbstractIhm ihm, boolean aiPlayer){
         setIhm(ihm);
         if (aiPlayer) {
             createAi(createAI());
@@ -136,7 +137,7 @@ public abstract class AbstractController {
         createPlayers();
         createBoard();
         if (aiPlayer) {
-            setBoardAi(jeu);
+            setBoardAi();
         }
     }
 }

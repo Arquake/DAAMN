@@ -2,7 +2,6 @@ package project.Controllers;
 
 import project.Models.AI.AbstractAI;
 import project.Models.AI.NimAI;
-import project.Models.AbstractPlateau;
 import project.Models.Exception.CoupException;
 import project.Models.Exception.HeapNumberException;
 import project.Models.Exception.MatchesNumberException;
@@ -32,7 +31,7 @@ public class ControleurJeuNim extends AbstractController {
      */
 
     public ControleurJeuNim(AbstractIhm ihm, boolean aiPlayer) {
-        boardInit( ihm, aiPlayer, jeu);
+        boardInit( ihm, aiPlayer);
     }
 
     /**
