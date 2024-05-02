@@ -8,7 +8,6 @@ import project.Models.Exception.NotEnoughMatchesException;
 import project.Models.PlateauNim;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class NimAI extends AbstractAI {
