@@ -20,7 +20,6 @@ public class PuissanceAI extends AbstractAI {
      */
     public PuissanceAI(AbstractPlateau jeu) {
         super(jeu);
-        System.out.println(jeu); //todo
     }
 
     @Override
@@ -101,7 +100,6 @@ public class PuissanceAI extends AbstractAI {
 
                     if (gagnerParRotation(isRotationActive,copie) != 1){
                         ((PlateauPuissance) jeu).jouerCoup(new int[]{coup, 2});
-                        System.out.println("==JEU==\n"+jeu);//TODO
                         return;
                     }
                 }
@@ -311,5 +309,7 @@ public class PuissanceAI extends AbstractAI {
         return copie;
     }
 
-
+    public void setBoard(AbstractPlateau jeu){
+        super.setBoard(jeu);
+    }
 }
