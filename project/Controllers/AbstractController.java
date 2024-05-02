@@ -123,4 +123,20 @@ public abstract class AbstractController {
     void setBoardAi(AbstractPlateau jeu){
         ((AbstractAI)this.joueurs[1]).setBoard(jeu);
     }
+
+    abstract void createBoard();
+
+    abstract AbstractAI createAI();
+
+    protected void boardInit(AbstractIhm ihm, boolean aiPlayer, AbstractPlateau jeu){
+        setIhm(ihm);
+        if (aiPlayer) {
+            createAi(createAI());
+        }
+        createPlayers();
+        createBoard();
+        if (aiPlayer) {
+            setBoardAi(jeu);
+        }
+    }
 }

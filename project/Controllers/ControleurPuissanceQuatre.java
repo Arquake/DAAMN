@@ -1,6 +1,7 @@
 package project.Controllers;
 
 
+import project.Models.AI.AbstractAI;
 import project.Models.AI.PuissanceAI;
 import project.Models.Exception.InvalidColumException;
 import project.Models.Exception.NombreRotationMaximumAtteintException;
@@ -24,15 +25,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
      * @param ihm the Ihm ( View )
      */
     public ControleurPuissanceQuatre(AbstractIhm ihm, boolean aiPlayer) {
-        super.setIhm(ihm);
-        if (aiPlayer) {
-            super.createAi(new PuissanceAI(jeu));
-        }
-        super.createPlayers();
-        jeu = new PlateauPuissance();
-        if (aiPlayer) {
-            super.setBoardAi(jeu);
-        }
+        boardInit( ihm, aiPlayer, jeu);
     }
 
 
@@ -96,5 +89,15 @@ public class ControleurPuissanceQuatre extends AbstractController {
             ihm.afficherErreur(e.getMessage());
             validLastMove = false;
         }
+    }
+
+    @Override
+    void createBoard() {
+        jeu = new PlateauPuissance();
+    }
+
+    @Override
+    AbstractAI createAI() {
+        return new PuissanceAI(jeu);
     }
 }

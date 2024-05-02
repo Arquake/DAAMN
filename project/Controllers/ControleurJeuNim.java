@@ -1,6 +1,8 @@
 package project.Controllers;
 
+import project.Models.AI.AbstractAI;
 import project.Models.AI.NimAI;
+import project.Models.AbstractPlateau;
 import project.Models.Exception.CoupException;
 import project.Models.Exception.HeapNumberException;
 import project.Models.Exception.MatchesNumberException;
@@ -30,19 +32,7 @@ public class ControleurJeuNim extends AbstractController {
      */
 
     public ControleurJeuNim(AbstractIhm ihm, boolean aiPlayer) {
-        super.setIhm(ihm);
-        if (aiPlayer) {
-            // it took me a whole fucking day to find out why this wasn't working, turns out it was because you were using the jeu variable before making it
-            super.createAi(new NimAI(jeu));
-        }
-        super.createPlayers();
-        createBoard();
-        if (aiPlayer) {
-            super.setBoardAi(jeu);
-            // even over here the jeu variable has still not been completely declared for some fucking reason
-            // DAMN YOU JAVA !!!!!!!!!
-        }
-
+        boardInit( ihm, aiPlayer, jeu);
     }
 
     /**
@@ -55,11 +45,16 @@ public class ControleurJeuNim extends AbstractController {
      * if invalid then it calls the ihm again to show the error message
      * si invalide, il appelle à nouveau l'ihm pour afficher le message d'erreur
      */
-    private void createBoard(){
+    void createBoard(){
         do {
             this.numberOfHeap = ((IhmNim) super.getIhm()).creerJeu();
         } while (this.numberOfHeap < 1); // if numberOfHeap < 1 we can't create a heap out of it
             // si numberOfHeap < 1, nous ne pouvons pas en créer un tas
+    }
+
+    @Override
+    AbstractAI createAI() {
+        return new NimAI(jeu);
     }
 
 
