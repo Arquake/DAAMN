@@ -50,7 +50,6 @@ public abstract class AbstractIhm {
             if (res.equalsIgnoreCase("y") || res.equalsIgnoreCase("n")){
                 return res.equalsIgnoreCase("y");
             } else {
-
                 System.out.println("Rejouer ? (Y/N)");
             }
         }

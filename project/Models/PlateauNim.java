@@ -11,7 +11,7 @@ public class PlateauNim extends AbstractPlateau {
      * Tableau d'entier contenant le nombre d'allumette dans chaque tas
      */
     private final int[] jeu;
-    private int maxMatches = 0;
+    private final int maxMatches;
 
     /**
      * makes the actual plateau
@@ -82,7 +82,7 @@ public class PlateauNim extends AbstractPlateau {
 
         for (int i = 0; i < gameLength; i++) {
             res.append(
-                    Integer.toString(i + 1)).append("\t:\t"
+                    i + 1).append("\t:\t"
             ).append(
                     "\t".repeat(this.jeu.length - i)
             ).append(
@@ -105,12 +105,28 @@ public class PlateauNim extends AbstractPlateau {
         return true;
     }
 
+    /**
+     * return the board
+     * @return the game board
+     */
     public int[] getPlateau() {
         return jeu;
     }
+
+
+    /**
+     * return if the game have constraints
+     * @return true if there is constraints | false otherwise
+     */
     public boolean hasConstraints() {
         return maxMatches > 0;
     }
+
+
+    /**
+     * return the maximum number of matches
+     * @return the max number of matches
+     */
     public int getMaxMatches() {
         return maxMatches;
     }

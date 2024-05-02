@@ -28,28 +28,20 @@ public class NimAI extends AbstractAI {
     public int[] getStrategieGagnante(){
         int[] plateau= ((PlateauNim)jeu).getPlateau();
         int resultatXOR = 0;
-        int[] coup = new int[2];
         for (int j : plateau) {
             resultatXOR = resultatXOR ^ j;
         }
         if (resultatXOR == 0){
             for (int i= 0; i< plateau.length; i++){
-                if (plateau[i] >0){
-                    coup[0] = i+1;
-                    coup[1] = 1;
-
-                    return coup;
-
+                if (plateau[i] > 0){
+                    return new int[]{i+1,1};
                 }
             }
         } else {
             for (int i= 0; i< plateau.length; i++){
                 int resultat = plateau[i] ^ resultatXOR;
                 if (resultat < plateau[i]){
-                    coup[0] = i+1;
-                    coup[1] = plateau[i] - resultat;
-                    return coup;
-
+                    return new int[]{i+1,plateau[i] - resultat};
                 }
             }
         }
@@ -69,17 +61,9 @@ public class NimAI extends AbstractAI {
 
             }
         }
-        Random random = new Random(); // Create a Random object
+        Random random = new Random();
         int randomIndex = random.nextInt(possibleMoves.size());
-        int [] coup = possibleMoves.get(randomIndex); // I know coup is redundant, but it's good for readability
-        /**
-         * to test out if the possible moves are correct
-        for (int[] move : possibleMoves) {
-            System.out.println(Arrays.toString(move));
-        }
-        */
-        return coup;
-
+        return possibleMoves.get(randomIndex);
     }
 
 
