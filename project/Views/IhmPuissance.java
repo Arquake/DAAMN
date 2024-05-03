@@ -59,4 +59,12 @@ public class IhmPuissance extends AbstractIhm {
     public void noWinBoardFull(String jeu){
         System.out.println(jeu + "\n\u001B[43m" + "\u001B[30m " + "La grille est complête et personne n'a aligné 4 jetons ! C'est un match nul. \u001B[0m");
     }
+
+    /**
+     * Affiche le coup joué par l'IA
+     * @param coup Coup joué par l'ia.
+     */
+    public void coupIa (int coup){
+        System.out.println("L'IA a joué en "+(coup+1)+".");
+    }
 }

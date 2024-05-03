@@ -235,7 +235,6 @@ public class PlateauPuissance extends AbstractPlateau {
                         if (terrain[i-1][colonne] != 0){
                             ligneActuelle=terrain.length;
                         }
-                        //System.out.println(terrain[i][colonne] + " devient " + terrain[i-1][colonne] + " || i=" + i +" colonne : " + colonne);
                     }
 
                     terrain[0][colonne] = 0; //set la case de la premiere ligne de la colonne traitée a 0 ("on remonte le zero jusqu'en haut")

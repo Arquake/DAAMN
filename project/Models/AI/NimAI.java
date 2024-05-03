@@ -69,7 +69,7 @@ public class NimAI extends AbstractAI {
 
 
     @Override
-    public void makeMove() {
+    public int[] makeMove() {
         int[] coup;
         if ( !((PlateauNim)jeu).hasConstraints()){
             coup = getStrategieGagnante();
@@ -83,6 +83,7 @@ public class NimAI extends AbstractAI {
         } catch (HeapNumberException | MatchesNumberException | CoupException | NotEnoughMatchesException e) {
             throw new RuntimeException(e);
         }
+        return coup;
     }
 
 }

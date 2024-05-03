@@ -22,8 +22,10 @@ public abstract class AbstractAI extends AbstractPlayer {
 
     /**
      * method to implement to make a move for the AI
+     *
+     * @return coup joué
      */
-    public abstract void makeMove();
+    public abstract int[] makeMove();
 
     public void setBoard(AbstractPlateau jeu){
         this.jeu = jeu;
