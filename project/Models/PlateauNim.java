@@ -122,7 +122,6 @@ public class PlateauNim extends AbstractPlateau {
         return maxMatches > 0;
     }
 
-
     /**
      * return the maximum number of matches
      * @return the max number of matches

@@ -78,11 +78,6 @@ public class NimAI extends AbstractAI {
             coup = getStrategieAleatoire();
         }
 
-        try {
-            ((PlateauNim)jeu).jouerCoup(coup);
-        } catch (HeapNumberException | MatchesNumberException | CoupException | NotEnoughMatchesException e) {
-            throw new RuntimeException(e);
-        }
         return coup;
     }
 

@@ -86,18 +86,21 @@ public class ControleurJeuNim extends AbstractController {
 
     @Override
     void manageMove() {
+        int[] coup;
         // if the current player is a bot
         if (!joueurs[playerTurn].isHuman()) {
             //ended up setting the jeu over here to make sure it would actually fucking work
             ((NimAI) joueurs[playerTurn]).setBoard(jeu);
-            ((NimAI) joueurs[playerTurn]).makeMove();
-            return;
+            coup= ((NimAI) joueurs[playerTurn]).makeMove();
+            ((IhmNim) super.getIhm()).afficherCoupIA(coup);
+
+        }else{
+            ihm.afficherPlateau(jeu.toString());
+            coup = ((IhmNim) super.getIhm()).demanderCoup(joueurs[playerTurn].getNom());
         }
         // Ask the current player for their move
         // Demander au joueur actuel son coup
         try {
-            ihm.afficherPlateau(jeu.toString());
-            int[] coup = ((IhmNim) super.getIhm()).demanderCoup(joueurs[playerTurn].getNom());
             jeu.jouerCoup(coup);
             validLastMove = true;
         } catch (HeapNumberException e) {
