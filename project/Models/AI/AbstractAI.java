@@ -8,7 +8,7 @@ public abstract class AbstractAI extends AbstractPlayer {
     AbstractPlateau jeu;
     /**
      * instantiate the AI
-     * @param jeu
+     * @param jeu the board to set the ai to
      */
     public AbstractAI(AbstractPlateau jeu) {
         super("AI");
