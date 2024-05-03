@@ -65,6 +65,10 @@ public class IhmPuissance extends AbstractIhm {
      * @param coup Coup joué par l'ia.
      */
     public void coupIa (int coup){
-        System.out.println("L'IA a joué en "+(coup+1)+".");
+        if (coup == -1){
+            System.out.println("L'IA a efféctué une rotation.");
+        } else {
+            System.out.println("L'IA a joué en "+(coup+1)+".");
+        }
     }
 }
