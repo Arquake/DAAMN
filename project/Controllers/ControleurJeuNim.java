@@ -91,6 +91,7 @@ public class ControleurJeuNim extends AbstractController {
         if (!joueurs[playerTurn].isHuman()) {
             //ended up setting the jeu over here to make sure it would actually fucking work
             ((NimAI) joueurs[playerTurn]).setBoard(jeu);
+            ihm.afficherPlateau(jeu.toString());
             coup= ((NimAI) joueurs[playerTurn]).makeMove();
             ((IhmNim) super.getIhm()).afficherCoupIA(coup);
 
