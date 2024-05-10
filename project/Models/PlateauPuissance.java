@@ -28,6 +28,7 @@ public class PlateauPuissance extends AbstractPlateau {
      * Stock le nombre de rotation restante a chaque joueur.
      */
     HashMap<AbstractPlayer,Integer> nbRestantDeRotation = new HashMap<>();
+    int[] nbRestantRotation = new int[2];
 
     /**
      * @return the power 4 grid with pieces in it
@@ -250,7 +251,7 @@ public class PlateauPuissance extends AbstractPlateau {
      */
     public void setNombreRotation(AbstractPlayer[] joueurs) {
         for (AbstractPlayer joueur : joueurs){
-            nbRestantDeRotation.put(joueur,4);
+            nbRestantRotation = new int[]{4,4};
         }
     }
 
@@ -288,29 +289,48 @@ public class PlateauPuissance extends AbstractPlateau {
 
     private void makeRotation(boolean isClockwiseRotation, AbstractPlayer[] joueurs, int playerTurn) throws NombreRotationMaximumAtteintException, RotationInactiveException {
         if (isRotationActive) {
-            if (nbRestantDeRotation.get(joueurs[playerTurn]) > 0) {
+            if (nbRestantRotation[playerTurn-1] > 0) {
                 if (isClockwiseRotation) {
                     tournerSensHoraire();
                 } else {
                     tournerSensAntiHoraire();
                 }
-                nbRestantDeRotation.replace(joueurs[playerTurn], nbRestantDeRotation.get(joueurs[playerTurn]) - 1);
+                nbRestantRotation[playerTurn-1] = nbRestantRotation[playerTurn-1] - 1;
             } else { throw new NombreRotationMaximumAtteintException(); }
         } else { throw new RotationInactiveException(); }
     }
 
 
     //IA
+
+    /**
+     * Donne l'information sur la rotation
+     * @return true si la rotation est active, false sinon
+     */
     public boolean rotationActive(){
         return isRotationActive;
     }
 
+    /**
+     * Recupere le terrain
+     * @return le terrain sur lequel on joue
+     */
     public int[][] getTerrain() {
         return terrain;
     }
 
+    /**
+     * Remplace le terrain actuel par un autre
+     * @param terrain Le nouveau terrain
+     */
     public void setTerrain(int[][] terrain) {
         this.terrain = terrain;
     }
+
+    /**
+     * Recupere le nombre de rotation
+     * @return un tableau contenant le nombre de rotation restantes par joueurs.
+     */
+    public int[] getNbRestantRotation() { return nbRestantRotation; }
 }
 

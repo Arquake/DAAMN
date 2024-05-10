@@ -29,7 +29,7 @@ public class PuissanceAI extends AbstractAI {
         PlateauPuissance plateauPuissance = (PlateauPuissance) jeu;
         boolean isRotationActive = plateauPuissance.rotationActive();
 
-        if (gagnerParRotation(isRotationActive,plateauPuissance)==2) return new int[]{-1};
+        if ((gagnerParRotation(isRotationActive,plateauPuissance)==2) && (plateauPuissance.getNbRestantRotation()[1] > 0)) return new int[]{-1};
 
         int[][] terrain = plateauPuissance.getTerrain();
         List<Integer> listeCoupPossible = new ArrayList<>();
@@ -76,7 +76,7 @@ public class PuissanceAI extends AbstractAI {
                     if (i != 7){
                         copie.jouerCoup(new int[]{coup,2});
 
-                        if (gagnerParRotation(isRotationActive,copie) != 1){
+                        if ((gagnerParRotation(isRotationActive,copie, ) != 1)){
                             ((PlateauPuissance) jeu).jouerCoup(new int[]{coup, 2});
                             return new int[]{coup};
                         }
@@ -123,26 +123,26 @@ public class PuissanceAI extends AbstractAI {
      * @param terrain Le terrain a verifié
      * @return Le numero du gagnant s'il existe, 0 sinon
      */
-    private int gagnerParRotation(boolean isRotationActive, PlateauPuissance terrain){
+    private int gagnerParRotation(boolean isRotationActive, PlateauPuissance terrain, int[] rotationRestantes){
         if ( isRotationActive ){
             PlateauPuissance copie = creerCopieTerrain(terrain);
             copie.tournerSensHoraire();
             int res = copie.checkWin();
 
-            if (res == 2){
+            if (res == 2 && rotationRestantes[1] > 0){
                 terrain.tournerSensHoraire();
                 return 2;
-            } else if (res==1){
+            } else if (res==1 && rotationRestantes[0] > 0){
                 return 1;
             }
             copie = creerCopieTerrain(terrain);
             copie.tournerSensHoraire();
             res = copie.checkWin();
 
-            if (res == 2){
+            if (res == 2 && rotationRestantes[1] > 0){
                 terrain.tournerSensAntiHoraire();
                 return 2;
-            } else if (res == 1) {
+            } else if (res == 1 && rotationRestantes[0] > 0) {
                 return 1;
             }
         }

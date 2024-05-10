@@ -103,16 +103,7 @@ public class ControleurJeuNim extends AbstractController {
         try {
             jeu.jouerCoup(coup);
             validLastMove = true;
-        } catch (HeapNumberException e) {
-            ihm.afficherErreur(e.getMessage());
-            validLastMove = false;
-        } catch (CoupException e) {
-            ihm.afficherErreur(e.getMessage());
-            validLastMove = false;
-        } catch (MatchesNumberException e) {
-            ihm.afficherErreur(e.getMessage());
-            validLastMove = false;
-        } catch (NotEnoughMatchesException e) {
+        } catch (HeapNumberException | NotEnoughMatchesException | MatchesNumberException | CoupException e) {
             ihm.afficherErreur(e.getMessage());
             validLastMove = false;
         }
