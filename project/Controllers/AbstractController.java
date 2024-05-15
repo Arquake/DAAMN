@@ -142,7 +142,7 @@ public abstract class AbstractController {
      * method to create an ai
      * @return the ai created
      */
-    abstract AbstractAI createAI();
+    abstract AbstractAI getAIType();
 
 
     /**
@@ -153,7 +153,7 @@ public abstract class AbstractController {
     protected void boardInit(AbstractIhm ihm, boolean aiPlayer){
         setIhm(ihm);
         if (aiPlayer) {
-            createAi(createAI());
+            createAi(getAIType());
         }
         createPlayers();
         createBoard();

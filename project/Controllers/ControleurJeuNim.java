@@ -51,7 +51,7 @@ public class ControleurJeuNim extends AbstractController {
     }
 
     @Override
-    AbstractAI createAI() {
+    AbstractAI getAIType() {
         return new NimAI(jeu);
     }
 

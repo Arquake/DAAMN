@@ -44,7 +44,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
             useRotations = false;
         }
         if (super.getContainsAiPlayer()){
-            super.createAi(createAI());
+            super.createAi(getAIType());
             System.out.println("IA CREER : " + useRotations);
         }
 
@@ -117,7 +117,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
     }
 
     @Override
-    AbstractAI createAI() {
+    AbstractAI getAIType() {
         if (useRotations) {
             return new OptiPuissanceAI(jeu);
         }
