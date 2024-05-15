@@ -3,6 +3,7 @@ package project;
 import project.Controllers.AbstractController;
 import project.Controllers.ControleurJeuNim;
 import project.Controllers.ControleurPuissanceQuatre;
+import project.Models.PlateauPuissance;
 import project.Views.AbstractIhm;
 import project.Views.IhmMain;
 import project.Views.IhmNim;

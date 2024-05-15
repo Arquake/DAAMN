@@ -17,7 +17,7 @@ import project.Views.IhmPuissance;
  */
 public class ControleurPuissanceQuatre extends AbstractController {
 
-    private PlateauPuissance jeu;
+    public PlateauPuissance jeu;
 
     private boolean useRotations;
 
@@ -45,7 +45,6 @@ public class ControleurPuissanceQuatre extends AbstractController {
         }
         if (super.getContainsAiPlayer()){
             super.createAi(getAIType());
-            System.out.println("IA CREER : " + useRotations);
         }
 
         ihm.afficherPlateau(jeu.toString());
@@ -56,9 +55,9 @@ public class ControleurPuissanceQuatre extends AbstractController {
     void handleWin() {
         if (jeu.checkWin() != -1) {
             joueurs[playerTurn].increaseScore();
-            ((IhmPuissance) super.getIhm()).victory(joueurs[playerTurn].getNom(), jeu.toString());
-            running = false;
             ihm.afficherPlateau(jeu.toString());
+            (super.getIhm()).victory(joueurs[playerTurn].getNom());
+            running = false;
         }
         else if (jeu.boardCompleted()) {
             ((IhmPuissance) super.getIhm()).noWinBoardFull(jeu.toString());
