@@ -23,7 +23,7 @@ public class NimAI extends AbstractAI {
 
     /**
      * method to get the winning strategy for the AI
-     * @return winning strategy
+     * @return int[] winning strategy
      */
     public int[] getStrategieGagnante(){
         int[] plateau= ((PlateauNim)jeu).getPlateau();
@@ -49,6 +49,11 @@ public class NimAI extends AbstractAI {
         // feel free to test it out and find bugs in it idc
     }
 
+    /**
+     * method to get a random strategy for the AI
+     * @return int[] random strategy
+     */
+
     public int[] getStrategieAleatoire(){
         int[] plateau= ((PlateauNim)jeu).getPlateau();
         int maxMatches = ((PlateauNim)jeu).getMaxMatches();
@@ -68,6 +73,10 @@ public class NimAI extends AbstractAI {
 
 
 
+    /**
+     * checks which strategy to use
+     * @return int[] move
+     */
     @Override
     public int[] makeMove() {
         int[] coup;
