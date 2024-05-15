@@ -2,6 +2,7 @@ package project.Controllers;
 
 
 import project.Models.AI.AbstractAI;
+import project.Models.AI.OptiPuissanceAI;
 import project.Models.AI.SimplePuissanceAI;
 import project.Models.Exception.InvalidColumException;
 import project.Models.Exception.NombreRotationMaximumAtteintException;
@@ -17,6 +18,8 @@ import project.Views.IhmPuissance;
 public class ControleurPuissanceQuatre extends AbstractController {
 
     private PlateauPuissance jeu;
+
+    private boolean useRotations;
 
 
     /**
@@ -34,7 +37,17 @@ public class ControleurPuissanceQuatre extends AbstractController {
         jeu = new PlateauPuissance();
         String rotation = ((IhmPuissance) super.getIhm()).demanderRotation();
         jeu.setRotationActive(rotation.equalsIgnoreCase("Y"));
-        if (rotation.equalsIgnoreCase("Y")) {jeu.setNombreRotation(joueurs);}
+        if (rotation.equalsIgnoreCase("Y")) {
+            jeu.setNombreRotation(joueurs);
+            useRotations = true;
+        } else {
+            useRotations = false;
+        }
+        if (super.getContainsAiPlayer()){
+            super.createAi(createAI());
+            System.out.println("IA CREER : " + useRotations);
+        }
+
         ihm.afficherPlateau(jeu.toString());
     }
 
@@ -69,8 +82,15 @@ public class ControleurPuissanceQuatre extends AbstractController {
     void manageMove() {
         // if the current player is a bot
         if (!joueurs[playerTurn].isHuman()) {
-            ((SimplePuissanceAI) joueurs[playerTurn]).setBoard(jeu);
-            int[] coup = ((SimplePuissanceAI) joueurs[playerTurn]).makeMove();
+            int[] coup;
+            if (useRotations) {
+                ((OptiPuissanceAI) joueurs[playerTurn]).setBoard(jeu);
+                coup = ((OptiPuissanceAI) joueurs[playerTurn]).makeMove();
+            } else {
+                ((SimplePuissanceAI) joueurs[playerTurn]).setBoard(jeu);
+                coup = ((SimplePuissanceAI) joueurs[playerTurn]).makeMove();
+            }
+
             ((IhmPuissance)ihm).coupIa(coup[0]);
             return;
         }
@@ -98,6 +118,9 @@ public class ControleurPuissanceQuatre extends AbstractController {
 
     @Override
     AbstractAI createAI() {
+        if (useRotations) {
+            return new OptiPuissanceAI(jeu);
+        }
         return new SimplePuissanceAI(jeu);
     }
 }

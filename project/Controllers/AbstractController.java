@@ -128,7 +128,7 @@ public abstract class AbstractController {
     /**
      * set the board to the ai
      */
-    void setBoardAi(){
+    protected void setBoardAi(){
         ((AbstractAI)this.joueurs[1]).setBoard(jeu);
     }
 
@@ -160,5 +160,9 @@ public abstract class AbstractController {
         if (aiPlayer) {
             setBoardAi();
         }
+    }
+
+    public boolean getContainsAiPlayer() {
+        return containsAiPlayer;
     }
 }
