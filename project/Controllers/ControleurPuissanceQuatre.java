@@ -2,7 +2,7 @@ package project.Controllers;
 
 
 import project.Models.AI.AbstractAI;
-import project.Models.AI.PuissanceAI;
+import project.Models.AI.SimplePuissanceAI;
 import project.Models.Exception.InvalidColumException;
 import project.Models.Exception.NombreRotationMaximumAtteintException;
 import project.Models.Exception.RotationInactiveException;
@@ -69,8 +69,8 @@ public class ControleurPuissanceQuatre extends AbstractController {
     void manageMove() {
         // if the current player is a bot
         if (!joueurs[playerTurn].isHuman()) {
-            ((PuissanceAI) joueurs[playerTurn]).setBoard(jeu);
-            int[] coup = ((PuissanceAI) joueurs[playerTurn]).makeMove();
+            ((SimplePuissanceAI) joueurs[playerTurn]).setBoard(jeu);
+            int[] coup = ((SimplePuissanceAI) joueurs[playerTurn]).makeMove();
             ((IhmPuissance)ihm).coupIa(coup[0]);
             return;
         }
@@ -98,6 +98,6 @@ public class ControleurPuissanceQuatre extends AbstractController {
 
     @Override
     AbstractAI createAI() {
-        return new PuissanceAI(jeu);
+        return new SimplePuissanceAI(jeu);
     }
 }

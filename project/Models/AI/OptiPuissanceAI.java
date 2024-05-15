@@ -9,14 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PuissanceAI extends AbstractAI {
+public class OptiPuissanceAI extends AbstractPuissaceAI {
 
 
     /**
      * Instantie l'IA
      * @param jeu le plateau sur lequel l'ia joue
      */
-    public PuissanceAI(AbstractPlateau jeu) {
+    public OptiPuissanceAI(AbstractPlateau jeu) {
         super(jeu);
     }
 
@@ -76,7 +76,7 @@ public class PuissanceAI extends AbstractAI {
                     if (i != 7){
                         copie.jouerCoup(new int[]{coup,2});
 
-                        if ((gagnerParRotation(isRotationActive,copie, ) != 1)){
+                        if ((gagnerParRotation(isRotationActive,copie) != 1)){
                             ((PlateauPuissance) jeu).jouerCoup(new int[]{coup, 2});
                             return new int[]{coup};
                         }
@@ -103,28 +103,15 @@ public class PuissanceAI extends AbstractAI {
     }
 
     /**
-     * Recupère la ligne sur laquelle arrivera le jeton joué.
-     * @param column Colonne dans laquelle le jeton est joué.
-     * @return Le ligne sur laquelle arrive le jeton.
-     */
-    private int getLigne(int column) {
-        int[][] terrain = ((PlateauPuissance) jeu).getTerrain();
-        for (int ligne = 1; ligne < terrain.length; ligne++) {
-            if (terrain[ligne][column] != 0){
-                return ligne-1;
-            }
-        }
-        return terrain.length-1;
-    }
-
-    /**
      * Test s'il est possible de gagner grace à une rotation.
      * @param isRotationActive True si la rotation est active, false sinon
      * @param terrain Le terrain a verifié
      * @return Le numero du gagnant s'il existe, 0 sinon
      */
-    private int gagnerParRotation(boolean isRotationActive, PlateauPuissance terrain, int[] rotationRestantes){
+    int gagnerParRotation(boolean isRotationActive, PlateauPuissance terrain){
         if ( isRotationActive ){
+            int[] rotationRestantes = terrain.getNbRestantRotation();
+
             PlateauPuissance copie = creerCopieTerrain(terrain);
             copie.tournerSensHoraire();
             int res = copie.checkWin();
@@ -155,7 +142,7 @@ public class PuissanceAI extends AbstractAI {
      * @param ligneCoup Ligne sur laquelle le jeton arrive.
      * @return Le maximum de jeton alignable (plafonné a 4) pour chauqe joueur sous forme d'un tableau. indice 0 pour le joueur, 1 pour l'IA.
      */
-    private int[] nombreAlignable(int columnCoup, int ligneCoup){
+     int[] nombreAlignable(int columnCoup, int ligneCoup){
         int[] column = nombreAlignableColumn(columnCoup,ligneCoup);
         int[] ligne = nombreAlignableLigne(columnCoup,ligneCoup);
         int[] diag = nombreAlignableDiagonal(columnCoup,ligneCoup);
@@ -318,34 +305,5 @@ public class PuissanceAI extends AbstractAI {
             maxParJoueurs[player-1] = Math.min(maxAlignableUnit,4);
         }
         return maxParJoueurs;
-    }
-
-    /**
-     * Creer une copie du terrain.
-     * @param base Le terrain a copier.
-     * @return La copie du terrain.
-     */
-    private PlateauPuissance creerCopieTerrain(PlateauPuissance base){
-        PlateauPuissance copie = new PlateauPuissance();
-
-        int len = base.getTerrain().length;
-
-        int[][] terrainCopie = new int[len][len];
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                terrainCopie[i][j] = base.getTerrain()[i][j];
-            }
-        }
-
-        copie.setTerrain(terrainCopie);
-        return copie;
-    }
-
-    /**
-     * Set le plateau sur lequel l'ia joue.
-     * @param jeu Le plateau en question.
-     */
-    public void setBoard(AbstractPlateau jeu){
-        super.setBoard(jeu);
     }
 }
