@@ -22,11 +22,12 @@ public abstract class AbstractPuissaceAI extends AbstractAI{
     int[] nombreAlignable(int columnCoup, int ligneCoup){
         int[] column = nombreAlignableColumn(columnCoup,ligneCoup);
         int[] ligne = nombreAlignableLigne(columnCoup,ligneCoup);
-        int[] diag = nombreAlignableDiagonal(columnCoup,ligneCoup);
+        int[] diag = nombreAlignableDiagonalBGHD(columnCoup,ligneCoup);
+        int[] diag2 = nombreAlignableDiagonalHGBD(columnCoup,ligneCoup);
 
         int[] max = new int[2]; //[joueur, ia]
-        max[0] = Math.max(Math.max(column[0], ligne[0]),diag[0]);
-        max[1] = Math.max(Math.max(column[1], ligne[1]),diag[1]);
+        max[0] = Math.max(Math.max(column[0], ligne[0]),Math.max(diag[0],diag2[0]));
+        max[1] = Math.max(Math.max(column[1], ligne[1]),Math.max(diag[1],diag2[1]));
 
         return max;
     }
@@ -37,7 +38,7 @@ public abstract class AbstractPuissaceAI extends AbstractAI{
      * @param ligneCoup Ligne sur laquelle le jeton arrive.
      * @return Le maximum de jeton alignable (plafonné a 4) pour chaque joueur sous forme d'un tableau. indice 0 pour le joueur, 1 pour l'IA.
      */
-    private int[] nombreAlignableColumn(int columnCoup, int ligneCoup){
+    int[] nombreAlignableColumn(int columnCoup, int ligneCoup){
         PlateauPuissance plateauPuissance = (PlateauPuissance) jeu;
         int taille = plateauPuissance.getTerrain().length-1;
 
@@ -85,7 +86,7 @@ public abstract class AbstractPuissaceAI extends AbstractAI{
      * @param ligneCoup Ligne sur laquelle le jeton arrive.
      * @return Le maximum de jeton alignable (plafonné a 4) pour chaque joueur sous forme d'un tableau. indice 0 pour le joueur, 1 pour l'IA.
      */
-    private int[] nombreAlignableLigne(int columnCoup, int ligneCoup){
+     int[] nombreAlignableLigne(int columnCoup, int ligneCoup){
         PlateauPuissance plateauPuissance = (PlateauPuissance) jeu;
         int taille = plateauPuissance.getTerrain().length-1;
 
@@ -133,7 +134,7 @@ public abstract class AbstractPuissaceAI extends AbstractAI{
      * @param ligneCoup Ligne sur laquelle le jeton arrive.
      * @return Le maximum de jeton alignable (plafonné a 4) pour chaque joueur sous forme d'un tableau. indice 0 pour le joueur, 1 pour l'IA.
      */
-    private int[] nombreAlignableDiagonal(int columnCoup, int ligneCoup) {
+    int[] nombreAlignableDiagonalBGHD(int columnCoup, int ligneCoup) {
         PlateauPuissance plateauPuissance = (PlateauPuissance) jeu;
         int coteTerrain = plateauPuissance.getTerrain().length -1;
 
@@ -153,32 +154,71 @@ public abstract class AbstractPuissaceAI extends AbstractAI{
         int[] maxParJoueurs = new int[2];
         for (int player = 1; player < 3; player++) {
 
-            int[] maxAlignable = new int[]{1,1,1,1}; //longueur maximum par direction
+            int[] maxAlignable = new int[]{1,1}; //longueur maximum par direction
+            int[][] terrain = plateauPuissance.getTerrain();
+
+            for (int i = 1; i <= 3; i++) {
+
+                //bas gauche + -
+                if (! (ligneCoup+i > maxIntervalDeCheckLigne || columnCoup-i < minIntervalDeCheckColumn)) {
+                    if (terrain[ligneCoup + i][columnCoup - i] == player) maxAlignable[0]++;
+                }
+
+                //haut droit - +
+                if (! (ligneCoup-i < minIntervalDeCheckLigne || columnCoup+i > maxIntervalDeCheckColumn)) {
+                    if (terrain[ligneCoup - i][columnCoup + i] == player) maxAlignable[1]++;
+                }
+
+            }
+
+            int maxAlignableUnit = Math.max(maxAlignable[0],maxAlignable[1]);
+            maxParJoueurs[player-1] = Math.min(maxAlignableUnit,4);
+        }
+        return maxParJoueurs;
+    }
+
+    /**
+     * Calcule le nombre de jeton alignable pour les deux joueurs sur la digonale allant d'en haut a gache a en bas a droite ( \ ).
+     * @param columnCoup Colonne ou le coup est jouer.
+     * @param ligneCoup Ligne sur laquelle le jeton arrive.
+     * @return Le maximum de jeton alignable (plafonné a 4) pour chaque joueur sous forme d'un tableau. indice 0 pour le joueur, 1 pour l'IA.
+     */
+    int[] nombreAlignableDiagonalHGBD(int columnCoup, int ligneCoup) {
+        PlateauPuissance plateauPuissance = (PlateauPuissance) jeu;
+        int coteTerrain = plateauPuissance.getTerrain().length -1;
+
+        //setup interval de verification
+        int minIntervalDeCheckLigne = ligneCoup-3;
+        int maxIntervalDeCheckLigne = ligneCoup+3;
+        int minIntervalDeCheckColumn = columnCoup-3;
+        int maxIntervalDeCheckColumn = columnCoup+3;
+
+        //Rogner l'interval de verification s'il depasse du plateau
+        if (maxIntervalDeCheckLigne > coteTerrain) maxIntervalDeCheckLigne = coteTerrain;
+        if (minIntervalDeCheckLigne < 0) minIntervalDeCheckLigne = 0;
+        if (maxIntervalDeCheckColumn > coteTerrain) maxIntervalDeCheckColumn = coteTerrain;
+        if (minIntervalDeCheckColumn < 0) minIntervalDeCheckColumn = 0;
+
+        //Compter le nombre de jeton alignable
+        int[] maxParJoueurs = new int[2];
+        for (int player = 1; player < 3; player++) {
+
+            int[] maxAlignable = new int[]{1,1}; //longueur maximum par direction
             int[][] terrain = plateauPuissance.getTerrain();
 
             for (int i = 1; i <= 3; i++) {
                 //bas droite + +
                 if (! (ligneCoup+i > maxIntervalDeCheckLigne || columnCoup+i > maxIntervalDeCheckColumn)) {
-                    if (/*terrain[ligneCoup + i][columnCoup + i] == 0 ||*/ terrain[ligneCoup + i][columnCoup + i] == player) maxAlignable[0]++;
-                }
-
-                //bas gauche + -
-                if (! (ligneCoup+i > maxIntervalDeCheckLigne || columnCoup-i < minIntervalDeCheckColumn)) {
-                    if (terrain[ligneCoup + i][columnCoup - i] == player) maxAlignable[1]++;
-                }
-
-                //haut droit - +
-                if (! (ligneCoup-i < minIntervalDeCheckLigne || columnCoup+i > maxIntervalDeCheckColumn)) {
-                    if (terrain[ligneCoup - i][columnCoup + i] == player) maxAlignable[2]++;
+                    if (terrain[ligneCoup + i][columnCoup + i] == player) maxAlignable[0]++;
                 }
 
                 //haut gauche - -
                 if (! (ligneCoup-i < minIntervalDeCheckLigne || columnCoup-i < minIntervalDeCheckColumn)) {
-                    if (terrain[ligneCoup - i][columnCoup - i] == player) maxAlignable[3]++;
+                    if (terrain[ligneCoup - i][columnCoup - i] == player) maxAlignable[1]++;
                 }
             }
 
-            int maxAlignableUnit = Math.max(Math.max(maxAlignable[0], maxAlignable[1]),Math.max(maxAlignable[2],maxAlignable[3]));
+            int maxAlignableUnit = Math.max(maxAlignable[0], maxAlignable[1]);
             maxParJoueurs[player-1] = Math.min(maxAlignableUnit,4);
         }
         return maxParJoueurs;

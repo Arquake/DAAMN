@@ -280,22 +280,22 @@ public class PlateauPuissance extends AbstractPlateau {
             boolean isCounterClockwiseRotation = coup.equalsIgnoreCase("A");
 
             if (isClockwiseRotation || isCounterClockwiseRotation) {
-                makeRotation(isClockwiseRotation, joueurs, playerTurn);
+                makeRotation(isClockwiseRotation, playerTurn);
             }
             else { throw new InvalidColumException();}
         } else { throw new InvalidColumException(); }
     }
 
 
-    private void makeRotation(boolean isClockwiseRotation, AbstractPlayer[] joueurs, int playerTurn) throws NombreRotationMaximumAtteintException, RotationInactiveException {
+    private void makeRotation(boolean isClockwiseRotation, int playerTurn) throws NombreRotationMaximumAtteintException, RotationInactiveException {
         if (isRotationActive) {
-            if (nbRestantRotation[playerTurn-1] > 0) {
+            if (nbRestantRotation[playerTurn] > 0) {
                 if (isClockwiseRotation) {
                     tournerSensHoraire();
                 } else {
                     tournerSensAntiHoraire();
                 }
-                nbRestantRotation[playerTurn-1] = nbRestantRotation[playerTurn-1] - 1;
+                nbRestantRotation[playerTurn] = nbRestantRotation[playerTurn] - 1;
             } else { throw new NombreRotationMaximumAtteintException(); }
         } else { throw new RotationInactiveException(); }
     }

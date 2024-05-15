@@ -12,9 +12,13 @@ public class IhmPuissance extends AbstractIhm {
      * @param playerName Player asked
      * @return Column played
      */
-    public String demanderCoup(String playerName) {
+    public String demanderCoup(String playerName, boolean rotation) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(playerName + " à vous de jouer ! Indiquez le numéro de la colonne visée ou H/A pour tourner la grille dans le sens Horaire ou Anti-Horaire. \nVotre coup : ");
+        if (rotation) {
+            System.out.println(playerName + " à vous de jouer ! Indiquez le numéro de la colonne visée ou H/A pour tourner la grille dans le sens Horaire ou Anti-Horaire. \nVotre coup : ");
+        } else {
+            System.out.println(playerName + " à vous de jouer ! Indiquez le numéro de la colonne visée.\nVotre coup : ");
+        }
         return scanner.next();
     }
 
@@ -23,7 +27,7 @@ public class IhmPuissance extends AbstractIhm {
      * @return La reponse, Y ou N, respectivement oui ou non
      */
     public String demanderRotation(){
-        System.out.print("Souhaitez vous jouer avec les rotations ? (Y/N)");
+        System.out.print("Souhaitez vous jouer avec les rotations ? (Y : oui | N : non)\nVotre choix :");
         Scanner sc = new Scanner(System.in);
         String rep = null;
 

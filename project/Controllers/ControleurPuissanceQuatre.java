@@ -83,18 +83,18 @@ public class ControleurPuissanceQuatre extends AbstractController {
         if (!joueurs[playerTurn].isHuman()) {
             int[] coup;
             if (useRotations) {
-                ((OptiPuissanceAI) joueurs[playerTurn]).setBoard(jeu);
-                coup = ((OptiPuissanceAI) joueurs[playerTurn]).makeMove();
-            } else {
                 ((SimplePuissanceAI) joueurs[playerTurn]).setBoard(jeu);
                 coup = ((SimplePuissanceAI) joueurs[playerTurn]).makeMove();
+            } else {
+                ((OptiPuissanceAI) joueurs[playerTurn]).setBoard(jeu);
+                coup = ((OptiPuissanceAI) joueurs[playerTurn]).makeMove();
             }
 
             ((IhmPuissance)ihm).coupIa(coup[0]);
             return;
         }
         // Ask the current player for their move
-        String coup = ((IhmPuissance) super.getIhm()).demanderCoup(joueurs[playerTurn].getNom());
+        String coup = ((IhmPuissance) super.getIhm()).demanderCoup(joueurs[playerTurn].getNom(),useRotations);
         try {
             jeu.gestionCoup(coup, joueurs, playerTurn);
             validLastMove = true;
@@ -118,8 +118,8 @@ public class ControleurPuissanceQuatre extends AbstractController {
     @Override
     AbstractAI getAIType() {
         if (useRotations) {
-            return new OptiPuissanceAI(jeu);
+            return new SimplePuissanceAI(jeu);
         }
-        return new SimplePuissanceAI(jeu);
+        return new OptiPuissanceAI(jeu);
     }
 }

@@ -36,8 +36,7 @@ public class IhmMain {
      * @return true if he wants to play against an AI | false otherwise
      */
     public boolean askAI(){
-        System.out.println("Voulez vous jouer contre une IA ? (Y : oui | N : non)");
-        System.out.println("Votre choix : ");
+        System.out.println("Voulez vous jouer contre une IA ? (Y : oui | N : non)\nVotre choix :");
         Scanner sc = new Scanner(System.in);
         String rep = null;
 

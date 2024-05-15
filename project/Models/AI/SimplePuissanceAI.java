@@ -63,8 +63,8 @@ public class SimplePuissanceAI extends AbstractPuissaceAI {
                     default -> pointParCoup.get(1).add(coup);
                 }
             }
-        }
 
+        }
         //Test des coups ayant le meilleur score
         for (int i = 7; i > 0; i--) {
             List<Integer> listeCoup = pointParCoup.get(i);
@@ -93,7 +93,6 @@ public class SimplePuissanceAI extends AbstractPuissaceAI {
 
         //Si rien ne marche
         try {
-            System.out.println("problem"); //todo ahhhhhh
             int randInt = ThreadLocalRandom.current().nextInt(0,listeCoupPossible.size());
             int coup = listeCoupPossible.get(randInt);
             plateauPuissance.jouerCoup(new int[]{coup,2});

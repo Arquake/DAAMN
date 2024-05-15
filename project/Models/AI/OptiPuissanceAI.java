@@ -99,8 +99,37 @@ public class OptiPuissanceAI extends AbstractPuissaceAI {
         }
     }
 
+    /**
+     * Determine si une position est prometeuse, c'est a dire si elle peut aboutir a une ligne de 4 jeton.
+     * @param columnCoup colonne sur laquelle la position est joué
+     * @param terrain le plateau sur lequel on joue
+     * @return true s'il est possible d'aligné 4 jetons depuis cette position, false sinon
+     */
     private boolean estPrometteur(int columnCoup, int[][] terrain) {
         int ligneCoup = getLigne(columnCoup);
+
+        int[] alignableColumn = nombreAlignableColumn(columnCoup,ligneCoup);
+        int[] alignableLigne = nombreAlignableLigne(columnCoup, ligneCoup);
+        int[] alignableDiag = nombreAlignableDiagonalHGBD(columnCoup, ligneCoup);
+        int[] alignableDiag2 = nombreAlignableDiagonalBGHD(columnCoup, ligneCoup);
+
+        String quiEstPrometteur = "";
+
+        int max = Math.max(Math.max(alignableDiag[1], alignableLigne[1]),alignableColumn[1]);
+
+        if (alignableDiag[1] == max){
+            quiEstPrometteur += "D";
+        }
+        if (alignableLigne[1] == max){
+            quiEstPrometteur += "L";
+        }
+        if (alignableColumn[1] == max){
+            quiEstPrometteur += "C";
+        }
+        if (alignableDiag2[1] == max){
+            quiEstPrometteur += "X";
+        }
+
         int taille = terrain.length-1;
 
         int minColumn = Math.max(columnCoup-3,0);
@@ -112,51 +141,99 @@ public class OptiPuissanceAI extends AbstractPuissaceAI {
         int dansLaColonne = 1;
         int dansLaDiag1 = 1;
         int dansLaDiag2 = 1;
-        for (int i = 1; i <= 3; i++) {
 
-            // droite +
-            if (! (columnCoup+i > maxColumn)) {
-                if (terrain[ligneCoup][columnCoup + i] != 1) dansLaLigne++;
+            if (quiEstPrometteur.contains("L")) {
+                for (int i = 1; i <= 3; i++) {
+                    // droite +
+                    if (!(columnCoup + i > maxColumn)) {
+                        if (terrain[ligneCoup][columnCoup + i] != 1) {
+                            dansLaLigne++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                for (int i = 1; i <= 3; i++) {
+                    //gauche -
+                    if (!(columnCoup - i < minColumn)) {
+                        if (terrain[ligneCoup][columnCoup - i] != 1)  {
+                            dansLaLigne++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
             }
 
-            //gauche -
-            if (! (columnCoup-i < minColumn)) {
-                if (terrain[ligneCoup][columnCoup - i] != 1) dansLaLigne++;
+            if (quiEstPrometteur.contains("C")) {
+                for (int i = 1; i <= 3; i++) {
+
+                    //bas +
+                    if (!(ligneCoup + i > maxLigne)) {
+                        if (terrain[ligneCoup + i][columnCoup] != 1) {
+                            dansLaColonne++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                for (int i = 1; i <= 3; i++) {
+                    //haut -
+                    if (!(ligneCoup - i < minLigne)) {
+                        if (terrain[ligneCoup - i][columnCoup] != 1) {
+                            dansLaColonne++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+
+            }
+            if (quiEstPrometteur.contains("D")) {
+                for (int i = 1; i <= 3; i++) {
+                    //bas droite + +
+                    if (!(ligneCoup + i > maxLigne || columnCoup + i > maxColumn)) {
+                        if (terrain[ligneCoup + i][columnCoup + i] != 1) {
+                            dansLaDiag1++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                for (int i = 1; i <= 3; i++) {
+                    //haut gauche - -
+                    if (!(ligneCoup - i < minLigne || columnCoup - i < maxLigne)) {
+                        if (terrain[ligneCoup - i][columnCoup - i] != 1) {
+                            dansLaDiag1++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
             }
 
-            //bas +
-            if (! (ligneCoup+i > maxLigne)) {
-                if (terrain[ligneCoup + i][columnCoup] != 1) dansLaColonne++;
+            if (quiEstPrometteur.contains("X")){
+                for (int i = 1; i <= 3; i++) {
+                    //haut droit - +
+                    if (!(ligneCoup - i < minLigne || columnCoup + i > maxLigne)) {
+                        if (terrain[ligneCoup - i][columnCoup + i] != 1) {
+                            dansLaDiag2++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                for (int i = 1; i <= 3; i++) {
+                    //bas gauche + -
+                    if (!(ligneCoup + i > maxLigne || columnCoup - i < minLigne)) {
+                        if (terrain[ligneCoup + i][columnCoup - i] != 1) {
+                            dansLaDiag2++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
             }
-
-            //haut -
-            if (! (ligneCoup-i < minLigne)) {
-                if (terrain[ligneCoup - i][columnCoup] != 1) dansLaColonne++;
-            }
-
-            //bas droite + +
-            if (! (ligneCoup+i > maxLigne || columnCoup+i > maxColumn)) {
-                if (terrain[ligneCoup + i][columnCoup + i] != 1) dansLaDiag1++;
-            }
-
-            //haut gauche - -
-            if (! (ligneCoup-i < minLigne || columnCoup-i < maxLigne)) {
-                if (terrain[ligneCoup - i][columnCoup - i] != 1) dansLaDiag1++;
-            }
-
-            //haut droit - +
-            if (! (ligneCoup-i < minLigne || columnCoup+i > maxLigne)) {
-                if (terrain[ligneCoup - i][columnCoup + i] != 1) dansLaDiag2++;
-            }
-
-            //bas gauche + -
-            if (! (ligneCoup+i > maxLigne || columnCoup-i < minLigne)) {
-                if (terrain[ligneCoup + i][columnCoup - i] != 1) dansLaDiag2++;
-            }
-
-
-        }
-
         return (   dansLaLigne > 4    // 4 alignable en dansLaLigne ?
                 || dansLaColonne > 4  // 4 alignable en dansLaColonne ?
                 || dansLaDiag1 > 4    // 4 alignable en diagonale \ ?
