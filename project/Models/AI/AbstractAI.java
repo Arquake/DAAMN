@@ -15,6 +15,10 @@ public abstract class AbstractAI extends AbstractPlayer {
         this.jeu = jeu;
     }
 
+    /**
+     * method to check if user is human or not
+     * @return if the user is human true otherwise false
+     */
     @Override
     public boolean isHuman() {
         return false;
@@ -27,6 +31,10 @@ public abstract class AbstractAI extends AbstractPlayer {
      */
     public abstract int[] makeMove();
 
+    /**
+     * method to set the board
+     * @param jeu the board to set to
+     */
     public void setBoard(AbstractPlateau jeu){
         this.jeu = jeu;
     }

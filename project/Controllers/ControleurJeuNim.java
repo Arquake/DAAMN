@@ -56,11 +56,16 @@ public class ControleurJeuNim extends AbstractController {
     }
 
 
+    /**
+     * asks for constraints using the ihm
+     * and sets the plateau with the constraints
+     */
     @Override
     void createConstraint() {
         int allumetteMax = ((IhmNim) super.getIhm()).demanderContrainte();
         jeu = new PlateauNim(this.numberOfHeap, allumetteMax);
     }
+
 
 
     @Override
@@ -84,6 +89,10 @@ public class ControleurJeuNim extends AbstractController {
     }
 
 
+    /**
+     * Manages the move of the player
+     * 
+     */
     @Override
     void manageMove() {
         int[] coup;

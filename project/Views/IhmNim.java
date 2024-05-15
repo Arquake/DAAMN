@@ -114,6 +114,9 @@ public class IhmNim extends AbstractIhm {
         }
     }
 
+    /**
+     * displays AI's last move
+     */
     public void afficherCoupIA(int[] coup) {
         System.out.println("L'IA a joué le coup suivant : " + coup[1] + " allumettes du tas " + coup[0]);
     }
