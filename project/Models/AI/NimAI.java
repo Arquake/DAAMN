@@ -1,10 +1,6 @@
 package project.Models.AI;
 
 import project.Models.AbstractPlateau;
-import project.Models.Exception.CoupException;
-import project.Models.Exception.HeapNumberException;
-import project.Models.Exception.MatchesNumberException;
-import project.Models.Exception.NotEnoughMatchesException;
 import project.Models.PlateauNim;
 
 import java.util.ArrayList;

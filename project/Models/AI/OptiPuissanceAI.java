@@ -27,7 +27,6 @@ public class OptiPuissanceAI extends AbstractPuissaceAI {
     @Override
     public int[] makeMove() {
         PlateauPuissance plateauPuissance = (PlateauPuissance) jeu;
-        boolean isRotationActive = plateauPuissance.rotationActive();
 
         int[][] terrain = plateauPuissance.getTerrain();
         List<Integer> listeCoupPossible = new ArrayList<>();

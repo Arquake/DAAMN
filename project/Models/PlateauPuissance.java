@@ -252,7 +252,6 @@ public class PlateauPuissance extends AbstractPlateau {
     /**
      * Recoit le coup du joueur, le traite et le joue s'il est correcte
      * @param coup Le coup du joueur sous forme de string
-     * @param joueurs La liste des joueurs
      * @param playerTurn Le tour du joueur actuel en int
      * @throws InvalidColumException Erreur si le numero de colone jouer n'est pas valide (hors grille ou colonne pleine)
      * @throws NombreRotationMaximumAtteintException Erreur si le joueur tente de faire une rotation alors qu'il n'a plus de rotation possible
