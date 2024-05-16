@@ -5,8 +5,6 @@ import project.Models.Exception.InvalidColumException;
 import project.Models.Exception.NombreRotationMaximumAtteintException;
 import project.Models.Exception.RotationInactiveException;
 
-import java.util.HashMap;
-
 public class PlateauPuissance extends AbstractPlateau {
 
     /**
@@ -27,7 +25,6 @@ public class PlateauPuissance extends AbstractPlateau {
     /**
      * Stock le nombre de rotation restante a chaque joueur.
      */
-    HashMap<AbstractPlayer,Integer> nbRestantDeRotation = new HashMap<>();
     int[] nbRestantRotation = new int[2];
 
     /**
@@ -247,12 +244,9 @@ public class PlateauPuissance extends AbstractPlateau {
 
     /**
      * Met le nombre de rotation maximum des joueurs a 4 a chaque debut de partie.
-     * @param joueurs Liste des joueurs en jeu
      */
-    public void setNombreRotation(AbstractPlayer[] joueurs) {
-        for (AbstractPlayer joueur : joueurs){
-            nbRestantRotation = new int[]{4,4};
-        }
+    public void setNombreRotation() {
+        nbRestantRotation = new int[]{4,4};
     }
 
     /**
@@ -264,7 +258,7 @@ public class PlateauPuissance extends AbstractPlateau {
      * @throws NombreRotationMaximumAtteintException Erreur si le joueur tente de faire une rotation alors qu'il n'a plus de rotation possible
      * @throws RotationInactiveException Erreur si le joueur tente une rotation alors qu'elles ne sont pas active
      */
-    public void gestionCoup(String coup, AbstractPlayer[] joueurs, int playerTurn)
+    public void gestionCoup(String coup, int playerTurn)
             throws InvalidColumException, NombreRotationMaximumAtteintException, RotationInactiveException {
         if (!(coup.isBlank() || coup.isEmpty())) {
 

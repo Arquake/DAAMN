@@ -38,7 +38,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
         String rotation = ((IhmPuissance) super.getIhm()).demanderRotation();
         jeu.setRotationActive(rotation.equalsIgnoreCase("Y"));
         if (rotation.equalsIgnoreCase("Y")) {
-            jeu.setNombreRotation(joueurs);
+            jeu.setNombreRotation();
             useRotations = true;
         } else {
             useRotations = false;
@@ -96,7 +96,7 @@ public class ControleurPuissanceQuatre extends AbstractController {
         // Ask the current player for their move
         String coup = ((IhmPuissance) super.getIhm()).demanderCoup(joueurs[playerTurn].getNom(),useRotations);
         try {
-            jeu.gestionCoup(coup, joueurs, playerTurn);
+            jeu.gestionCoup(coup, playerTurn);
             validLastMove = true;
         } catch (RotationInactiveException e) {
             ihm.afficherErreur(e.getMessage());
