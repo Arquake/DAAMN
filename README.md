@@ -1,4 +1,4 @@
-Développement d'application Amin Mattéo Nicolas
+# Développement d'application Amin Mattéo Nicolas
 
 Développement d'un puissance 4 et jeu de Nim
 
